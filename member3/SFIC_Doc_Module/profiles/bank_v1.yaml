@@ -1,0 +1,18 @@
+name: bank_v1
+version: "1.0"
+required_headers:
+  - txn_id
+  - txn_date
+  - from_account
+  - to_account
+  - amount
+header_aliases:
+  transaction_id: txn_id
+  date: txn_date
+  debit_account: from_account
+  credit_account: to_account
+  transaction_amount: amount
+date_format: "%d/%m/%Y"
+timezone: null
+amount_format: "indian"
+id_columns: [from_account, to_account]

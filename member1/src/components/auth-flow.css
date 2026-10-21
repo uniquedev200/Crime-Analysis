@@ -1,0 +1,45 @@
+/* Scoped account screens: shared palette, compact forms, and explicit service states. */
+.atlas-auth.auth-flow-v2 .atlas-auth-card { max-width: 420px; padding: 26px; border: 1px solid var(--palette-border, #D7E2DB); border-radius: 16px; background: var(--palette-card, #FFFFFF); box-shadow: 0 8px 32px #171C1B08; }
+.atlas-auth.auth-flow-v2.atlas-auth-register .atlas-auth-card { max-width: 620px; }
+.auth-flow-v2 .auth-card-emblem { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: var(--palette-selected, #D7E2DB); color: var(--auth-olive); margin-bottom: 16px; }
+.auth-card-emblem svg { width: 28px; height: 28px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-card h1 { margin: 0 0 6px; font-size: 24px; font-weight: 600; letter-spacing: -.6px; }
+.auth-flow-v2 #auth-title:focus { outline: none; }
+.atlas-auth.auth-flow-v2 .atlas-auth-description { font-size: 12px; line-height: 1.6; margin-bottom: 22px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-fields { min-width: 0; }
+.atlas-auth.auth-flow-v2.atlas-auth-register .atlas-auth-fields { gap: 16px 18px; }
+.atlas-auth.auth-flow-v2.atlas-auth-register .atlas-auth-field { margin: 0; }
+.atlas-auth.auth-flow-v2 .atlas-auth-field label { font-size: 12px; font-weight: 600; margin-bottom: 7px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-field input { background: #fff; min-height: 40px; border: 1px solid var(--auth-line); border-radius: 7px; padding: 10px 12px; font-size: 13px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-password input { padding-right: 44px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-password button { height: 34px; width: 36px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-submit { border-radius: 7px; margin: 20px auto 0; min-height: 38px; }
+.auth-flow-v2 button:disabled { cursor: not-allowed; }
+.auth-flow-v2 .auth-text-link { display: inline; border: 0; padding: 0; background: transparent; box-shadow: none; color: var(--auth-olive); font-size: 12px; font-weight: 600; line-height: 1.6; cursor: pointer; }
+.auth-flow-v2 .auth-text-link:hover { color: var(--auth-copper); text-decoration: underline; text-underline-offset: 3px; }
+.auth-flow-v2 .auth-recovery { text-align: right; margin-top: -2px; }
+.auth-flow-v2 .auth-account-link { border-top: 1px solid var(--auth-line); padding-top: 18px; margin: 22px 0 0; text-align: center; font-size: 12px; color: var(--auth-muted); }
+.auth-flow-v2 .auth-progress { display: flex; list-style: none; padding: 0 0 16px; gap: 24px; margin: 0 0 20px; border-bottom: 1px solid var(--auth-line); }
+.auth-flow-v2 .auth-progress li { display: flex; align-items: center; gap: 7px; color: var(--auth-muted); font-size: 11px; }
+.auth-flow-v2 .auth-progress span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--auth-line); background: #fff; }
+.auth-flow-v2 .auth-progress [aria-current] { color: var(--auth-olive); font-weight: 600; }
+.auth-flow-v2 .auth-progress [aria-current] span { background: var(--auth-olive); color: #fff; border-color: var(--auth-olive); }
+.auth-flow-v2 .auth-field-hint { font-size: 11px; color: var(--auth-muted); margin: 10px 0 0; }
+.auth-flow-v2 .auth-email-summary { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px; background: #fff; border: 1px solid var(--auth-line); border-radius: 8px; margin-bottom: 18px; }
+.auth-flow-v2 .auth-email-summary span { font-size: 10px; color: var(--auth-muted); }
+.auth-flow-v2 .auth-email-summary strong { font-size: 13px; overflow-wrap: anywhere; max-width: 100%; font-weight: 600; }
+.atlas-auth.auth-flow-v2 .atlas-auth-field .auth-otp { text-align: center; letter-spacing: .6em; padding-left: 1em; font-size: 24px; font-family: ui-monospace, monospace; height: 52px; }
+.auth-flow-v2 .auth-service-note { font-size: 12px; line-height: 1.6; color: var(--auth-muted); padding: 12px; border: 1px solid var(--auth-line); border-radius: 8px; background: #fff; }
+.auth-flow-v2 .auth-resend { text-align: center; margin-top: 14px; }
+.auth-flow-v2 .auth-resend p { font-size: 11px; color: var(--auth-muted); line-height: 1.6; margin: 8px 0 0; }
+.auth-flow-v2 .auth-resend p:empty { display: none; }
+.atlas-auth.auth-flow-v2 .atlas-auth-main { padding-bottom: 18px; gap: 18px; }
+.atlas-auth.auth-flow-v2 .atlas-auth-bottom { position: static; font-size: 10px; }
+@media (max-width: 680px) {
+  .atlas-auth.auth-flow-v2 .atlas-auth-card { padding: 22px 18px; }
+  .atlas-auth.auth-flow-v2.atlas-auth-register .atlas-auth-fields { grid-template-columns: 1fr; gap: 12px; }
+  .auth-flow-v2 .auth-progress { gap: 16px; }
+}
+
+.auth-flow-v2 .auth-demo-login { margin-top: 12px; background: var(--palette-selected); color: var(--palette-text); border: 1px solid var(--palette-border); }
+.auth-flow-v2 .auth-demo-login:hover:not(:disabled) { background: var(--palette-border); }

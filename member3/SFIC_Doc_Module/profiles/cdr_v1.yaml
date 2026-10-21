@@ -1,0 +1,17 @@
+name: cdr_v1
+version: "1.0"
+required_headers:
+  - a_party
+  - b_party
+  - start_time
+  - duration_s
+  - call_type
+header_aliases:
+  calling_number: a_party
+  called_number: b_party
+  duration: duration_s
+  type: call_type
+date_format: "%Y-%m-%d %H:%M:%S"
+timezone: null
+amount_format: null
+id_columns: [a_party, b_party, imei]

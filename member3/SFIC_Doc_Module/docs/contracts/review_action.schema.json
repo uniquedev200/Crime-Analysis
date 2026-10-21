@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "ReviewActionType": {
+      "description": "Human review actions applied to review items and suggestions.",
+      "enum": [
+        "CONFIRM_IDENTIFIER",
+        "CORRECT_IDENTIFIER",
+        "APPROVE_MATCH",
+        "REJECT_MATCH",
+        "MERGE",
+        "SPLIT",
+        "RESOLVE_ITEM"
+      ],
+      "title": "ReviewActionType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Persisted, hash-chained review decision performed by an authorized human.",
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/ReviewActionType"
+    },
+    "actor": {
+      "title": "Actor",
+      "type": "string"
+    },
+    "at": {
+      "title": "At",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "target_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Ids",
+      "type": "array"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+    },
+    "before_state": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Before State"
+    },
+    "after_state": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "After State"
+    },
+    "prev_hash": {
+      "title": "Prev Hash",
+      "type": "string"
+    },
+    "entry_hash": {
+      "title": "Entry Hash",
+      "type": "string"
+    },
+    "case_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Case Id"
+    }
+  },
+  "required": [
+    "action_id",
+    "type",
+    "actor",
+    "at",
+    "reason",
+    "prev_hash",
+    "entry_hash"
+  ],
+  "title": "ReviewAction",
+  "type": "object"
+}

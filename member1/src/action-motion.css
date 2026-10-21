@@ -1,0 +1,58 @@
+/* Action-button counterpart to the sliding navigation highlight. */
+:is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link) {
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease,
+    box-shadow 240ms ease, scale 180ms cubic-bezier(.22,1,.36,1);
+}
+:is(.neu-btn:not(.primary):not(.danger), .workspace-text-button, .auth-text-link) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 999px;
+}
+:is(.workspace-text-button, .auth-flow-v2 .auth-text-link) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  vertical-align: middle;
+}
+:is(.neu-btn:not(.primary):not(.danger), .workspace-text-button, .auth-text-link)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--palette-selected);
+  transform: translateX(-104%);
+  transition: transform 320ms cubic-bezier(.22,1,.36,1);
+}
+:is(.neu-btn:not(.primary):not(.danger), .workspace-text-button, .auth-text-link):not(:disabled):is(:hover, :focus-visible) {
+  background-color: transparent;
+  color: var(--palette-text);
+  text-decoration: none;
+  transform: none;
+}
+:is(.neu-btn:not(.primary):not(.danger), .workspace-text-button, .auth-text-link):not(:disabled):is(:hover, :focus-visible)::before {
+  transform: translateX(0);
+}
+:is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link):not(:disabled):active {
+  scale: .97;
+}
+:is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link):focus-visible {
+  outline: 2px solid var(--palette-text);
+  outline-offset: 3px;
+}
+:is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link):disabled {
+  transform: none;
+  scale: 1;
+}
+.source-reference-button:not(:disabled):is(:hover, :focus-visible) {
+  background: var(--palette-selected);
+  border-color: var(--palette-secondary);
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link),
+  :is(.neu-btn, .workspace-text-button, .auth-text-link)::before { transition: none; }
+  :is(.neu-btn, .workspace-text-button, .source-reference-button, .auth-text-link):active { scale: 1; }
+}

@@ -1,0 +1,5 @@
+users:
+  - name: demo_analyst
+    allowed_cases: ["CASE-A-001", "CASE-B-002"]
+  - name: restricted_user
+    allowed_cases: ["CASE-A-001"]

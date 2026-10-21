@@ -1,0 +1,19 @@
+name: tower_location_v1
+version: "1.0"
+required_headers:
+  - observation_id
+  - target_number
+  - cell_global_id
+header_aliases:
+  event_time_ist: timestamp
+  site_description: site
+  site_latitude: latitude
+  site_longitude: longitude
+  sector_azimuth_deg: azimuth
+  technology: technology
+  location_basis: location_basis
+  accuracy_note: accuracy_note
+date_format: "%Y-%m-%d %H:%M:%S"
+timezone: "Asia/Kolkata"
+amount_format: null
+id_columns: [target_number, cell_global_id]

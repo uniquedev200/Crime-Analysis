@@ -1,0 +1,662 @@
+/* ==========================================================================
+   ATLAS Graph-First Investigation Surface
+   Full-bleed, edge-to-edge canvas with zero invisible borders.
+   ========================================================================== */
+
+.app-shell.investigate-shell .view-banner {
+  display: none !important;
+}
+
+.app-shell.investigate-shell .main {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  height: calc(100vh - 56px) !important;
+  height: calc(100dvh - 56px) !important;
+  overflow: hidden !important;
+}
+
+.app-shell.investigate-shell .view-pane {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Master Graph Workspace Layout */
+.investigation-map-layout {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Collapsible Network Controls & Insights Panel */
+.network-information {
+  width: 280px;
+  min-width: 280px;
+  max-width: 300px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 12px 14px 20px;
+  background: var(--palette-card, #171C1B);
+  border-right: 1px solid var(--palette-border, #303A36);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 20;
+  flex-shrink: 0;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s ease, opacity 0.2s ease;
+}
+
+.network-information.is-collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  border-right: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.network-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.network-stat-card,
+.network-information-card {
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  border-radius: 10px;
+  padding: 11px 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.network-stat-card h2,
+.network-information-card h2 {
+  font-size: 11.5px;
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--text, #E2E8F0);
+}
+
+.network-stat-card strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.network-information-card label {
+  display: block;
+  color: var(--text-faint, #94A3B8);
+  font-size: 10.5px;
+  margin-bottom: 4px;
+}
+
+.network-scope-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--text-faint, #94A3B8);
+  font-size: 10.5px;
+}
+
+.network-type-list {
+  display: grid;
+  gap: 6px;
+}
+
+.network-type-list > div,
+.network-type-list span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+}
+
+.network-type-list > div {
+  justify-content: space-between;
+}
+
+.network-type-list i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.network-entity-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  color: var(--text, #E2E8F0);
+  padding: 7px 0;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.network-entity-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Graph Canvas Container: Pure 100% Flex Fill, Zero Invisible Border */
+.graph-explorer-card {
+  flex: 1 !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+#graph {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--graph-bg, transparent) !important;
+}
+
+#graphCanvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+#graphCanvas .vis-network {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none !important;
+}
+
+/* Floating Sidebar Toggle Pill */
+.graph-panel-toggle-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 25;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  color: var(--text, #E2E8F0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  transition: all 0.15s ease;
+}
+
+.graph-panel-toggle-btn:hover {
+  background: var(--bg1, #263038);
+  transform: translateY(-1px);
+}
+
+/* Canvas Floating Actions */
+.graph-canvas-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: calc(100% - 24px);
+  gap: 6px;
+  z-index: 25;
+}
+
+.graph-canvas-actions .neu-btn {
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  color: var(--text, #E2E8F0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Structured / Investigation Mode Pill Toggle */
+.graph-mode-pill-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.15));
+  border-radius: 9999px;
+  padding: 2px;
+  gap: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+}
+
+.graph-mode-pill-toggle .neu-btn {
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 4px 11px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  border-radius: 9999px !important;
+  background: transparent !important;
+  color: var(--text-dim, #94A3B8) !important;
+  transition: all 0.15s ease !important;
+}
+
+.graph-mode-pill-toggle .neu-btn:hover {
+  color: var(--text, #FFFFFF) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.graph-mode-pill-toggle .neu-btn.is-active,
+.graph-mode-pill-toggle .neu-btn.primary {
+  background: var(--accent, #10B981) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
+}
+
+
+/* Floating Pan/Zoom Map Controls */
+.graph-map-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 25;
+}
+
+.graph-pan-controls,
+.graph-zoom-controls {
+  display: flex;
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.graph-pan-controls button,
+.graph-zoom-controls button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  color: var(--text, #E2E8F0);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.graph-pan-controls button:hover,
+.graph-zoom-controls button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   FLOATING OVERLAY CONTROLS (Top Bar, Status Pill, PAN CANVAS Card)
+   ========================================================================== */
+.graph-floating-top-bar {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface, rgba(32, 39, 46, 0.92));
+  backdrop-filter: blur(10px);
+  padding: 4px 10px;
+  border-radius: 24px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.graph-floating-select-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.graph-floating-prefix {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim, #94A3B8);
+  white-space: nowrap;
+}
+
+.graph-floating-select {
+  background: transparent;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  color: var(--text, #E2E8F0);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.graph-floating-select:focus {
+  border-color: var(--accent, #38BDF8);
+}
+
+.graph-floating-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 14px;
+  padding: 3px 10px;
+}
+
+.graph-floating-search-wrap svg {
+  color: var(--text-dim, #94A3B8);
+  flex-shrink: 0;
+}
+
+.graph-floating-input {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 11.5px;
+  color: var(--text, #E2E8F0);
+  width: 120px;
+}
+
+.graph-floating-input::placeholder {
+  color: var(--text-dim, #64748B);
+}
+
+.graph-floating-status-pill {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface, rgba(32, 39, 46, 0.92));
+  backdrop-filter: blur(10px);
+  padding: 6px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text, #E2E8F0);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.graph-floating-status-pill strong {
+  color: var(--accent, #38BDF8);
+  font-weight: 700;
+}
+
+.graph-pill-divider {
+  opacity: 0.35;
+  margin: 0 2px;
+}
+
+.graph-pan-canvas-card {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  z-index: 25;
+  background: var(--surface, #20272E);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.graph-pan-canvas-header {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-dim, #94A3B8);
+}
+
+.graph-dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.graph-dpad-middle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.graph-dpad-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 6px;
+  color: var(--text, #E2E8F0);
+  cursor: pointer;
+  font-size: 10px;
+  transition: all 0.15s ease;
+}
+
+.graph-dpad-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent, #38BDF8);
+  border-color: var(--accent, #38BDF8);
+}
+
+.graph-dpad-center {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.graph-pan-canvas-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  padding-top: 6px;
+  width: 100%;
+  justify-content: center;
+}
+
+.graph-pan-canvas-actions button {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--text-dim, #94A3B8);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.graph-pan-canvas-actions button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text, #E2E8F0);
+}
+
+/* ==========================================================================
+   WHOLE PAGE EXPANDED FULLSCREEN CANVAS
+   Zero margins, zero borders, 100vw x 100vh edge-to-edge
+   ========================================================================== */
+.graph-workspace.is-expanded #graph,
+.app-shell .graph-first-workspace.is-expanded #graph,
+.app-shell.investigate-shell .investigation-map-layout.is-expanded #graph {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: 999999 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  background: var(--graph-bg, #0B0F17) !important;
+}
+
+.graph-workspace.is-expanded .network-information {
+  display: none !important;
+}
+
+.graph-workspace.is-expanded .graph-panel-toggle-btn {
+  display: none !important;
+}
+
+.graph-workspace.is-expanded .graph-canvas-actions {
+  position: fixed !important;
+  top: 16px !important;
+  right: 16px !important;
+  z-index: 1000000 !important;
+}
+
+.graph-workspace.is-expanded .graph-map-controls {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 1000000 !important;
+}
+
+/* ==========================================================================
+   AI COPILOT OVERFLOW & CONTAINMENT SHIELD
+   Ensures Copilot never expands out of screen and footer stays permanently accessible
+   ========================================================================== */
+.graph-ai-box,
+#graph-copilot {
+  position: absolute !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  width: 360px !important;
+  max-width: 90vw !important;
+  background: var(--surface, #20272E) !important;
+  border-left: 1px solid var(--border, rgba(255, 255, 255, 0.12)) !important;
+  z-index: 100 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.35) !important;
+  overflow: hidden !important;
+}
+
+.graph-ai-box.collapsed,
+#graph-copilot.collapsed {
+  display: none !important;
+}
+
+.graph-ai-header {
+  flex-shrink: 0 !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--border, rgba(255, 255, 255, 0.12)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: var(--bg1, #1A1F26) !important;
+}
+
+.graph-ai-body {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  scroll-behavior: smooth !important;
+  word-break: break-word !important;
+}
+
+.graph-ai-body::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.graph-ai-body::-webkit-scrollbar-thumb {
+  background: var(--border, rgba(255, 255, 255, 0.2)) !important;
+  border-radius: 4px !important;
+}
+
+.graph-ai-footer {
+  flex-shrink: 0 !important;
+  padding: 10px 14px !important;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.12)) !important;
+  background: var(--surface, #20272E) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.ai-msg {
+  max-width: 100% !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+}
+
+.ai-msg pre,
+.ai-msg code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}

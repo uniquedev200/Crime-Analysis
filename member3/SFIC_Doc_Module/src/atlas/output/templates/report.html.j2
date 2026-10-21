@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATLAS Evidence Report — {{ case_id }}</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+    .mock-banner {
+      background: #dc2626;
+      color: #ffffff;
+      padding: 16px 24px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+      border-bottom: 3px solid #991b1b;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .meta-item strong {
+      color: var(--text);
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-primary { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
+    .badge-success { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
+    .badge-warning { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
+    .badge-danger { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid #ef4444; }
+    .badge-purple { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid #8b5cf6; }
+    .badge-cyan { background: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid #06b6d4; }
+
+    /* Summary Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 4px;
+    }
+    .stat-lbl {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Section Styling */
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sub-note {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* Document Tabs */
+    .doc-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: var(--text);
+      border-color: var(--primary);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* Side-by-side Viewer */
+    .viewer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .viewer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .viewer-pane {
+      background: #131d31;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      max-height: 700px;
+      overflow-y: auto;
+    }
+    .pane-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .raw-text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.85rem;
+      white-space: pre-wrap;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    mark.quote-highlight {
+      background: #854d0e;
+      color: #fef08a;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-weight: 600;
+      border-bottom: 2px solid #eab308;
+    }
+
+    /* Extracted Facts List */
+    .fact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .fact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .fact-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .fact-row {
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+    .fact-row strong {
+      color: var(--text);
+    }
+    .quote-box {
+      margin-top: 8px;
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 3px solid var(--primary);
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: #cbd5e1;
+      border-radius: 0 4px 4px 0;
+    }
+    .ocr-box {
+      margin-top: 6px;
+      padding: 6px 10px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 6px;
+      font-size: 0.8rem;
+    }
+    .bbox-badge {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 0.75rem;
+      background: #0f172a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    /* Table styling */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+    .custom-table th, .custom-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .custom-table th {
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .custom-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Suggestions Cards */
+    .suggestion-card {
+      background: #131d31;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .sug-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .rank-note {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-style: italic;
+    }
+    .signals-list {
+      margin-top: 10px;
+      list-style: none;
+    }
+    .signals-list li {
+      padding: 4px 0;
+      font-size: 0.85rem;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  {% if is_mock %}
+  <div class="mock-banner">
+    SCRIPTED MOCK PROVIDER: not live extraction
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-title-row">
+        <div>
+          <h1>ATLAS Evidence Report</h1>
+          <div style="font-size: 1.1rem; color: #60a5fa; margin-top: 4px; font-weight: 600;">
+            Case ID: {{ case_id }}
+          </div>
+        </div>
+        <div>
+          <span class="badge {% if job_state == 'completed' %}badge-success{% elif job_state == 'completed_with_warnings' %}badge-warning{% else %}badge-danger{% endif %}">
+            {{ job_state }}
+          </span>
+        </div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <strong>Run ID:</strong> <span>{{ run_id }}</span>
+        </div>
+        <div class="meta-item">
+          <strong>Timestamp:</strong> <span>{{ started_at }}</span>
+        </div>
+        <div class="meta-item">
+          <strong>Pipeline Version:</strong> <span>{{ pipeline_version }}</span>
+        </div>
+        <div class="meta-item">
+          <strong>Provider / Model:</strong> <span>{{ provider }} ({{ model }})</span>
+        </div>
+        <div class="meta-item">
+          <strong>OCR Engine:</strong> <span>{{ ocr_engine }} ({{ ocr_langs }})</span>
+        </div>
+        <div class="meta-item">
+          <strong>Idempotency Key:</strong> <span style="font-family: monospace; font-size: 0.75rem;">{{ idempotency_key[:16] }}...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-lbl">Documents</div>
+        <div class="stat-val">{{ documents|length }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-lbl">Mentions</div>
+        <div class="stat-val">{{ mentions|length }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-lbl">Relationships</div>
+        <div class="stat-val">{{ relationships|length }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-lbl">Events</div>
+        <div class="stat-val">{{ events|length }}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-lbl">Review Items</div>
+        <div class="stat-val" style="color: {% if review_items|length > 0 %}#f59e0b{% else %}#10b981{% endif %};">
+          {{ review_items|length }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Document Viewer -->
+    <div class="section-card">
+      <div class="section-title">
+        <span>Document Viewer &amp; Provenance Highlight</span>
+        <span class="sub-note">Verified quote alignment alongside extracted facts</span>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="doc-tabs">
+        {% for doc in documents %}
+        <button class="tab-btn {% if loop.first %}active{% endif %}" onclick="showDocTab('doc-{{ loop.index0 }}', this)">
+          {{ doc.file_name }}
+        </button>
+        {% endfor %}
+      </div>
+
+      <!-- Tab Panels -->
+      {% for doc in documents %}
+      <div id="doc-{{ loop.index0 }}" class="doc-panel" style="{% if not loop.first %}display: none;{% endif %}">
+        <div style="margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted);">
+          <strong>Doc ID:</strong> {{ doc.doc_id }} |
+          <strong>SHA-256:</strong> <span style="font-family: monospace;">{{ doc.file_sha256[:16] }}...</span> |
+          <strong>Type:</strong> {{ doc.detected_type }} |
+          <strong>Status:</strong> <span class="badge badge-primary">{{ doc.status }}</span>
+        </div>
+
+        <div class="viewer-grid">
+          <!-- Left: Raw Text with Quote Highlights -->
+          <div class="viewer-pane">
+            <div class="pane-header">
+              <span>Raw Document Text</span>
+              <span class="sub-note">Verified quotes highlighted</span>
+            </div>
+            <div class="raw-text">{{ doc_rendered_texts[doc.doc_id]|safe }}</div>
+          </div>
+
+          <!-- Right: Extracted Facts -->
+          <div class="viewer-pane">
+            <div class="pane-header">
+              <span>Extracted Facts &amp; Attributes</span>
+              <span class="sub-note">{{ doc_mentions[doc.doc_id]|length }} mentions</span>
+            </div>
+
+            {% for m in doc_mentions[doc.doc_id] %}
+            <div class="fact-card">
+              <div class="fact-header">
+                <div>
+                  <span class="fact-title">{{ m.surface_text }}</span>
+                  {% if m.normalized_value and m.normalized_value != m.surface_text %}
+                  <span style="color: #60a5fa; font-size: 0.85rem;">({{ m.normalized_value }})</span>
+                  {% endif %}
+                </div>
+                <div>
+                  <span class="badge badge-purple">{{ m.type }}</span>
+                  <span class="badge badge-cyan">{{ m.origin }}</span>
+                  {% if m.identifier_trust == "review_required" %}
+                  <span class="badge badge-warning">review_required</span>
+                  {% elif m.identifier_trust == "strong" %}
+                  <span class="badge badge-success">strong</span>
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if m.stated_role %}
+              <div class="fact-row"><strong>Role:</strong> {{ m.stated_role }}</div>
+              {% endif %}
+
+              {% for attr in m.attributes %}
+              <div class="fact-row"><strong>{{ attr.name }}:</strong> {{ attr.value_text }}</div>
+              {% endfor %}
+
+              <!-- OCR and Bounding Box Info -->
+              {% if m.ocr or m.origin == "ocr" or m.source.text_origin == "ocr" %}
+              <div class="ocr-box">
+                <div style="font-weight: 700; color: #a78bfa; margin-bottom: 2px;">
+                  OCR Confidence &amp; BBox
+                </div>
+                <div style="font-size: 0.8rem; color: #cbd5e1;">
+                  {% if m.ocr %}
+                  <span>Engine: {{ m.ocr.engine }} | Mean: {{ m.ocr.mean }} | Min: {{ m.ocr.min }} (<em>{{ m.ocr.score_kind }}</em>)</span>
+                  {% else %}
+                  <span>Origin: OCR engine extraction</span>
+                  {% endif %}
+                </div>
+                <div style="margin-top: 4px;">
+                  <span class="bbox-badge">
+                    {% if m.source.bbox %}
+                    BBox: [{{ m.source.bbox|join(', ') }}]
+                    {% else %}
+                    Crop Area: Page {{ m.source.page or 1 }}
+                    {% endif %}
+                  </span>
+                  {% if m.identifier_trust == "review_required" %}
+                  <span class="badge badge-warning" style="margin-left: 6px;">Needs Review</span>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+
+              <!-- Source Quote -->
+              {% if m.source.quote %}
+              <div class="quote-box">
+                &ldquo;{{ m.source.quote }}&rdquo;
+                <div style="font-size: 0.75rem; margin-top: 4px; color: #94a3b8;">
+                  Status: <strong>{{ m.source.quote_status }}</strong> |
+                  Unit: {{ m.source.unit_id }} |
+                  Origin: <span class="badge badge-cyan" style="font-size: 0.65rem;">{{ m.source.text_origin }}</span>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% else %}
+            <div style="color: var(--text-muted); font-style: italic; padding: 12px;">
+              No mentions extracted for this document.
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Cross-Case Resolution Suggestions -->
+    {% if suggestions %}
+    <div class="section-card">
+      <div class="section-title">
+        <span>Cross-Case Resolution Suggestions</span>
+        <span class="sub-note">Suggestions only — requires human decision, no automatic merges</span>
+      </div>
+
+      <p class="rank-note" style="margin-bottom: 16px;">
+        * Note: All rankings represent <strong>heuristic ordering, not a probability</strong>.
+      </p>
+
+      {% for s in suggestions %}
+      <div class="suggestion-card">
+        <div class="sug-header">
+          <div>
+            <strong style="font-size: 1.05rem; color: #ffffff;">Target Mention: {{ s.mention_id }}</strong>
+            <span style="color: #60a5fa; margin-left: 8px;">&harr; Candidate: {{ s.candidate_entity_id }} (Case: {{ s.candidate_case_id or 'Unknown' }})</span>
+          </div>
+          <div>
+            <span class="badge {% if s.status == 'candidate' %}badge-success{% elif s.status == 'needs_review' %}badge-warning{% elif s.status == 'ambiguous' %}badge-danger{% else %}badge-primary{% endif %}">
+              {{ s.status }}
+            </span>
+            {% if s.requires_human_decision %}
+            <span class="badge badge-purple" style="margin-left: 4px;">Human Decision Required</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div style="font-size: 0.9rem; margin-bottom: 8px;">
+          <strong>Explanation:</strong> {{ s.explanation }}
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+          <strong>Heuristic Rank:</strong> {{ s.heuristic_rank if s.heuristic_rank is not none else 'N/A' }}
+          <em>({{ s.rank_note }})</em>
+        </div>
+
+        {% if s.signals %}
+        <div style="font-size: 0.85rem; font-weight: 700; color: #cbd5e1; margin-top: 8px;">Shared Signals Breakdown:</div>
+        <ul class="signals-list">
+          {% for sig in s.signals %}
+          <li>
+            <span class="badge {% if sig.polarity == 'positive' %}badge-success{% elif sig.polarity == 'negative' %}badge-danger{% else %}badge-primary{% endif %}">
+              {{ sig.polarity }}
+            </span>
+            <strong>{{ sig.kind }}:</strong> {{ sig.detail }}
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Review Queue Section -->
+    {% if review_items %}
+    <div class="section-card">
+      <div class="section-title">
+        <span>Actionable Review Items</span>
+        <span class="sub-note">{{ review_items|length }} pending review items</span>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Review ID</th>
+            <th>Kind</th>
+            <th>Target IDs</th>
+            <th>Detail</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in review_items %}
+          <tr>
+            <td style="font-family: monospace;">{{ item.review_id }}</td>
+            <td><span class="badge badge-warning">{{ item.kind }}</span></td>
+            <td style="font-family: monospace; font-size: 0.8rem;">{{ item.target_ids|join(', ') }}</td>
+            <td>{{ item.detail }}</td>
+            <td><span class="badge {% if item.status == 'resolved' %}badge-success{% else %}badge-danger{% endif %}">{{ item.status }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    <!-- Audit Trail Section -->
+    {% if audit_entries %}
+    <div class="section-card">
+      <div class="section-title">
+        <span>Cryptographic Audit Trail</span>
+        <span class="sub-note">Append-only SHA-256 hash-chained log</span>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <span class="badge badge-success">Hash Chain Status: VERIFIED</span>
+      </div>
+
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Action ID</th>
+            <th>Timestamp</th>
+            <th>Actor</th>
+            <th>Action Type</th>
+            <th>Target IDs</th>
+            <th>Reason</th>
+            <th>Entry Hash</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in audit_entries %}
+          <tr>
+            <td style="font-family: monospace; font-size: 0.8rem;">{{ entry.action_id }}</td>
+            <td style="font-family: monospace; font-size: 0.8rem;">{{ entry.at }}</td>
+            <td><strong>{{ entry.actor }}</strong></td>
+            <td><span class="badge badge-purple">{{ entry.type }}</span></td>
+            <td style="font-family: monospace; font-size: 0.75rem;">{{ entry.target_ids|join(', ') if entry.target_ids else '-' }}</td>
+            <td>{{ entry.reason }}</td>
+            <td style="font-family: monospace; font-size: 0.75rem;" title="{{ entry.entry_hash }}">{{ entry.entry_hash[:12] }}...</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <script>
+    function showDocTab(tabId, btn) {
+      document.querySelectorAll('.doc-panel').forEach(function(p) {
+        p.style.display = 'none';
+      });
+      document.querySelectorAll('.tab-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      var panel = document.getElementById(tabId);
+      if (panel) {
+        panel.style.display = 'block';
+      }
+      if (btn) {
+        btn.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+name: anpr_v1
+version: "1.0"
+required_headers:
+  - event_id
+  - camera_id
+  - plate_ocr
+header_aliases:
+  reviewed_time_ist: timestamp
+  source_clock_ist: source_time
+  plate_reviewed: plate_reviewed
+  clock_offset_seconds: clock_offset
+  site: site
+  direction: direction
+  lane: lane
+  clip_reference: clip_reference
+  visibility: visibility
+  review_note: review_note
+  ocr_confidence: ocr_confidence
+date_format: "%Y-%m-%d %H:%M:%S"
+timezone: "Asia/Kolkata"
+amount_format: null
+id_columns: [plate_ocr, plate_reviewed]

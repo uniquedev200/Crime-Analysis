@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "ReviewItemStatus": {
+      "description": "Resolution lifecycle status for a review item.",
+      "enum": [
+        "open",
+        "resolved"
+      ],
+      "title": "ReviewItemStatus",
+      "type": "string"
+    },
+    "ReviewKind": {
+      "description": "Categorized review triggers requiring human reviewer inspection.",
+      "enum": [
+        "low_trust_identifier",
+        "invalid_identifier",
+        "identifier_not_found_by_parser",
+        "role_inferred",
+        "ambiguous_date",
+        "contradiction",
+        "ambiguous_location",
+        "mapping_unconfirmed",
+        "tabular_pdf_detected",
+        "match_candidate",
+        "chunk_failed"
+      ],
+      "title": "ReviewKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actionable human review queue item.",
+  "properties": {
+    "review_id": {
+      "title": "Review Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/ReviewKind"
+    },
+    "target_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Ids",
+      "type": "array"
+    },
+    "detail": {
+      "title": "Detail",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ReviewItemStatus",
+      "default": "open"
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Resolution"
+    }
+  },
+  "required": [
+    "review_id",
+    "case_id",
+    "kind",
+    "detail"
+  ],
+  "title": "ReviewItem",
+  "type": "object"
+}

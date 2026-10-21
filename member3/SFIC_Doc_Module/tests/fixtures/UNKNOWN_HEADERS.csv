@@ -1,0 +1,4 @@
+cust_record_ref,client_tag_id,raw_timestamp_epoch,unverified_party,custom_notes
+REF001,TAG-99,1773000000,+919876543210,Unknown header sample - SYNTHETIC TEST DATA
+REF002,TAG-101,1773003600,+919811122233,Unmapped table rows - SYNTHETIC TEST DATA
+REF003,TAG-105,1773007200,+919822233344,No facts extracted - SYNTHETIC TEST DATA

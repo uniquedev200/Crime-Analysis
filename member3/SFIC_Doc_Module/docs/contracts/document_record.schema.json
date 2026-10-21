@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "DocumentStatus": {
+      "description": "Processing status of an ingested evidence document.",
+      "enum": [
+        "processed",
+        "partial",
+        "rejected_input",
+        "failed"
+      ],
+      "title": "DocumentStatus",
+      "type": "string"
+    },
+    "PageInfo": {
+      "additionalProperties": false,
+      "description": "Per-page extraction metadata for an ingested document.",
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "method": {
+          "$ref": "#/$defs/PageMethod"
+        },
+        "chars": {
+          "title": "Chars",
+          "type": "integer"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page",
+        "method",
+        "chars"
+      ],
+      "title": "PageInfo",
+      "type": "object"
+    },
+    "PageMethod": {
+      "description": "Extraction method applied to a specific document page.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "image_ocr",
+        "table",
+        "text"
+      ],
+      "title": "PageMethod",
+      "type": "string"
+    },
+    "SheetInfo": {
+      "additionalProperties": false,
+      "description": "Spreadsheet sheet metadata.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/SheetState",
+          "default": "visible"
+        },
+        "rows": {
+          "title": "Rows",
+          "type": "integer"
+        },
+        "merged_ranges": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Merged Ranges",
+          "type": "array"
+        },
+        "formula_cells": {
+          "default": 0,
+          "title": "Formula Cells",
+          "type": "integer"
+        },
+        "formula_missing_cache": {
+          "default": 0,
+          "title": "Formula Missing Cache",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "rows"
+      ],
+      "title": "SheetInfo",
+      "type": "object"
+    },
+    "SheetState": {
+      "description": "Visibility state of a spreadsheet sheet.",
+      "enum": [
+        "visible",
+        "hidden",
+        "veryHidden"
+      ],
+      "title": "SheetState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Ingested and processed document record.",
+  "properties": {
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "file_name": {
+      "title": "File Name",
+      "type": "string"
+    },
+    "file_sha256": {
+      "title": "File Sha256",
+      "type": "string"
+    },
+    "size_bytes": {
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "detected_type": {
+      "title": "Detected Type",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/DocumentStatus"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageInfo"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "row_count": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Row Count"
+    },
+    "sheets": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/SheetInfo"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sheets"
+    },
+    "chunk_failures": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Chunk Failures",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "case_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Case Id"
+    }
+  },
+  "required": [
+    "doc_id",
+    "file_name",
+    "file_sha256",
+    "size_bytes",
+    "detected_type",
+    "status"
+  ],
+  "title": "DocumentRecord",
+  "type": "object"
+}

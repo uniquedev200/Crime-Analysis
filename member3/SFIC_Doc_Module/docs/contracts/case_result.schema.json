@@ -1,0 +1,1454 @@
+{
+  "$defs": {
+    "Aggregate": {
+      "additionalProperties": false,
+      "description": "Aggregated communication or transaction statistics from bulk tabular data.",
+      "properties": {
+        "aggregate_id": {
+          "title": "Aggregate Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/RelType"
+        },
+        "subject_mention_id": {
+          "title": "Subject Mention Id",
+          "type": "string"
+        },
+        "object_mention_id": {
+          "title": "Object Mention Id",
+          "type": "string"
+        },
+        "count": {
+          "title": "Count",
+          "type": "integer"
+        },
+        "total_duration_s": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Duration S"
+        },
+        "total_amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Amount"
+        },
+        "first_ts": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Ts"
+        },
+        "last_ts": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Ts"
+        },
+        "sample_sources": {
+          "items": {
+            "$ref": "#/$defs/SourceRef"
+          },
+          "title": "Sample Sources",
+          "type": "array"
+        },
+        "events_file": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Events File"
+        },
+        "events_row_range": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Events Row Range"
+        }
+      },
+      "required": [
+        "aggregate_id",
+        "case_id",
+        "type",
+        "subject_mention_id",
+        "object_mention_id",
+        "count"
+      ],
+      "title": "Aggregate",
+      "type": "object"
+    },
+    "Assertion": {
+      "description": "Assertion confidence grade for relationships and facts.",
+      "enum": [
+        "stated",
+        "model_inferred",
+        "structured_record"
+      ],
+      "title": "Assertion",
+      "type": "string"
+    },
+    "AttrName": {
+      "description": "Standardized demographic and personal attribute names.",
+      "enum": [
+        "father_name",
+        "age",
+        "dob",
+        "gender",
+        "address",
+        "occupation"
+      ],
+      "title": "AttrName",
+      "type": "string"
+    },
+    "DocumentRecord": {
+      "additionalProperties": false,
+      "description": "Ingested and processed document record.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "detected_type": {
+          "title": "Detected Type",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/DocumentStatus"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/PageInfo"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "row_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Count"
+        },
+        "sheets": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/SheetInfo"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheets"
+        },
+        "chunk_failures": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Chunk Failures",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        },
+        "case_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Case Id"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "size_bytes",
+        "detected_type",
+        "status"
+      ],
+      "title": "DocumentRecord",
+      "type": "object"
+    },
+    "DocumentStatus": {
+      "description": "Processing status of an ingested evidence document.",
+      "enum": [
+        "processed",
+        "partial",
+        "rejected_input",
+        "failed"
+      ],
+      "title": "DocumentStatus",
+      "type": "string"
+    },
+    "EntityType": {
+      "description": "Supported entity categories extracted from evidence documents.",
+      "enum": [
+        "PERSON",
+        "PHONE",
+        "IMEI",
+        "VEHICLE",
+        "ACCOUNT",
+        "ORGANIZATION",
+        "LOCATION"
+      ],
+      "title": "EntityType",
+      "type": "string"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "description": "Extracted event fact (incident, call, transaction, etc.).",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "time": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EventTime"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "participants": {
+          "items": {
+            "$ref": "#/$defs/EventParticipant"
+          },
+          "title": "Participants",
+          "type": "array"
+        },
+        "location_mention_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location Mention Id"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EventAmount"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "review_flags": {
+          "items": {
+            "$ref": "#/$defs/ReviewKind"
+          },
+          "title": "Review Flags",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        }
+      },
+      "required": [
+        "event_id",
+        "case_id",
+        "type",
+        "description",
+        "origin",
+        "source"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "EventAmount": {
+      "additionalProperties": false,
+      "description": "Financial amount associated with an event.",
+      "properties": {
+        "value_text": {
+          "title": "Value Text",
+          "type": "string"
+        },
+        "decimal": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decimal"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        }
+      },
+      "required": [
+        "value_text"
+      ],
+      "title": "EventAmount",
+      "type": "object"
+    },
+    "EventParticipant": {
+      "additionalProperties": false,
+      "description": "Participant mention reference and role in an event.",
+      "properties": {
+        "mention_id": {
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        }
+      },
+      "required": [
+        "mention_id"
+      ],
+      "title": "EventParticipant",
+      "type": "object"
+    },
+    "EventTime": {
+      "additionalProperties": false,
+      "description": "Parsed time description with ambiguity tracking.",
+      "properties": {
+        "original_text": {
+          "title": "Original Text",
+          "type": "string"
+        },
+        "normalized_iso": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Iso"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timezone"
+        },
+        "ambiguity": {
+          "$ref": "#/$defs/TimeAmbiguity",
+          "default": "none"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "original_text"
+      ],
+      "title": "EventTime",
+      "type": "object"
+    },
+    "EventType": {
+      "description": "Event types extracted from narrative or tabular records.",
+      "enum": [
+        "INCIDENT",
+        "CALL",
+        "TRANSACTION",
+        "MEETING",
+        "ARREST",
+        "SIGHTING",
+        "OTHER"
+      ],
+      "title": "EventType",
+      "type": "string"
+    },
+    "IdentifierTrust": {
+      "description": "Trust classification for identifiers governing graph node creation.",
+      "enum": [
+        "strong",
+        "review_required",
+        "blocked",
+        "not_applicable"
+      ],
+      "title": "IdentifierTrust",
+      "type": "string"
+    },
+    "JobState": {
+      "description": "Job execution states for document processing.",
+      "enum": [
+        "queued",
+        "running",
+        "completed",
+        "completed_with_warnings",
+        "failed",
+        "failed_validation",
+        "rejected_input"
+      ],
+      "title": "JobState",
+      "type": "string"
+    },
+    "Mention": {
+      "additionalProperties": false,
+      "description": "Extracted entity mention with provenance and normalization state.",
+      "properties": {
+        "mention_id": {
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/EntityType"
+        },
+        "surface_text": {
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "normalized_value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Value"
+        },
+        "normalization_status": {
+          "$ref": "#/$defs/NormalizationStatus",
+          "default": "not_applicable"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/ValidationCheck"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "stated_role": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StatedRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/$defs/MentionAttribute"
+          },
+          "title": "Attributes",
+          "type": "array"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "ocr": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OcrInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "identifier_trust": {
+          "$ref": "#/$defs/IdentifierTrust",
+          "default": "not_applicable"
+        },
+        "confirmed_by": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confirmed By"
+        },
+        "review_flags": {
+          "items": {
+            "$ref": "#/$defs/ReviewKind"
+          },
+          "title": "Review Flags",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        }
+      },
+      "required": [
+        "mention_id",
+        "case_id",
+        "doc_id",
+        "type",
+        "surface_text",
+        "origin",
+        "source"
+      ],
+      "title": "Mention",
+      "type": "object"
+    },
+    "MentionAttribute": {
+      "additionalProperties": false,
+      "description": "Demographic or personal attribute attached to a mention.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/AttrName"
+        },
+        "value_text": {
+          "title": "Value Text",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "name",
+        "value_text"
+      ],
+      "title": "MentionAttribute",
+      "type": "object"
+    },
+    "NormalizationStatus": {
+      "description": "Status of deterministic identifier/attribute normalization.",
+      "enum": [
+        "ok",
+        "ambiguous",
+        "invalid",
+        "masked",
+        "not_applicable"
+      ],
+      "title": "NormalizationStatus",
+      "type": "string"
+    },
+    "OcrInfo": {
+      "additionalProperties": false,
+      "description": "OCR confidence scoring and engine metadata.",
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/OcrLevel"
+        },
+        "min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min"
+        },
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean"
+        },
+        "score_kind": {
+          "default": "engine_score_not_probability",
+          "title": "Score Kind",
+          "type": "string"
+        },
+        "engine": {
+          "title": "Engine",
+          "type": "string"
+        },
+        "langs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Langs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level",
+        "engine"
+      ],
+      "title": "OcrInfo",
+      "type": "object"
+    },
+    "OcrLevel": {
+      "description": "Granularity level of OCR confidence scoring.",
+      "enum": [
+        "word",
+        "line",
+        "none"
+      ],
+      "title": "OcrLevel",
+      "type": "string"
+    },
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "PageInfo": {
+      "additionalProperties": false,
+      "description": "Per-page extraction metadata for an ingested document.",
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "method": {
+          "$ref": "#/$defs/PageMethod"
+        },
+        "chars": {
+          "title": "Chars",
+          "type": "integer"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page",
+        "method",
+        "chars"
+      ],
+      "title": "PageInfo",
+      "type": "object"
+    },
+    "PageMethod": {
+      "description": "Extraction method applied to a specific document page.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "image_ocr",
+        "table",
+        "text"
+      ],
+      "title": "PageMethod",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "Rejection": {
+      "additionalProperties": false,
+      "description": "Record of an LLM output item that failed quote verification or schema validation.",
+      "properties": {
+        "rejection_id": {
+          "title": "Rejection Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/RejectionKind"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "model_item_excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Item Excerpt"
+        }
+      },
+      "required": [
+        "rejection_id",
+        "case_id",
+        "doc_id",
+        "kind",
+        "reason"
+      ],
+      "title": "Rejection",
+      "type": "object"
+    },
+    "RejectionKind": {
+      "description": "Reason category for rejecting an LLM extraction item.",
+      "enum": [
+        "quote_not_found",
+        "unit_not_in_chunk",
+        "value_not_in_quote",
+        "schema_violation",
+        "unknown_local_id",
+        "role_unsupported"
+      ],
+      "title": "RejectionKind",
+      "type": "string"
+    },
+    "RelType": {
+      "description": "Relationship categories linking mentions or entities.",
+      "enum": [
+        "USES_PHONE",
+        "USES_DEVICE",
+        "OWNS_VEHICLE",
+        "HOLDS_ACCOUNT",
+        "ASSOCIATED_WITH",
+        "EMPLOYED_BY",
+        "LOCATED_AT",
+        "ALSO_KNOWN_AS",
+        "CALLED",
+        "TRANSFERRED_TO"
+      ],
+      "title": "RelType",
+      "type": "string"
+    },
+    "Relationship": {
+      "additionalProperties": false,
+      "description": "Directed relationship between two mentions.",
+      "properties": {
+        "rel_id": {
+          "title": "Rel Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/RelType"
+        },
+        "subject_mention_id": {
+          "title": "Subject Mention Id",
+          "type": "string"
+        },
+        "object_mention_id": {
+          "title": "Object Mention Id",
+          "type": "string"
+        },
+        "assertion": {
+          "$ref": "#/$defs/Assertion"
+        },
+        "origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "review_flags": {
+          "items": {
+            "$ref": "#/$defs/ReviewKind"
+          },
+          "title": "Review Flags",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/SourceRef"
+        }
+      },
+      "required": [
+        "rel_id",
+        "case_id",
+        "type",
+        "subject_mention_id",
+        "object_mention_id",
+        "assertion",
+        "origin",
+        "source"
+      ],
+      "title": "Relationship",
+      "type": "object"
+    },
+    "ReviewItem": {
+      "additionalProperties": false,
+      "description": "Actionable human review queue item.",
+      "properties": {
+        "review_id": {
+          "title": "Review Id",
+          "type": "string"
+        },
+        "case_id": {
+          "title": "Case Id",
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/ReviewKind"
+        },
+        "target_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Ids",
+          "type": "array"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewItemStatus",
+          "default": "open"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution"
+        }
+      },
+      "required": [
+        "review_id",
+        "case_id",
+        "kind",
+        "detail"
+      ],
+      "title": "ReviewItem",
+      "type": "object"
+    },
+    "ReviewItemStatus": {
+      "description": "Resolution lifecycle status for a review item.",
+      "enum": [
+        "open",
+        "resolved"
+      ],
+      "title": "ReviewItemStatus",
+      "type": "string"
+    },
+    "ReviewKind": {
+      "description": "Categorized review triggers requiring human reviewer inspection.",
+      "enum": [
+        "low_trust_identifier",
+        "invalid_identifier",
+        "identifier_not_found_by_parser",
+        "role_inferred",
+        "ambiguous_date",
+        "contradiction",
+        "ambiguous_location",
+        "mapping_unconfirmed",
+        "tabular_pdf_detected",
+        "match_candidate",
+        "chunk_failed"
+      ],
+      "title": "ReviewKind",
+      "type": "string"
+    },
+    "RunMeta": {
+      "additionalProperties": false,
+      "description": "Metadata for an execution run across pipeline stages.",
+      "properties": {
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Finished At"
+        },
+        "pipeline_version": {
+          "title": "Pipeline Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "default": "1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "temperature": {
+          "default": 0.0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "ocr_engine": {
+          "title": "Ocr Engine",
+          "type": "string"
+        },
+        "ocr_version": {
+          "title": "Ocr Version",
+          "type": "string"
+        },
+        "ocr_langs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ocr Langs",
+          "type": "array"
+        },
+        "normalization_version": {
+          "title": "Normalization Version",
+          "type": "string"
+        },
+        "resolver_version": {
+          "title": "Resolver Version",
+          "type": "string"
+        },
+        "idempotency_key": {
+          "title": "Idempotency Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "started_at",
+        "pipeline_version",
+        "prompt_version",
+        "provider",
+        "model",
+        "ocr_engine",
+        "ocr_version",
+        "normalization_version",
+        "resolver_version",
+        "idempotency_key"
+      ],
+      "title": "RunMeta",
+      "type": "object"
+    },
+    "SheetInfo": {
+      "additionalProperties": false,
+      "description": "Spreadsheet sheet metadata.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/SheetState",
+          "default": "visible"
+        },
+        "rows": {
+          "title": "Rows",
+          "type": "integer"
+        },
+        "merged_ranges": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Merged Ranges",
+          "type": "array"
+        },
+        "formula_cells": {
+          "default": 0,
+          "title": "Formula Cells",
+          "type": "integer"
+        },
+        "formula_missing_cache": {
+          "default": 0,
+          "title": "Formula Missing Cache",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "rows"
+      ],
+      "title": "SheetInfo",
+      "type": "object"
+    },
+    "SheetState": {
+      "description": "Visibility state of a spreadsheet sheet.",
+      "enum": [
+        "visible",
+        "hidden",
+        "veryHidden"
+      ],
+      "title": "SheetState",
+      "type": "string"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Exact source location reference in an ingested document.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "unit_kind": {
+          "$ref": "#/$defs/UnitKind"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "row": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "text_origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_status": {
+          "$ref": "#/$defs/QuoteStatus"
+        },
+        "occurrence_count": {
+          "default": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "unit_id",
+        "unit_kind",
+        "text_origin",
+        "quote",
+        "quote_status"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "StatedRole": {
+      "description": "Stated role for PERSON entities in narrative police documents.",
+      "enum": [
+        "complainant",
+        "accused",
+        "suspect",
+        "witness",
+        "victim",
+        "officer",
+        "other",
+        "unknown"
+      ],
+      "title": "StatedRole",
+      "type": "string"
+    },
+    "TimeAmbiguity": {
+      "description": "Date/time ambiguity classification.",
+      "enum": [
+        "none",
+        "dmy_mdy",
+        "partial",
+        "unparseable"
+      ],
+      "title": "TimeAmbiguity",
+      "type": "string"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    },
+    "ValidationCheck": {
+      "additionalProperties": false,
+      "description": "Result of an individual deterministic validator check.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        }
+      },
+      "required": [
+        "name",
+        "passed"
+      ],
+      "title": "ValidationCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Top-level pipeline output encapsulating all facts and review items for a case.",
+  "properties": {
+    "schema_version": {
+      "default": "1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "run": {
+      "$ref": "#/$defs/RunMeta"
+    },
+    "state": {
+      "$ref": "#/$defs/JobState"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/DocumentRecord"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "mentions": {
+      "items": {
+        "$ref": "#/$defs/Mention"
+      },
+      "title": "Mentions",
+      "type": "array"
+    },
+    "relationships": {
+      "items": {
+        "$ref": "#/$defs/Relationship"
+      },
+      "title": "Relationships",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "aggregates": {
+      "items": {
+        "$ref": "#/$defs/Aggregate"
+      },
+      "title": "Aggregates",
+      "type": "array"
+    },
+    "review_items": {
+      "items": {
+        "$ref": "#/$defs/ReviewItem"
+      },
+      "title": "Review Items",
+      "type": "array"
+    },
+    "rejections": {
+      "items": {
+        "$ref": "#/$defs/Rejection"
+      },
+      "title": "Rejections",
+      "type": "array"
+    },
+    "warnings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "case_id",
+    "run",
+    "state"
+  ],
+  "title": "CaseResult",
+  "type": "object"
+}

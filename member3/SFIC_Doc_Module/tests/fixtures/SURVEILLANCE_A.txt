@@ -1,0 +1,12 @@
+SPECIAL SURVEILLANCE REPORT - CASE-A-001
+DATE: 11/03/2026
+LOCATION: Plot 12, Phase 1, Okhla Industrial Area, New Delhi 110020
+
+Surveillance log by Sub-Inspector K. Rathore.
+At 21:30 IST on 11/03/2026, suspect vehicle DL01AB1234 was spotted parked outside Plot 12, Phase 1, Okhla Industrial Area, New Delhi 110020.
+A male individual identified as Arjun Verma, age 28, S/o Suresh Verma, was observed meeting Vikram Singh alias Vicky.
+Arjun Verma handed over a package to Vikram Singh.
+Vikram Singh was operating mobile number +919876543210 during the meeting.
+Suspects departed towards Ashram Chowk in vehicle DL01AB1234.
+
+SYNTHETIC TEST DATA - FOR DEMO ONLY

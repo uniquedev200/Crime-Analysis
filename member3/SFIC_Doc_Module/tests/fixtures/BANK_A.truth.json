@@ -1,0 +1,21 @@
+{
+  "case_id": "CASE-A-001",
+  "doc_type": "BANK",
+  "events": [],
+  "expected_resolver_outcomes": [],
+  "file_name": "BANK_A.csv",
+  "mentions": [
+    {
+      "attributes": [],
+      "normalized_value": "001234567890",
+      "page": null,
+      "quote": "001234567890",
+      "surface_text": "001234567890",
+      "type": "ACCOUNT"
+    }
+  ],
+  "profile": "bank_v1",
+  "relationships": [],
+  "review_items": [],
+  "row_count": 300
+}

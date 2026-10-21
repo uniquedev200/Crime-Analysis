@@ -1,0 +1,16 @@
+{
+  "case_id": "CASE-A-001",
+  "doc_type": "UNKNOWN",
+  "events": [],
+  "expected_resolver_outcomes": [],
+  "file_name": "UNKNOWN_HEADERS.csv",
+  "mentions": [],
+  "relationships": [],
+  "review_items": [
+    {
+      "detail": "Headers do not match any known profile; no facts extracted.",
+      "kind": "mapping_unconfirmed"
+    }
+  ],
+  "row_count": 3
+}

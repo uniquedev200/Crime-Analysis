@@ -1,0 +1,43 @@
+{
+  "audit_trail": {
+    "chain_verified": true,
+    "genesis_hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "case_a": {
+    "case_id": "CASE-A-001",
+    "documents_count": 5,
+    "events_count": 301,
+    "mentions_count": 15,
+    "ocr_phone_trust": "review_required",
+    "relationships_count": 3,
+    "review_items_count": 11,
+    "state": "completed_with_warnings"
+  },
+  "case_b": {
+    "case_id": "CASE-B-002",
+    "documents_count": 2,
+    "events_count": 1,
+    "mentions_count": 5,
+    "relationships_count": 1,
+    "review_items_count": 4,
+    "state": "completed_with_warnings"
+  },
+  "cross_case_resolution": {
+    "hard_negative_status": "no_match",
+    "rank_note": "heuristic ordering, not a probability",
+    "vicky_candidate_id": "PERSON:CASE-A-001:vikram",
+    "vicky_status": "needs_review"
+  },
+  "pipeline_version": "3.3.0",
+  "provider": "mock",
+  "review_workflow": {
+    "approve_match_success": true,
+    "audit_chain_verified_after_merge": true,
+    "audit_chain_verified_after_split": true,
+    "confirm_identifier_success": true,
+    "re_resolved_status": "needs_review",
+    "split_success": true,
+    "total_audit_actions": 3
+  },
+  "seed": 42
+}

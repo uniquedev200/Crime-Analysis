@@ -1,0 +1,92 @@
+{
+  "case_id": "CASE-A-001",
+  "doc_type": "IO_REPORT",
+  "events": [],
+  "expected_resolver_outcomes": [],
+  "file_name": "IO_REPORT_A.pdf",
+  "mentions": [
+    {
+      "attributes": [],
+      "normalized_value": "Rajesh Kumar Sharma",
+      "page": 1,
+      "quote": "complaint of Rajesh Kumar Sharma,",
+      "stated_role": "complainant",
+      "surface_text": "Rajesh Kumar Sharma",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "Vikram Singh",
+      "page": 1,
+      "quote": "primary suspect was identified as Vikram Singh alias Vicky.",
+      "stated_role": "suspect",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "Vikram Singh",
+      "page": 2,
+      "quote": "suspect was referred to as Vikrum Singh.",
+      "stated_role": "suspect",
+      "surface_text": "Vikrum Singh",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "DL01AB1234",
+      "page": 2,
+      "quote": "operates vehicle DL01AB1234 in the National Capital Region.",
+      "stated_role": null,
+      "surface_text": "DL01AB1234",
+      "type": "VEHICLE"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "+919876543210",
+      "page": 3,
+      "quote": "CDR analysis for phone +919876543210 reveals active communication",
+      "stated_role": null,
+      "surface_text": "+919876543210",
+      "type": "PHONE"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "860123045678900",
+      "page": 3,
+      "quote": "Handset IMEI 860123045678900 was associated",
+      "stated_role": null,
+      "surface_text": "860123045678900",
+      "type": "IMEI"
+    }
+  ],
+  "pages": {
+    "1": "OFFICE OF THE ASSISTANT COMMISSIONER OF POLICE\nCRIME BRANCH, NEW DELHI\n\nINVESTIGATION REPORT - CASE-A-001\nFIR No: 0142/2026, Police Station: Connaught Place\nInvestigating Officer: SI Manpreet Singh\n\n1. Case Background:\nOn 12/03/2026, a case was registered upon the complaint of Rajesh Kumar Sharma,\nS/o Ramesh Sharma, residing at Flat 102, Shanti Vihar, Rohini Sector 9, New Delhi 110085.\nThe primary suspect was identified as Vikram Singh alias Vicky.\n\n2. Initial Investigation:\nThe investigating team inspected the spot at Connaught Place.\nComplainant Rajesh Kumar Sharma was examined under Section 161 Cr.P.C.\nThe suspect used mobile phone +919876543210 to orchestrate transactions.\nSYNTHETIC TEST DATA - REPORTLAB INVARIANT - PAGE 1",
+    "2": "INVESTIGATION REPORT - CASE-A-001 (Page 2)\n\n3. Surveillance and Variant Name Analysis:\nDuring interrogation of associates, the suspect was referred to as Vikrum Singh.\nSurveillance confirmed Vikrum Singh operates vehicle DL01AB1234 in the National Capital Region.\nThe vehicle DL01AB1234 was sighted near Connaught Place on 10/03/2026.\n\n4. Interrogation of Local Informants:\nInformants corroborated that Vikrum Singh and Vikram Singh are the same individual.\nVehicle DL01AB1234 was seized as material evidence.\nSYNTHETIC TEST DATA - REPORTLAB INVARIANT - PAGE 2",
+    "3": "INVESTIGATION REPORT - CASE-A-001 (Page 3)\n\n5. Technical and CDR Evidence:\nCDR analysis for phone +919876543210 reveals active communication during the incident.\nHandset IMEI 860123045678900 was associated with the active subscriber card.\nBank transactions regarding account 001234567890 substantiate fund movement.\n\n6. Conclusion & Recommendations:\nNotice under Section 41A Cr.P.C. served upon Vikram Singh.\nVehicle DL01AB1234 deposited at PS Malkhana.\nSubmitted by SI Manpreet Singh.\nSYNTHETIC TEST DATA - REPORTLAB INVARIANT - PAGE 3"
+  },
+  "relationships": [
+    {
+      "object": "Vikrum Singh",
+      "page": 2,
+      "quote": "Informants corroborated that Vikrum Singh and Vikram Singh are the same individual.",
+      "subject": "Vikram Singh",
+      "type": "ALSO_KNOWN_AS"
+    },
+    {
+      "object": "DL01AB1234",
+      "page": 2,
+      "quote": "Surveillance confirmed Vikrum Singh operates vehicle DL01AB1234 in the National Capital Region.",
+      "subject": "Vikrum Singh",
+      "type": "OWNS_VEHICLE"
+    },
+    {
+      "object": "860123045678900",
+      "page": 3,
+      "quote": "Handset IMEI 860123045678900 was associated with the active subscriber card.",
+      "subject": "Vikram Singh",
+      "type": "USES_DEVICE"
+    }
+  ],
+  "review_items": []
+}

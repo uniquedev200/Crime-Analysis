@@ -1,0 +1,317 @@
+{
+  "$defs": {
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "RelType": {
+      "description": "Relationship categories linking mentions or entities.",
+      "enum": [
+        "USES_PHONE",
+        "USES_DEVICE",
+        "OWNS_VEHICLE",
+        "HOLDS_ACCOUNT",
+        "ASSOCIATED_WITH",
+        "EMPLOYED_BY",
+        "LOCATED_AT",
+        "ALSO_KNOWN_AS",
+        "CALLED",
+        "TRANSFERRED_TO"
+      ],
+      "title": "RelType",
+      "type": "string"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Exact source location reference in an ingested document.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "unit_kind": {
+          "$ref": "#/$defs/UnitKind"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "row": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "text_origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_status": {
+          "$ref": "#/$defs/QuoteStatus"
+        },
+        "occurrence_count": {
+          "default": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "unit_id",
+        "unit_kind",
+        "text_origin",
+        "quote",
+        "quote_status"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Aggregated communication or transaction statistics from bulk tabular data.",
+  "properties": {
+    "aggregate_id": {
+      "title": "Aggregate Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/RelType"
+    },
+    "subject_mention_id": {
+      "title": "Subject Mention Id",
+      "type": "string"
+    },
+    "object_mention_id": {
+      "title": "Object Mention Id",
+      "type": "string"
+    },
+    "count": {
+      "title": "Count",
+      "type": "integer"
+    },
+    "total_duration_s": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Total Duration S"
+    },
+    "total_amount": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Total Amount"
+    },
+    "first_ts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "First Ts"
+    },
+    "last_ts": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Ts"
+    },
+    "sample_sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRef"
+      },
+      "title": "Sample Sources",
+      "type": "array"
+    },
+    "events_file": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Events File"
+    },
+    "events_row_range": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Events Row Range"
+    }
+  },
+  "required": [
+    "aggregate_id",
+    "case_id",
+    "type",
+    "subject_mention_id",
+    "object_mention_id",
+    "count"
+  ],
+  "title": "Aggregate",
+  "type": "object"
+}

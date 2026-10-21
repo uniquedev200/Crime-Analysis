@@ -1,0 +1,55 @@
+{
+  "events": [
+    {
+      "description": "Coercive call demanding ransom",
+      "location_local_id": null,
+      "participant_local_ids": [
+        "m8"
+      ],
+      "quote": "The mobile phone +919876543210 was used by the accused to make coercive calls demanding ransom.",
+      "time_text": null,
+      "type": "CALL",
+      "unit_id": "DOC-482400506952:p002"
+    }
+  ],
+  "mentions": [
+    {
+      "attributes": [
+        {
+          "name": "age",
+          "quote": "Witness Manoj Tiwari, age 38",
+          "value_text": "38"
+        }
+      ],
+      "local_id": "m8",
+      "quote": "Witness Manoj Tiwari, age 38, confirmed seeing the accused",
+      "role_stated": "witness",
+      "surface_text": "Manoj Tiwari",
+      "type": "PERSON",
+      "unit_id": "DOC-482400506952:p002"
+    },
+    {
+      "attributes": [],
+      "local_id": "m9",
+      "quote": "entering the vehicle DL01AB1234",
+      "role_stated": null,
+      "surface_text": "DL01AB1234",
+      "type": "VEHICLE",
+      "unit_id": "DOC-482400506952:p002"
+    },
+    {
+      "attributes": [],
+      "local_id": "m10",
+      "quote": "The mobile phone +919876543210 was used",
+      "role_stated": null,
+      "surface_text": "+919876543210",
+      "type": "PHONE",
+      "unit_id": "DOC-482400506952:p002"
+    }
+  ],
+  "notes": [
+    "SCRIPTED MOCK PROVIDER: not live extraction",
+    "Ignored injection vector on page 2."
+  ],
+  "relationships": []
+}

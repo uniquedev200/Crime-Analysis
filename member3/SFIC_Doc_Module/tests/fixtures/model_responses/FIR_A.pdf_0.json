@@ -1,0 +1,130 @@
+{
+  "events": [
+    {
+      "description": "Occurrence of offence at Connaught Place",
+      "location_local_id": null,
+      "participant_local_ids": [
+        "m1",
+        "m3"
+      ],
+      "quote": "Occurrence of Offence: Date: 10/03/2026, Time: 18:30 IST",
+      "time_text": "10/03/2026, Time: 18:30 IST",
+      "type": "INCIDENT",
+      "unit_id": "DOC-482400506952:p001"
+    }
+  ],
+  "mentions": [
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "Father's Name: Harbans Singh",
+          "value_text": "Harbans Singh"
+        },
+        {
+          "name": "age",
+          "quote": "Age: 32 yrs",
+          "value_text": "32 yrs"
+        }
+      ],
+      "local_id": "m1",
+      "quote": "Accused: Vikram Singh alias Vicky",
+      "role_stated": "accused",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m2",
+      "quote": "Accused: Vikram Singh alias Vicky",
+      "role_stated": "accused",
+      "surface_text": "Vicky",
+      "type": "PERSON",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "Father's Name: Ramesh Sharma",
+          "value_text": "Ramesh Sharma"
+        },
+        {
+          "name": "age",
+          "quote": "Age: 45 yrs",
+          "value_text": "45 yrs"
+        }
+      ],
+      "local_id": "m3",
+      "quote": "Name: Rajesh Kumar Sharma",
+      "role_stated": "complainant",
+      "surface_text": "Rajesh Kumar Sharma",
+      "type": "PERSON",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m4",
+      "quote": "Contact Phone: +919811122233",
+      "role_stated": null,
+      "surface_text": "+919811122233",
+      "type": "PHONE",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m5",
+      "quote": "Contact Phone: +919876543210",
+      "role_stated": null,
+      "surface_text": "+919876543210",
+      "type": "PHONE",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m6",
+      "quote": "Vehicle Involved: White Swift Dzire bearing registration DL01AB1234",
+      "role_stated": null,
+      "surface_text": "DL01AB1234",
+      "type": "VEHICLE",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m7",
+      "quote": "Bank Account: SBI Account 001234567890",
+      "role_stated": null,
+      "surface_text": "001234567890",
+      "type": "ACCOUNT",
+      "unit_id": "DOC-482400506952:p001"
+    }
+  ],
+  "notes": [
+    "SCRIPTED MOCK PROVIDER: not live extraction",
+    "Case A FIR page 1 facts"
+  ],
+  "relationships": [
+    {
+      "object_local_id": "m2",
+      "quote": "Accused: Vikram Singh alias Vicky",
+      "subject_local_id": "m1",
+      "type": "ALSO_KNOWN_AS",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "object_local_id": "m5",
+      "quote": "Contact Phone: +919876543210",
+      "subject_local_id": "m1",
+      "type": "USES_PHONE",
+      "unit_id": "DOC-482400506952:p001"
+    },
+    {
+      "object_local_id": "m6",
+      "quote": "fled in vehicle DL01AB1234",
+      "subject_local_id": "m1",
+      "type": "OWNS_VEHICLE",
+      "unit_id": "DOC-482400506952:p001"
+    }
+  ]
+}

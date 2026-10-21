@@ -1,0 +1,69 @@
+{
+  "events": [
+    {
+      "description": "Surveillance meeting in Okhla",
+      "location_local_id": null,
+      "participant_local_ids": [
+        "m1",
+        "m2"
+      ],
+      "quote": "At 21:30 IST on 11/03/2026, suspect vehicle DL01AB1234 was spotted parked outside Plot 12, Phase 1, Okhla Industrial Area, New Delhi 110020.",
+      "time_text": "21:30 IST on 11/03/2026",
+      "type": "MEETING",
+      "unit_id": "DOC-45de563df99f:l000001"
+    }
+  ],
+  "mentions": [
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "S/o Suresh Verma",
+          "value_text": "Suresh Verma"
+        },
+        {
+          "name": "age",
+          "quote": "age 28",
+          "value_text": "28"
+        }
+      ],
+      "local_id": "m1",
+      "quote": "individual identified as Arjun Verma, age 28, S/o Suresh Verma,",
+      "role_stated": "witness",
+      "surface_text": "Arjun Verma",
+      "type": "PERSON",
+      "unit_id": "DOC-45de563df99f:l000001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m2",
+      "quote": "meeting Vikram Singh alias Vicky.",
+      "role_stated": "suspect",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON",
+      "unit_id": "DOC-45de563df99f:l000001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m3",
+      "quote": "suspect vehicle DL01AB1234 was spotted parked",
+      "role_stated": null,
+      "surface_text": "DL01AB1234",
+      "type": "VEHICLE",
+      "unit_id": "DOC-45de563df99f:l000001"
+    }
+  ],
+  "notes": [
+    "SCRIPTED MOCK PROVIDER: not live extraction",
+    "Surveillance extraction"
+  ],
+  "relationships": [
+    {
+      "object_local_id": "m2",
+      "quote": "Arjun Verma handed over a package to Vikram Singh.",
+      "subject_local_id": "m1",
+      "type": "ASSOCIATED_WITH",
+      "unit_id": "DOC-45de563df99f:l000001"
+    }
+  ]
+}

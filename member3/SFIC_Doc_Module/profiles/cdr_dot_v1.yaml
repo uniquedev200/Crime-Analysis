@@ -1,0 +1,36 @@
+name: cdr_dot_v1
+version: "1.0"
+required_headers:
+  - a_party
+  - b_party
+  - call_type
+  - duration_s
+  - call_date
+header_aliases:
+  target_a_party_number: a_party
+  b_party_number: b_party
+  call_type_in_out: call_type
+  call_duration_second: duration_s
+  imei_esn: imei
+  first_cell_global_id_mcc_mnc_lac_site_id: cell_id
+  call_date: call_date
+  call_initiation_time_cit: call_time
+  first_bts_location: first_bts_location
+  last_bts_location: last_bts_location
+  last_cell_global_id: last_cell_global_id
+  sms_centre_no: sms_centre_no
+  service_type: service_type
+  imsi_min: imsi_min
+  call_forwarding_number: call_forwarding_number
+  roaming_network_circle: roaming_network_circle
+  switch_id_msc_id: switch_id_msc_id
+  in_tg: in_tg
+  out_tg: out_tg
+  record_id: record_id
+  lrn_a_b_party_number: lrn_a_b_party_number
+  translation_of_lrn: translation_of_lrn
+  type_of_connection_prepaid_postpaid: type_of_connection_prepaid_postpaid
+date_format: "%d/%m/%Y %H:%M:%S"
+timezone: "Asia/Kolkata"
+amount_format: null
+id_columns: [a_party, b_party, imei]

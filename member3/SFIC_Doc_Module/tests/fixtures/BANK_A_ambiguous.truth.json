@@ -1,0 +1,17 @@
+{
+  "case_id": "CASE-A-001",
+  "doc_type": "BANK",
+  "events": [],
+  "expected_resolver_outcomes": [],
+  "file_name": "BANK_A_ambiguous.csv",
+  "mentions": [],
+  "profile": "bank_v1",
+  "relationships": [],
+  "review_items": [
+    {
+      "detail": "Date field uses ambiguous dd/mm or mm/dd format with day and month both <= 12.",
+      "kind": "ambiguous_date"
+    }
+  ],
+  "row_count": 100
+}

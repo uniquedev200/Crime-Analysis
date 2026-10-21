@@ -1,0 +1,82 @@
+{
+  "_disclaimer": "FICTIONAL MOCK DATASET FOR INITIAL COLLEGE PROJECT DEVELOPMENT ONLY. ALL NAMES, LOCATIONS, AND EVENTS ARE COMPLETELY SYNTHETIC. FINAL TEAM JSON SCHEMA IS NOT YET CONFIRMED.",
+  "is_fictional_mock": true,
+  "schema_status": "TEMPORARY_DEVELOPMENT_MOCK",
+  "generated_at": "2026-10-13T09:00:00Z",
+  "cases": [
+    {
+      "case_id": "CASE-MOCK-001",
+      "case_title": "Fictional North Pier Logistics Discrepancy",
+      "status": "OPEN_MOCK",
+      "records": [
+        {
+          "record_id": "REC-101",
+          "case_id": "CASE-MOCK-001",
+          "record_type": "incident_report",
+          "document_name": "mock_pier_incident_report.pdf",
+          "page_number": 2,
+          "timestamp": "2026-09-14T21:15:00Z",
+          "reported_by_name": "Jordan Vance (Fictional)",
+          "contact_phone": "555-0199-MOCK",
+          "location": "Synthetic Pier 4 Warehouse, Bay Sector",
+          "amount_usd": 4500.00,
+          "description": "Fictional security log noting an unscheduled crate movement at Gate B. Association with night-shift badge scan only; camera feed at Gate B was offline."
+        },
+        {
+          "record_id": "REC-102",
+          "case_id": "CASE-MOCK-001",
+          "record_type": "financial_log",
+          "document_name": "mock_freight_ledger_sep.pdf",
+          "page_number": 7,
+          "timestamp": "2026-09-15T10:30:00Z",
+          "person_name": "Rowan Sterling (Fictional)",
+          "contact_email": "r.sterling.mock@example.invalid",
+          "location": "Fictional Harbor Accounting Office",
+          "amount_usd": 1250.50,
+          "description": "Fictional invoice adjustment recorded under voucher #M-882. Reason code listed as pending carrier verification."
+        },
+        {
+          "record_id": "REC-103",
+          "case_id": "CASE-MOCK-001",
+          "record_type": "witness_statement",
+          "document_name": "mock_gate_attendant_interview.pdf",
+          "page_number": null,
+          "timestamp": "2026-09-16T14:05:00Z",
+          "witness_name": "Casey Thorne (Fictional)",
+          "home_address": "742 Evergreen Mock Lane, Fictional City",
+          "description": "Fictional attendant stated a white delivery van was parked near Gate B between 21:00 and 21:30, but license plate could not be read due to fog."
+        }
+      ]
+    },
+    {
+      "case_id": "CASE-MOCK-002",
+      "case_title": "Fictional Museum Archive Access Inquiry",
+      "status": "UNDER_REVIEW_MOCK",
+      "records": [
+        {
+          "record_id": "REC-201",
+          "case_id": "CASE-MOCK-002",
+          "record_type": "access_log",
+          "document_name": "mock_archive_badge_logs.csv",
+          "page_number": 1,
+          "timestamp": "2026-10-01T18:42:10Z",
+          "person_name": "Morgan Ellis (Fictional)",
+          "contact_phone": "555-0144-MOCK",
+          "amount_usd": 0.00,
+          "description": "Fictional badge swipe recorded at East Archive Door. Entry occurred during scheduled maintenance window; no items reported missing."
+        },
+        {
+          "record_id": "REC-202",
+          "case_id": "CASE-MOCK-002",
+          "record_type": "audit_note",
+          "document_name": "mock_curator_checklist.pdf",
+          "page_number": 4,
+          "timestamp": "2026-10-02T09:10:00Z",
+          "reported_by_name": "Avery Quinn (Fictional)",
+          "contact_email": "a.quinn.mock@example.invalid",
+          "description": "Fictional inventory check confirming display case seals were intact, though secondary hallway logbook page for Oct 1 was not signed."
+        }
+      ]
+    }
+  ]
+}

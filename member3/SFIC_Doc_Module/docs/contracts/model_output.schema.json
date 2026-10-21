@@ -1,0 +1,289 @@
+{
+  "$defs": {
+    "AttrName": {
+      "description": "Standardized demographic and personal attribute names.",
+      "enum": [
+        "father_name",
+        "age",
+        "dob",
+        "gender",
+        "address",
+        "occupation"
+      ],
+      "title": "AttrName",
+      "type": "string"
+    },
+    "EntityType": {
+      "description": "Supported entity categories extracted from evidence documents.",
+      "enum": [
+        "PERSON",
+        "PHONE",
+        "IMEI",
+        "VEHICLE",
+        "ACCOUNT",
+        "ORGANIZATION",
+        "LOCATION"
+      ],
+      "title": "EntityType",
+      "type": "string"
+    },
+    "EventType": {
+      "description": "Event types extracted from narrative or tabular records.",
+      "enum": [
+        "INCIDENT",
+        "CALL",
+        "TRANSACTION",
+        "MEETING",
+        "ARREST",
+        "SIGHTING",
+        "OTHER"
+      ],
+      "title": "EventType",
+      "type": "string"
+    },
+    "ModelAttributeOutput": {
+      "additionalProperties": false,
+      "description": "Attribute entry inside a model mention.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/AttrName"
+        },
+        "value_text": {
+          "title": "Value Text",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value_text",
+        "quote"
+      ],
+      "title": "ModelAttributeOutput",
+      "type": "object"
+    },
+    "ModelEventOutput": {
+      "additionalProperties": false,
+      "description": "Event extracted by LLM.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "time_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Time Text"
+        },
+        "participant_local_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Participant Local Ids",
+          "type": "array"
+        },
+        "location_local_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location Local Id"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "description",
+        "participant_local_ids",
+        "unit_id",
+        "quote"
+      ],
+      "title": "ModelEventOutput",
+      "type": "object"
+    },
+    "ModelMentionOutput": {
+      "additionalProperties": false,
+      "description": "Mention extracted by LLM.",
+      "properties": {
+        "local_id": {
+          "title": "Local Id",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/EntityType"
+        },
+        "surface_text": {
+          "title": "Surface Text",
+          "type": "string"
+        },
+        "role_stated": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StatedRole"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/$defs/ModelAttributeOutput"
+          },
+          "title": "Attributes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "local_id",
+        "type",
+        "surface_text",
+        "unit_id",
+        "quote",
+        "attributes"
+      ],
+      "title": "ModelMentionOutput",
+      "type": "object"
+    },
+    "ModelRelationshipOutput": {
+      "additionalProperties": false,
+      "description": "Relationship extracted by LLM.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/RelType"
+        },
+        "subject_local_id": {
+          "title": "Subject Local Id",
+          "type": "string"
+        },
+        "object_local_id": {
+          "title": "Object Local Id",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "subject_local_id",
+        "object_local_id",
+        "unit_id",
+        "quote"
+      ],
+      "title": "ModelRelationshipOutput",
+      "type": "object"
+    },
+    "RelType": {
+      "description": "Relationship categories linking mentions or entities.",
+      "enum": [
+        "USES_PHONE",
+        "USES_DEVICE",
+        "OWNS_VEHICLE",
+        "HOLDS_ACCOUNT",
+        "ASSOCIATED_WITH",
+        "EMPLOYED_BY",
+        "LOCATED_AT",
+        "ALSO_KNOWN_AS",
+        "CALLED",
+        "TRANSFERRED_TO"
+      ],
+      "title": "RelType",
+      "type": "string"
+    },
+    "StatedRole": {
+      "description": "Stated role for PERSON entities in narrative police documents.",
+      "enum": [
+        "complainant",
+        "accused",
+        "suspect",
+        "witness",
+        "victim",
+        "officer",
+        "other",
+        "unknown"
+      ],
+      "title": "StatedRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Root structure of LLM response.",
+  "properties": {
+    "mentions": {
+      "items": {
+        "$ref": "#/$defs/ModelMentionOutput"
+      },
+      "title": "Mentions",
+      "type": "array"
+    },
+    "relationships": {
+      "items": {
+        "$ref": "#/$defs/ModelRelationshipOutput"
+      },
+      "title": "Relationships",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/ModelEventOutput"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "mentions",
+    "relationships",
+    "events",
+    "notes"
+  ],
+  "title": "ModelOutput",
+  "type": "object"
+}

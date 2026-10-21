@@ -1,0 +1,12 @@
+exact_identifier: 1.0
+name_similarity: 0.4
+parent_name: 0.3
+age_dob_compat: 0.2
+address_overlap: 0.15
+co_occurrence: 0.25
+alias_stated: 0.5
+MIN_RANK: 0.3
+T_NAME_HIGH: 0.85
+RANK_EPSILON: 0.05
+MAX_SCORE: 2.0
+CONTRADICTION_PENALTY: 0.3

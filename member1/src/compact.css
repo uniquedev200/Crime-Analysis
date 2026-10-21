@@ -1,0 +1,271 @@
+/* Smaller component dimensions at normal browser zoom. */
+.atlas-landing { --home-nav-height: 56px; }
+.atlas-home-brand { font-size: 19px; gap: 9px; letter-spacing: 3px; }
+.atlas-home-header .atlas-mark { width: 29px; height: 29px; }
+.atlas-home-header nav { gap: 26px; }
+.atlas-home-header nav button { font-size: 12px; }
+.atlas-home-hero h1 { font-size: clamp(40px, min(5.5vw, 10svh), 76px); }
+.atlas-home-hero-content > p { font-size: 15px; margin-bottom: 24px; }
+.atlas-landing .atlas-home-button { min-height: 42px; padding: 10px 18px; gap: 22px; font-size: 12px; }
+.atlas-home-section-intro h2, .atlas-home-workflow > h2 { font-size: clamp(25px, 2.7vw, 32px); letter-spacing: -.9px; }
+.atlas-home-section-intro p { font-size: 13px; }
+.atlas-home-feature h2, .atlas-home-platform-overview .atlas-home-feature-copy h2 { font-size: clamp(25px, 2.5vw, 30px); }
+.atlas-home-platform-overview .atlas-home-feature-copy > p { font-size: 13px; line-height: 1.65; margin-bottom: 12px; }
+.atlas-home-capabilities { max-width: 1080px; }
+.atlas-home-art { height: 350px; }
+.evidence-art .record-front { top: 45px; }
+.evidence-art .record-back, .evidence-art .record-middle { top: 30px; }
+.atlas-home-workflow .atlas-timeline-number { width: 58px; height: 58px; font-size: 21px; border-radius: 14px; }
+.atlas-timeline::before { top: 29px; height: 2px; background: var(--palette-accent); opacity: .65; }
+.atlas-home-workflow .atlas-timeline h3 { font-size: 18px; }
+.atlas-home-workflow .atlas-timeline li p { font-size: 12px; line-height: 1.6; }
+.atlas-landing .atlas-case-intro h2 { font-size: clamp(26px, 2.8vw, 36px); }
+.atlas-case-intro p { font-size: 13px; }
+.atlas-case-surface { max-width: 940px; }
+
+.atlas-auth .atlas-auth-card { max-width: 400px; padding: 20px 24px; }
+.atlas-auth.atlas-auth-register .atlas-auth-card { max-width: 620px; }
+.atlas-auth .atlas-auth-card h1 { font-size: 26px; }
+.atlas-auth .atlas-auth-description { font-size: 12px; }
+.atlas-auth .atlas-auth-switch { margin: 12px 0; gap: 20px; }
+.atlas-auth .atlas-auth-switch button { font-size: 12px; }
+.atlas-auth .atlas-auth-field { margin-bottom: 12px; }
+.atlas-auth .atlas-auth-field input, .atlas-auth .atlas-auth-field select,
+.atlas-auth .atlas-auth-field textarea { min-height: 38px; padding: 8px 10px; font-size: 12px; }
+.atlas-auth .atlas-auth-password input { padding-right: 46px; }
+.atlas-auth .atlas-auth-password button { height: 32px; }
+.atlas-auth.atlas-auth-register .atlas-auth-fields { gap: 10px 18px; }
+.atlas-auth .atlas-auth-submit { min-height: 38px; padding: 9px 20px; font-size: 12px; }
+
+.app-shell .view-banner h1 { font-size: 18px; }
+.app-shell .main { padding: 14px 18px 18px; }
+.app-shell .card { padding: 14px; margin-bottom: 12px; }
+.app-shell .card-title { font-size: 14px; }
+.app-shell .control { min-height: 30px; padding: 6px 9px; font-size: 12px; }
+.app-shell .neu-btn { min-height: 30px; padding: 6px 10px; font-size: 12px; }
+.app-shell table { font-size: 12px; }
+.app-shell thead th { padding: 9px 12px; }
+.app-shell tbody td { padding: 10px 12px; }
+.app-shell .investigation-heading h2, .app-shell .case-workspace-header h2 { font-size: 20px; }
+.app-shell .investigation-columns .card { padding: 13px; margin-bottom: 12px; }
+.app-shell .investigation-metrics strong, .app-shell .stat-value { font-size: 20px; }
+.app-shell .network-stat-card, .app-shell .network-information-card { padding: 11px; border-radius: 9px; }
+.app-shell .network-stat-card strong { font-size: 19px; }
+.app-shell .investigation-map-layout { gap: 14px; }
+.app-shell .investigation-map-layout .graph-explorer-card { padding: 0; }
+
+/* Keep internal tools small and reserve the main area for results. */
+.app-shell { --workspace-header-height: 38px; --rail-width: 84px; }
+.app-shell .view-banner { padding: 10px 16px 8px; }
+.app-shell .view-banner h1 { font-size: 16px; letter-spacing: -.5px; }
+.app-shell .main { padding: 10px 14px 14px; }
+.app-shell .app-sidebar nav { gap: 6px; }
+.app-shell .workspace-rail-item { padding: 5px 2px; gap: 3px; width: 100%; font-size: 10px; text-align: center; }
+.app-shell .workspace-rail-item > span:not(.workspace-rail-icon) { display: block; width: 100%; padding: 0 4px; line-height: 1.18; text-align: center; word-break: normal; overflow-wrap: break-word; font-size: 10px; }
+.app-shell .workspace-rail-icon { width: 25px; height: 25px; }
+.app-shell .card { padding: 12px; margin-bottom: 10px; }
+.app-shell .card-title { font-size: 13px; }
+.app-shell .control, .app-shell .neu-btn,
+.app-shell .graph-first-workspace :is(.control,.neu-btn) { min-height: 28px; font-size: 11px; padding: 5px 8px; }
+.app-shell .investigation-heading h2, .app-shell .case-workspace-header h2 { font-size: 18px; }
+.app-shell .network-information { gap: 8px; }
+.app-shell .network-stat-grid { gap: 7px; }
+.app-shell .network-stat-card, .app-shell .network-information-card { padding: 9px 10px; }
+.app-shell .network-stat-card h2, .app-shell .network-information-card h2 { font-size: 11px; margin-bottom: 5px; }
+.app-shell .network-stat-card strong { font-size: 17px; }
+.app-shell .network-scope-footer { margin-top: 6px; }
+.app-shell .network-type-list { gap: 6px; }
+.app-shell .network-entity-row { padding: 6px 0; }
+.app-shell .graph-canvas-actions { top: 8px; right: 8px; gap: 5px; }
+.app-shell .graph-first-workspace .graph-ai-box { width: min(270px, calc(100% - 16px)); }
+.app-shell .graph-first-workspace .vis-navigation .vis-button { width: 26px; height: 26px; background-size: 26px 26px; }
+.app-shell.investigate-shell .main { background: var(--palette-background); }
+.app-shell .investigation-map-layout:not(.is-expanded) #graph {
+  background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible;
+  --graph-bg: var(--palette-background);
+}
+.app-shell .investigation-map-layout #graphCanvas { background: transparent; }
+.app-shell .investigation-map-layout.is-expanded #graph { background: var(--palette-background); }
+.app-shell .investigation-map-layout .graph-explorer-card,
+.app-shell .investigation-map-layout .graph-explorer-card:hover,
+.app-shell .investigation-map-layout #graphCanvas,
+.app-shell .investigation-map-layout #graphCanvas .vis-network {
+  border: 0; border-radius: 0; box-shadow: none; background: transparent;
+}
+
+.app-shell div.vis-tooltip {
+  max-width: min(300px, calc(100vw - 80px)); max-height: 320px;
+  padding: 12px 14px; white-space: normal; overflow: hidden;
+  font: 11px/1.5 'Segoe UI',system-ui,sans-serif;
+  color: var(--palette-text); background: var(--palette-card);
+  border: 1px solid var(--palette-border); border-radius: 9px;
+  box-shadow: 0 8px 24px rgba(23,28,27,.12); z-index: 20;
+  overflow-wrap: anywhere;
+}
+.graph-node-preview-type { color: var(--palette-accent); font-size: 10px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
+.graph-node-preview-body { max-height: 150px; overflow: hidden; }
+.graph-node-preview-name, .graph-node-preview-id, .graph-node-preview-row { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.graph-node-preview-name { font-size: 13px; font-weight: 600; margin-top: 4px; line-height: 1.4; }
+.graph-node-preview-id { color: var(--palette-secondary); font: 10px/1.5 var(--mono); margin: 4px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--palette-border); }
+.graph-node-preview-detail { margin: 5px 0; font-weight: 500; }
+.graph-node-preview-row { padding: 3px 0 3px 8px; border-left: 2px solid var(--palette-border); color: var(--palette-secondary); }
+.graph-node-preview-footer { margin-top: 9px; padding-top: 8px; border-top: 1px solid var(--palette-border); color: var(--palette-accent); font-size: 10px; }
+
+.app-shell .graph-canvas-actions { flex-direction: column; align-items: flex-end; flex-wrap: nowrap; }
+.app-shell .graph-canvas-actions .graph-icon-action { flex-direction: row-reverse; justify-content: flex-start; gap: 0; height: 32px; min-width: 32px; padding: 7px; color: var(--palette-accent); }
+.graph-icon-action svg { flex-shrink: 0; }
+.graph-icon-action > span { max-width: 0; overflow: hidden; opacity: 0; white-space: nowrap; transition: max-width 180ms ease, opacity 180ms ease, margin 180ms ease; }
+.graph-icon-action:hover > span, .graph-icon-action:focus-visible > span { max-width: 150px; opacity: 1; margin-right: 9px; }
+.graph-map-controls { position: absolute; right: 8px; bottom: 10px; z-index: 15; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.graph-map-controls button { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; background: var(--palette-card); color: var(--palette-accent); border: 1px solid var(--palette-border); border-radius: 6px; box-shadow: 0 2px 6px rgba(23,28,27,.06); }
+.graph-map-controls button:hover:not(:disabled) { background: var(--palette-selected); border-color: var(--palette-accent); }
+.graph-map-controls button:disabled { opacity: .45; cursor: default; }
+.graph-pan-controls { display: grid; grid-template-columns: repeat(3,30px); grid-template-rows: repeat(2,30px); gap: 3px; }
+.graph-pan-up { grid-area: 1 / 2; }
+.graph-pan-left { grid-area: 2 / 1; }
+.graph-pan-down { grid-area: 2 / 2; }
+.graph-pan-right { grid-area: 2 / 3; }
+.graph-zoom-controls { display: flex; gap: 3px; }
+.app-shell .graph-first-workspace .graph-ai-box { top: 8px; right: 52px; bottom: 122px; }
+@media(hover:none) { .graph-icon-action > span { transition: none; } }
+@media(prefers-reduced-motion:reduce) { .graph-icon-action > span { transition: none; } }
+
+/* Entity search details use a compact white dialog. */
+.modal.entity-details-modal {
+  width: min(600px, calc(100vw - 32px)); max-width: 600px;
+  max-height: calc(100svh - 48px); overflow-y: auto; padding: 22px;
+  background: #FFFFFF; color: var(--palette-text); border: 1px solid var(--palette-border);
+  border-radius: 12px; box-shadow: 0 18px 60px rgba(23,28,27,.18);
+}
+.entity-details-header { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--palette-border); }
+.entity-details-avatar { flex-shrink: 0; width: 38px; height: 38px; display: grid; place-items: center; background: var(--palette-selected); border-radius: 10px; font-size: 13px; font-weight: 600; }
+.entity-details-heading { min-width: 0; flex: 1; }
+.entity-details-type { font-size: 10px; color: var(--palette-accent); letter-spacing: .6px; text-transform: uppercase; }
+.modal.entity-details-modal h3 { font-size: 18px; font-weight: 600; margin: 3px 0 4px; line-height: 1.3; overflow-wrap: anywhere; }
+.entity-details-id { color: var(--palette-secondary); font: 11px/1.5 var(--mono); overflow-wrap: anywhere; }
+.entity-details-close { flex-shrink: 0; align-self: flex-start; display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--palette-border); border-radius: 6px; background: #FFFFFF; color: var(--palette-secondary); }
+.entity-details-close:hover { color: var(--palette-accent); background: var(--palette-selected); }
+.entity-details-modal .entity-props-table { width: 100%; font-size: 12px; border-collapse: collapse; table-layout: fixed; }
+.entity-details-modal .entity-props-table td { padding: 9px 10px; border-bottom: 1px solid var(--palette-border); background: #FFFFFF; overflow-wrap: anywhere; line-height: 1.5; }
+.entity-details-modal .entity-props-table .prop-key { width: 34%; color: var(--palette-secondary); font-size: 11px; }
+.entity-details-modal .entity-props-table .prop-val { color: var(--palette-text); font-size: 12px; }
+.entity-details-connections { margin-top: 20px; }
+.entity-details-connections h4 { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; margin: 0 0 10px; }
+.entity-details-connections h4 > span { border-radius: 5px; padding: 2px 6px; background: var(--palette-selected); color: var(--palette-accent); font-size: 10px; }
+.entity-details-connection-list { max-height: 260px; overflow-y: auto; border: 1px solid var(--palette-border); border-radius: 8px; }
+.entity-details-connection { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; width: 100%; text-align: left; border: 0; border-bottom: 1px solid var(--palette-border); background: #FFFFFF; color: var(--palette-text); }
+.entity-details-connection:last-child { border-bottom: 0; }
+.entity-details-connection:hover:not(:disabled) { background: var(--palette-selected); }
+.entity-details-connection-copy { min-width: 0; overflow-wrap: anywhere; }
+.entity-details-inspect { flex-shrink: 0; display: flex; gap: 6px; color: var(--palette-accent); font-size: 11px; }
+@media(max-width:540px) { .modal.entity-details-modal { padding: 16px; max-height: calc(100svh - 24px); } .entity-details-header { gap: 9px; } }
+
+/* The investigation network fills the workspace, rather than a nested panel. */
+.app-shell.investigate-shell .main { max-width: none; padding: 0; }
+.app-shell.investigate-shell .view-banner {
+  position: relative; z-index: 2; width: fit-content;
+  padding: 10px 14px 8px; background: var(--palette-background);
+}
+.app-shell.investigate-shell .investigation-map-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 60px);
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+.app-shell.investigate-shell #graph {
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+@media(max-width:760px) {
+  .app-shell.investigate-shell .network-information {
+    display: flex; width: 190px; max-height: 34svh !important;
+    margin-left: 10px;
+  }
+  .app-shell.investigate-shell .network-stat-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(min-width:761px) {
+  .app-shell .investigation-map-layout { grid-template-columns: clamp(200px,20vw,240px) minmax(0,1fr); gap: 12px; }
+}
+
+/* Section tools share the navy header on every workspace route. */
+.app-shell .app-top-header .workspace-tabs {
+  flex: 1; min-width: 0; align-self: stretch; align-items: stretch;
+  padding: 0; gap: 4px; border: 0; scrollbar-width: thin;
+}
+.app-shell .app-top-header .workspace-tabs button {
+  padding: 0 9px; font-size: 11px; gap: 5px; color: var(--palette-border); border-radius: 4px 4px 0 0;
+}
+.app-shell .app-top-header .workspace-tabs button:hover {
+  color: #FFFFFF; background: rgba(255,255,255,.08);
+}
+.app-shell .app-top-header .workspace-tabs button.active {
+  color: var(--palette-text); background: var(--palette-selected);
+  border-bottom-color: var(--palette-decorative);
+}
+.app-shell .app-top-header .workspace-logo,
+.app-shell .app-top-header .profile-wrap { flex-shrink: 0; }
+.app-shell .app-top-header .header-search { margin-left: 0; flex-shrink: 0; }
+@media(max-width:840px) {
+  .app-shell .app-top-header { gap: 6px; padding-right: 10px; }
+  .app-shell .app-top-header .header-search { flex: 0 0 30px; min-width: 30px; padding: 7px; }
+  .app-shell .app-top-header .header-search span { display: none; }
+  .app-shell .app-top-header .workspace-tabs button { padding: 0 9px; }
+}
+
+@media(max-width:600px) {
+  .atlas-landing { --home-nav-height: 56px; }
+  .atlas-home-header nav { gap: 14px; }
+  .atlas-home-brand { font-size: 16px; }
+  .atlas-home-hero h1 { font-size: clamp(40px, min(10.5vw, 10svh), 60px); }
+  .atlas-home-art { height: 340px; }
+  .atlas-auth .atlas-auth-card { padding: 18px; }
+  .app-shell .main { padding: 12px; }
+}
+
+/* Case details precede the upload drop zone. */
+.upload-case-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; border:0; padding:0; margin:0 0 20px; min-width:0; }
+.upload-case-fields label { display:grid; gap:7px; font-size:12px; font-weight:600; color:var(--palette-text); }
+.upload-case-fields input { width:100%; min-width:0; background:var(--palette-card); }
+.evidence-upload-page .upload-footer { justify-content:flex-end; }
+.registry-delete { margin-left:8px; }
+@media(max-width:600px) { .upload-case-fields { grid-template-columns:1fr; } }
+
+/* Compact data grid preserves identifiers and horizontal columns. */
+.spreadsheet-preview { min-width:0; font-size:12px; }
+.sheet-toolbar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:12px 0; }
+.sheet-toolbar label { display:flex; align-items:center; gap:8px; }
+.sheet-toolbar select,.sheet-toolbar input { padding:7px 10px; border:1px solid var(--palette-border); border-radius:6px; background:var(--palette-card); color:var(--palette-text); font:inherit; max-width:100%; }
+.sheet-note { color:var(--palette-secondary); font-size:11px; }
+.sheet-scroll { max-height:55vh; overflow:auto; border:1px solid var(--palette-border); border-radius:8px; background:var(--palette-card); }
+.sheet-scroll table { width:max-content; min-width:100%; border-collapse:separate; border-spacing:0; }
+.sheet-scroll th,.sheet-scroll td { padding:8px 12px!important; font-size:12px!important; line-height:1.4; white-space:nowrap; border-right:1px solid var(--palette-border); border-bottom:1px solid var(--palette-border); text-align:left; }
+.sheet-scroll thead th { position:sticky; top:0; background:var(--palette-selected); z-index:2; }
+.sheet-scroll tbody th { position:sticky; left:0; background:var(--palette-selected); color:var(--palette-secondary); font-weight:400; }
+.sheet-scroll tbody tr:nth-child(even) td { background:var(--palette-background); }
+.sheet-scroll tbody tr:hover td { background:var(--palette-selected); }
+.registry-delete { display:inline-grid; place-items:center; min-width:30px; }
+/* Sliding selection capsule inspired by the supplied motion reference. */
+.app-shell .app-top-header .workspace-tabs { position:relative; isolation:isolate; }
+.workspace-tab-marker { position:absolute; left:0; top:4px; bottom:4px; border-radius:8px; background:var(--palette-selected); pointer-events:none; transition:transform 360ms cubic-bezier(.22,1,.36,1),width 360ms cubic-bezier(.22,1,.36,1); z-index:-1; }
+.app-shell .app-top-header .workspace-tabs button { border:0; background:transparent; transition:color 180ms ease; }
+.app-shell .app-top-header .workspace-tabs button.active { background:transparent; border:0; }
+.app-shell .app-top-header .workspace-tabs button.active:hover { color:var(--palette-text); }
+.app-shell .view-pane { animation:atlas-tab-enter 300ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes atlas-tab-enter { from {opacity:0;translate:0 8px;} to {opacity:1;translate:none;} }
+@media(prefers-reduced-motion:reduce) { .workspace-tab-marker,.app-shell .app-top-header .workspace-tabs button {transition:none;} .app-shell .view-pane {animation:none;} }
+
+/* Scroll-driven section covers, adapted from the supplied layered page reference. */
+.atlas-landing.atlas-stacked-scroll { overflow:clip; }
+.atlas-stacked-scroll .atlas-scroll-pair { position:relative; isolation:isolate; }
+.atlas-stacked-scroll .atlas-scroll-pair > .atlas-home-hero { position:sticky; top:var(--stack-top,56px); z-index:1; background:var(--palette-background); transform:scale(var(--stack-scale,1)); transform-origin:center top; }
+.atlas-stacked-scroll .atlas-scroll-pair > .atlas-case-section { position:relative; z-index:2; background:var(--palette-background); border-radius:18px 18px 0 0; box-shadow:0 -12px 28px rgba(23,28,27,.06); }
+.atlas-stacked-scroll .atlas-home-footer { position:relative; z-index:6; background:var(--palette-background); }
+@media(max-width:600px) { .atlas-stacked-scroll .atlas-scroll-pair > .atlas-case-section { border-radius:12px 12px 0 0; } }
+@media(prefers-reduced-motion:reduce) { .atlas-stacked-scroll .atlas-scroll-pair > section { position:relative; top:auto; transform:none; box-shadow:none; } }

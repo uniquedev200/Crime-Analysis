@@ -1,0 +1,54 @@
+{
+  "events": [],
+  "mentions": [
+    {
+      "attributes": [],
+      "local_id": "m1",
+      "quote": "complaint of Rajesh Kumar Sharma,",
+      "role_stated": "complainant",
+      "surface_text": "Rajesh Kumar Sharma",
+      "type": "PERSON",
+      "unit_id": "DOC-380975e9c3f2:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m2",
+      "quote": "primary suspect was identified as Vikram Singh alias Vicky.",
+      "role_stated": "suspect",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON",
+      "unit_id": "DOC-380975e9c3f2:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m3",
+      "quote": "suspect was referred to as Vikrum Singh.",
+      "role_stated": "suspect",
+      "surface_text": "Vikrum Singh",
+      "type": "PERSON",
+      "unit_id": "DOC-380975e9c3f2:p002"
+    },
+    {
+      "attributes": [],
+      "local_id": "m4",
+      "quote": "operates vehicle DL01AB1234 in the National Capital Region.",
+      "role_stated": null,
+      "surface_text": "DL01AB1234",
+      "type": "VEHICLE",
+      "unit_id": "DOC-380975e9c3f2:p002"
+    }
+  ],
+  "notes": [
+    "SCRIPTED MOCK PROVIDER: not live extraction",
+    "IO report extraction"
+  ],
+  "relationships": [
+    {
+      "object_local_id": "m3",
+      "quote": "Informants corroborated that Vikrum Singh and Vikram Singh are the same individual.",
+      "subject_local_id": "m2",
+      "type": "ALSO_KNOWN_AS",
+      "unit_id": "DOC-380975e9c3f2:p002"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$defs": {
+    "OcrLevel": {
+      "description": "Granularity level of OCR confidence scoring.",
+      "enum": [
+        "word",
+        "line",
+        "none"
+      ],
+      "title": "OcrLevel",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "OCR confidence scoring and engine metadata.",
+  "properties": {
+    "level": {
+      "$ref": "#/$defs/OcrLevel"
+    },
+    "min": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Min"
+    },
+    "mean": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Mean"
+    },
+    "score_kind": {
+      "default": "engine_score_not_probability",
+      "title": "Score Kind",
+      "type": "string"
+    },
+    "engine": {
+      "title": "Engine",
+      "type": "string"
+    },
+    "langs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Langs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "level",
+    "engine"
+  ],
+  "title": "OcrInfo",
+  "type": "object"
+}

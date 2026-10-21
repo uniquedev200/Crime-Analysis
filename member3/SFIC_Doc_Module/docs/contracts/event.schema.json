@@ -1,0 +1,412 @@
+{
+  "$defs": {
+    "EventAmount": {
+      "additionalProperties": false,
+      "description": "Financial amount associated with an event.",
+      "properties": {
+        "value_text": {
+          "title": "Value Text",
+          "type": "string"
+        },
+        "decimal": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decimal"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        }
+      },
+      "required": [
+        "value_text"
+      ],
+      "title": "EventAmount",
+      "type": "object"
+    },
+    "EventParticipant": {
+      "additionalProperties": false,
+      "description": "Participant mention reference and role in an event.",
+      "properties": {
+        "mention_id": {
+          "title": "Mention Id",
+          "type": "string"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        }
+      },
+      "required": [
+        "mention_id"
+      ],
+      "title": "EventParticipant",
+      "type": "object"
+    },
+    "EventTime": {
+      "additionalProperties": false,
+      "description": "Parsed time description with ambiguity tracking.",
+      "properties": {
+        "original_text": {
+          "title": "Original Text",
+          "type": "string"
+        },
+        "normalized_iso": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Normalized Iso"
+        },
+        "timezone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timezone"
+        },
+        "ambiguity": {
+          "$ref": "#/$defs/TimeAmbiguity",
+          "default": "none"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "required": [
+        "original_text"
+      ],
+      "title": "EventTime",
+      "type": "object"
+    },
+    "EventType": {
+      "description": "Event types extracted from narrative or tabular records.",
+      "enum": [
+        "INCIDENT",
+        "CALL",
+        "TRANSACTION",
+        "MEETING",
+        "ARREST",
+        "SIGHTING",
+        "OTHER"
+      ],
+      "title": "EventType",
+      "type": "string"
+    },
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "ReviewKind": {
+      "description": "Categorized review triggers requiring human reviewer inspection.",
+      "enum": [
+        "low_trust_identifier",
+        "invalid_identifier",
+        "identifier_not_found_by_parser",
+        "role_inferred",
+        "ambiguous_date",
+        "contradiction",
+        "ambiguous_location",
+        "mapping_unconfirmed",
+        "tabular_pdf_detected",
+        "match_candidate",
+        "chunk_failed"
+      ],
+      "title": "ReviewKind",
+      "type": "string"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Exact source location reference in an ingested document.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "unit_kind": {
+          "$ref": "#/$defs/UnitKind"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "row": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "text_origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_status": {
+          "$ref": "#/$defs/QuoteStatus"
+        },
+        "occurrence_count": {
+          "default": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "unit_id",
+        "unit_kind",
+        "text_origin",
+        "quote",
+        "quote_status"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "TimeAmbiguity": {
+      "description": "Date/time ambiguity classification.",
+      "enum": [
+        "none",
+        "dmy_mdy",
+        "partial",
+        "unparseable"
+      ],
+      "title": "TimeAmbiguity",
+      "type": "string"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Extracted event fact (incident, call, transaction, etc.).",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/EventType"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "time": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EventTime"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "participants": {
+      "items": {
+        "$ref": "#/$defs/EventParticipant"
+      },
+      "title": "Participants",
+      "type": "array"
+    },
+    "location_mention_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Location Mention Id"
+    },
+    "amount": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EventAmount"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "origin": {
+      "$ref": "#/$defs/Origin"
+    },
+    "review_flags": {
+      "items": {
+        "$ref": "#/$defs/ReviewKind"
+      },
+      "title": "Review Flags",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceRef"
+    }
+  },
+  "required": [
+    "event_id",
+    "case_id",
+    "type",
+    "description",
+    "origin",
+    "source"
+  ],
+  "title": "Event",
+  "type": "object"
+}

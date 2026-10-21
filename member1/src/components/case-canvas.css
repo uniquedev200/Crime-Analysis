@@ -1,0 +1,639 @@
+/* ATLAS Case & Architecture Surface */
+.atlas-case-section {
+  width: 100%;
+  padding: 44px 0 24px 0;
+  background: var(--palette-background, #F8FAFC);
+  overflow-x: clip;
+}
+
+.atlas-case-section.fullwidth {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.atlas-case-intro {
+  margin: 0 auto 32px;
+  text-align: center;
+  padding: 0 24px;
+  max-width: 820px;
+}
+
+.atlas-landing .atlas-case-intro h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 3.2vw, 44px);
+  font-weight: 400;
+  letter-spacing: -1.2px;
+  margin: 12px 0 10px;
+  color: var(--palette-text, #0F172A);
+}
+
+.atlas-case-intro .atlas-home-eyebrow {
+  color: #0284C7;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.atlas-case-intro p {
+  color: var(--palette-secondary, #475569);
+  font-size: 14.5px;
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* FULL-WIDTH CANVAS WRAPPER (NO BOX, 100% SCREEN WIDTH) */
+.atlas-fullwidth-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  border-top: 1px solid var(--palette-border, #E2E8F0);
+  border-bottom: 1px solid var(--palette-border, #E2E8F0);
+}
+
+/* Map Viewport spanning full width */
+.atlas-fullwidth-map-viewport {
+  position: relative;
+  width: 100%;
+  height: clamp(620px, 60vw, 860px);
+  overflow: hidden;
+  background: #0B1320;
+}
+
+.atlas-map-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 35%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Full-width image */
+.atlas-map-fullwidth-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Connecting laser traces between the points */
+.atlas-map-traces {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 5;
+}
+
+.atlas-map-traces line {
+  stroke: rgba(14, 165, 233, 0.4);
+  stroke-width: 1.6;
+  stroke-dasharray: 4 4;
+  transition: stroke 0.25s ease, stroke-width 0.25s ease;
+}
+
+.atlas-map-traces line.is-active-trace {
+  stroke: #0284C7;
+  stroke-width: 2.4;
+  stroke-dasharray: 6 3;
+  animation: trace-flow 10s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.8));
+}
+
+@keyframes trace-flow {
+  to { stroke-dashoffset: -120; }
+}
+
+/* 4 Feature Points on the Image */
+.atlas-feature-point-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atlas-feature-point-pin:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Pulsing Radar Ring */
+.atlas-pin-radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(14, 165, 233, 0.7);
+  pointer-events: none;
+  animation: pin-radar 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+}
+
+.atlas-pin-radar-ring.delay {
+  animation-delay: 1.2s;
+}
+
+@keyframes pin-radar {
+  0% {
+    width: 28px;
+    height: 28px;
+    opacity: 0.95;
+  }
+  100% {
+    width: 76px;
+    height: 76px;
+    opacity: 0;
+  }
+}
+
+/* Pin Center Core */
+.atlas-pin-core {
+  position: relative;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #0F172A;
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+  border: 2px solid #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.7), 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.atlas-pin-number {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--mono, ui-monospace, monospace);
+  line-height: 1;
+}
+
+.atlas-feature-point-pin.is-selected .atlas-pin-core {
+  background: #0284C7;
+  border-color: #FFFFFF;
+  transform: scale(1.18);
+  box-shadow: 0 0 22px rgba(14, 165, 233, 0.95), 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Floating label chip next to the pin */
+.atlas-pin-label-chip {
+  margin-left: 10px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #F8FAFC;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.atlas-pin-label-chip svg {
+  width: 14px;
+  height: 14px;
+  color: #38BDF8;
+}
+
+.atlas-feature-point-pin.is-selected .atlas-pin-label-chip {
+  background: #0F172A;
+  border-color: #38BDF8;
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.45);
+}
+
+/* TOP STATUS BANNER & ZOOM OVERLAY */
+.atlas-map-top-bar-overlay {
+  position: absolute;
+  top: 18px;
+  left: clamp(16px, 3.5vw, 48px);
+  right: clamp(16px, 3.5vw, 48px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.atlas-map-live-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  font-size: 11px;
+  color: #F8FAFC;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  animation: pulse-dot-anim 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot-anim {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.status-title {
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  font-family: var(--mono, ui-monospace, monospace);
+}
+
+.status-separator {
+  color: #64748B;
+}
+
+.status-highlight {
+  color: #38BDF8;
+  font-weight: 500;
+}
+
+.atlas-case-zoom {
+  display: flex;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  pointer-events: auto;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.atlas-case-zoom button {
+  border: 0;
+  background: transparent;
+  color: #F8FAFC;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.atlas-case-zoom button:hover:not(:disabled) {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+}
+
+.atlas-case-zoom button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* 4 SEPARATE KPI CARDS (INDIVIDUAL CARDS SITUATED ACROSS THE BOTTOM) */
+.atlas-kpi-cards-container {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  padding: 0 clamp(16px, 3.5vw, 48px);
+  pointer-events: none;
+}
+
+.atlas-kpi-cards-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  pointer-events: auto;
+}
+
+/* Standalone individual KPI Card */
+.atlas-kpi-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  border-radius: 12px;
+  padding: 18px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s ease,
+              border-color 0.22s ease,
+              background 0.22s ease;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+  user-select: none;
+  outline: none;
+}
+
+.atlas-kpi-card:hover {
+  transform: translateY(-4px);
+  border-color: #0284C7;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(2, 132, 199, 0.3);
+  background: #FFFFFF;
+}
+
+.atlas-kpi-card.is-selected {
+  transform: translateY(-5px);
+  border-color: #0284C7;
+  border-top: 3px solid #0284C7;
+  padding-top: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 18px 42px rgba(2, 132, 199, 0.18), 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* Card Header with 01 badge & capability icon */
+.atlas-kpi-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.atlas-kpi-badge {
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.1);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.atlas-kpi-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: rgba(2, 132, 199, 0.08);
+  color: #0284C7;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.atlas-kpi-card:hover .atlas-kpi-icon-wrap,
+.atlas-kpi-card.is-selected .atlas-kpi-icon-wrap {
+  transform: scale(1.1);
+  background: #0284C7;
+  color: #FFFFFF;
+}
+
+.atlas-kpi-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Card Body */
+.atlas-kpi-card-body {
+  flex: 1;
+  margin-bottom: 14px;
+}
+
+.atlas-kpi-title {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+  color: #0F172A;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  transition: color 0.18s ease;
+}
+
+.atlas-kpi-card.is-selected .atlas-kpi-title,
+.atlas-kpi-card:hover .atlas-kpi-title {
+  color: #0284C7;
+}
+
+.atlas-kpi-desc {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+/* Card Footer with Hub Tag & Arrow */
+.atlas-kpi-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+  font-size: 11px;
+  color: #64748B;
+}
+
+.atlas-kpi-hub-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 550;
+}
+
+.atlas-kpi-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
+.atlas-kpi-arrow {
+  font-weight: 700;
+  font-size: 13px;
+  color: #94A3B8;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.atlas-kpi-card:hover .atlas-kpi-arrow,
+.atlas-kpi-card.is-selected .atlas-kpi-arrow {
+  transform: translateX(3px);
+  color: #0284C7;
+}
+
+/* Note under section */
+.atlas-case-note {
+  max-width: 820px;
+  margin: 24px auto 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--palette-secondary, #64748B);
+  padding: 0 24px;
+}
+
+/* DARK THEME STYLES */
+[data-theme="dark"] .atlas-case-section {
+  background: #0B1320;
+}
+
+[data-theme="dark"] .atlas-case-intro h2 {
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .atlas-case-intro p {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .atlas-fullwidth-canvas-wrapper {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .atlas-kpi-card {
+  background: rgba(15, 23, 42, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .atlas-kpi-card:hover {
+  background: rgba(22, 33, 56, 0.96);
+  border-color: #38BDF8;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(56, 189, 248, 0.4);
+}
+
+[data-theme="dark"] .atlas-kpi-card.is-selected {
+  background: rgba(26, 39, 66, 0.98);
+  border-color: #38BDF8;
+  border-top: 3px solid #38BDF8;
+  box-shadow: 0 20px 48px rgba(14, 165, 233, 0.3), 0 0 0 1px rgba(56, 189, 248, 0.5);
+}
+
+[data-theme="dark"] .atlas-kpi-badge {
+  color: #38BDF8;
+  background: rgba(56, 189, 248, 0.14);
+}
+
+[data-theme="dark"] .atlas-kpi-icon-wrap {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .atlas-kpi-card:hover .atlas-kpi-icon-wrap,
+[data-theme="dark"] .atlas-kpi-card.is-selected .atlas-kpi-icon-wrap {
+  background: #38BDF8;
+  color: #0F172A;
+}
+
+[data-theme="dark"] .atlas-kpi-title {
+  color: #F8FAFC;
+}
+
+[data-theme="dark"] .atlas-kpi-card.is-selected .atlas-kpi-title,
+[data-theme="dark"] .atlas-kpi-card:hover .atlas-kpi-title {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .atlas-kpi-desc {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .atlas-kpi-card-footer {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .atlas-kpi-card:hover .atlas-kpi-arrow,
+[data-theme="dark"] .atlas-kpi-card.is-selected .atlas-kpi-arrow {
+  color: #38BDF8;
+}
+
+[data-theme="dark"] .atlas-case-note {
+  color: #94A3B8;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1180px) {
+  .atlas-fullwidth-map-viewport {
+    height: clamp(640px, 72vw, 880px);
+  }
+  .atlas-kpi-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .atlas-kpi-card {
+    padding: 16px 18px 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .atlas-case-section {
+    padding: 30px 0 20px 0;
+  }
+  .atlas-fullwidth-map-viewport {
+    height: auto;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+  .atlas-map-scene {
+    position: relative;
+    height: 380px;
+  }
+  .atlas-pin-label-chip {
+    display: none;
+  }
+  .atlas-kpi-cards-container {
+    position: relative;
+    bottom: auto;
+    padding: 18px 16px 16px;
+  }
+  .atlas-kpi-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .atlas-map-top-bar-overlay {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot,
+  .atlas-pin-radar-ring,
+  .atlas-map-traces line.is-active-trace {
+    animation: none !important;
+  }
+  .atlas-map-scene,
+  .atlas-feature-point-pin,
+  .atlas-kpi-card {
+    transition: none !important;
+  }
+}

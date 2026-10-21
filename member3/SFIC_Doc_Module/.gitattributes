@@ -1,0 +1,12 @@
+# Enforce LF endings on text files to preserve synthetic hash integrity across platforms
+* text=auto eol=lf
+
+# Fixtures and binary assets must never be converted or normalized
+tests/fixtures/** -text
+*.pdf binary
+*.xlsx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tif binary
+*.tiff binary

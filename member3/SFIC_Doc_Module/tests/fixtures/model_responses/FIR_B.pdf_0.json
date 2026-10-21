@@ -1,0 +1,110 @@
+{
+  "events": [
+    {
+      "description": "Store vandalism and threats",
+      "location_local_id": null,
+      "participant_local_ids": [
+        "m1",
+        "m3"
+      ],
+      "quote": "Occurrence of Offence: Date: 13/03/2026, Time: 20:15 IST",
+      "time_text": "13/03/2026, Time: 20:15 IST",
+      "type": "INCIDENT",
+      "unit_id": "DOC-19aa576778ce:p001"
+    }
+  ],
+  "mentions": [
+    {
+      "attributes": [],
+      "local_id": "m1",
+      "quote": "suspect operating locally under the name Vicky was traced using mobile phone +919876543210.",
+      "role_stated": "suspect",
+      "surface_text": "Vicky",
+      "type": "PERSON",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m2",
+      "quote": "mobile phone +919876543210.",
+      "role_stated": null,
+      "surface_text": "+919876543210",
+      "type": "PHONE",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "Father's Name: Mohan Singh",
+          "value_text": "Mohan Singh"
+        },
+        {
+          "name": "age",
+          "quote": "Age: 48 yrs",
+          "value_text": "48 yrs"
+        }
+      ],
+      "local_id": "m3",
+      "quote": "Name: Vikram Singh",
+      "role_stated": "complainant",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m4",
+      "quote": "Witness Pooja Sharma, age 26, D/o Dinesh Sharma,",
+      "role_stated": "witness",
+      "surface_text": "Pooja Sharma",
+      "type": "PERSON",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m5",
+      "quote": "Sunita Sharma, age 50, W/o Dinesh Sharma,",
+      "role_stated": "witness",
+      "surface_text": "Sunita Sharma",
+      "type": "PERSON",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "attributes": [],
+      "local_id": "m6",
+      "quote": "share family contact phone +919844455566.",
+      "role_stated": null,
+      "surface_text": "+919844455566",
+      "type": "PHONE",
+      "unit_id": "DOC-19aa576778ce:p001"
+    }
+  ],
+  "notes": [
+    "SCRIPTED MOCK PROVIDER: not live extraction",
+    "Case B FIR extraction"
+  ],
+  "relationships": [
+    {
+      "object_local_id": "m2",
+      "quote": "Suspect Vicky communicating via +919876543210 issued threats.",
+      "subject_local_id": "m1",
+      "type": "USES_PHONE",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "object_local_id": "m6",
+      "quote": "share family contact phone +919844455566.",
+      "subject_local_id": "m4",
+      "type": "USES_PHONE",
+      "unit_id": "DOC-19aa576778ce:p001"
+    },
+    {
+      "object_local_id": "m6",
+      "quote": "share family contact phone +919844455566.",
+      "subject_local_id": "m5",
+      "type": "USES_PHONE",
+      "unit_id": "DOC-19aa576778ce:p001"
+    }
+  ]
+}

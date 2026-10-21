@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact source location reference in an ingested document.",
+  "properties": {
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "file_name": {
+      "title": "File Name",
+      "type": "string"
+    },
+    "file_sha256": {
+      "title": "File Sha256",
+      "type": "string"
+    },
+    "unit_id": {
+      "title": "Unit Id",
+      "type": "string"
+    },
+    "unit_kind": {
+      "$ref": "#/$defs/UnitKind"
+    },
+    "page": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Page"
+    },
+    "sheet": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sheet"
+    },
+    "row": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Row"
+    },
+    "line_start": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Line Start"
+    },
+    "line_end": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Line End"
+    },
+    "bbox": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Bbox"
+    },
+    "text_origin": {
+      "$ref": "#/$defs/Origin"
+    },
+    "quote": {
+      "title": "Quote",
+      "type": "string"
+    },
+    "quote_status": {
+      "$ref": "#/$defs/QuoteStatus"
+    },
+    "occurrence_count": {
+      "default": 1,
+      "title": "Occurrence Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "doc_id",
+    "file_name",
+    "file_sha256",
+    "unit_id",
+    "unit_kind",
+    "text_origin",
+    "quote",
+    "quote_status"
+  ],
+  "title": "SourceRef",
+  "type": "object"
+}

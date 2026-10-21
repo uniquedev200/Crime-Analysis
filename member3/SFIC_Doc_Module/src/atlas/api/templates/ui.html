@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ATLAS — Entity Extraction Inspector</title>
+<style>
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --panel2: #273449; --line: #334155;
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8; --ok: #34d399;
+    --warn: #fbbf24; --bad: #f87171; --person: #f472b6; --id: #38bdf8;
+    --org: #a78bfa; --loc: #34d399; --event: #fbbf24; --case: #94a3b8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 14px/1.5 "Segoe UI", system-ui, sans-serif; }
+  header { padding: 18px 24px; border-bottom: 1px solid var(--line);
+           display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 18px; margin: 0; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  .badge { padding: 3px 10px; border-radius: 999px; font-size: 12px;
+           border: 1px solid var(--line); background: var(--panel); }
+  .badge.mock { background: #7c2d12; border-color: #ea580c; color: #fed7aa; font-weight: 700; }
+  main { padding: 20px 24px; max-width: 1200px; margin: 0 auto; }
+  .panel { background: var(--panel); border: 1px solid var(--line);
+           border-radius: 10px; padding: 16px; margin-bottom: 18px; }
+  .panel h2 { font-size: 14px; margin: 0 0 12px; text-transform: uppercase;
+              letter-spacing: .04em; color: var(--muted); }
+  form { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+  label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+  input[type=text], select { background: var(--bg); color: var(--text);
+        border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; min-width: 180px; }
+  input[type=file] { color: var(--muted); }
+  button { background: var(--accent); color: #06263a; border: 0; border-radius: 6px;
+           padding: 9px 18px; font-weight: 700; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: progress; }
+  button.secondary { background: var(--panel2); color: var(--text); border: 1px solid var(--line); }
+  .banner { padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; font-weight: 700; }
+  .banner.mock { background: #7c2d12; border: 1px solid #ea580c; color: #fed7aa; }
+  .banner.err { background: #450a0a; border: 1px solid #b91c1c; color: #fecaca; }
+  .banner.bad { background: #450a0a; border: 1px solid #b91c1c; color: #fecaca; }
+  .banner.warn { background: #451a03; border: 1px solid #d97706; color: #fed7aa; }
+  .banner.ok { background: #064e3b; border: 1px solid #059669; color: #a7f3d0; }
+  .banner.info { background: #0c4a6e; border: 1px solid #0284c7; color: #bae6fd; }
+  .check { display: flex; flex-direction: row; align-items: center; gap: 8px;
+           margin-top: 12px; font-size: 12px; color: var(--muted); }
+  .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+  .actions a { color: var(--accent); }
+  .counts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .count { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px;
+           padding: 8px 14px; min-width: 90px; }
+  .count b { display: block; font-size: 20px; }
+  .count span { color: var(--muted); font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; }
+  tr:hover td { background: var(--panel2); }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 999px;
+          font-size: 11px; border: 1px solid var(--line); }
+  .type-PERSON { color: var(--person); } .type-ORGANIZATION { color: var(--org); }
+  .type-LOCATION { color: var(--loc); } .type-PHONE, .type-IMEI,
+  .type-VEHICLE, .type-ACCOUNT { color: var(--id); }
+  .quote { color: var(--muted); font-style: italic; }
+  .muted { color: var(--muted); }
+  .warn { color: var(--warn); } .bad { color: var(--bad); } .ok { color: var(--ok); }
+  .graph-wrap { overflow: auto; background: var(--bg); border: 1px solid var(--line);
+                border-radius: 8px; }
+  svg { display: block; }
+  .edge-label { fill: var(--muted); font-size: 9px; }
+  .node-label { fill: var(--text); font-size: 10px; }
+  .hidden { display: none; }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid #fff4;
+             border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite;
+             vertical-align: -2px; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>ATLAS — Entity Extraction Inspector</h1>
+  <span class="sub">Upload a document, inspect extracted entities and their connections.</span>
+  <span id="provider-badge" class="badge">provider: …</span>
+  <span id="mock-badge" class="badge mock hidden">MOCK</span>
+</header>
+
+<main>
+  <div id="mock-banner" class="banner mock hidden"></div>
+  <div id="error-banner" class="banner err hidden"></div>
+  <div id="state-banner" class="banner hidden"></div>
+
+  <div class="panel">
+    <h2>1 · Upload &amp; extract</h2>
+    <form id="run-form">
+      <label>Case ID
+        <input type="text" id="case-id" name="case_id" placeholder="e.g. CASE-2026-001"
+               pattern="[A-Za-z0-9_-]{1,64}" required />
+      </label>
+      <label id="provider-label">Provider
+        <select id="provider" name="provider"></select>
+      </label>
+      <span id="provider-static" class="badge hidden"></span>
+      <label>Document(s)
+        <input type="file" id="files" name="files" multiple required />
+      </label>
+      <button type="submit" id="run-btn">Extract</button>
+      <button type="button" id="cancel-btn" class="secondary hidden">Cancel</button>
+    </form>
+    <label id="register-label" class="check hidden">
+      <input type="checkbox" id="register-synthetic" />
+      I confirm these uploads are synthetic — register their SHA-256 in the synthetic manifest
+    </label>
+    <p class="muted" id="status"></p>
+    <p class="muted" id="hint"></p>
+  </div>
+
+  <div id="results" class="hidden">
+    <div class="panel">
+      <h2>Run summary</h2>
+      <div class="counts" id="counts"></div>
+      <p class="muted" id="run-meta"></p>
+      <div class="actions">
+        <button type="button" id="download-json" class="secondary">Download JSON</button>
+        <span class="muted" id="download-status"></span>
+      </div>
+      <p class="muted" id="artifact-links"></p>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Extracted entities</h2>
+      <div id="entities"></div>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Connections</h2>
+      <div id="connections"></div>
+    </div>
+
+    <div class="panel">
+      <h2>4 · Graph view</h2>
+      <div class="graph-wrap" id="graph"></div>
+      <p class="muted">Only trusted identifiers and person/event nodes are graphed. Suggested
+         cross-case matches stay non-canonical until a human approves them.</p>
+    </div>
+
+    <div class="panel">
+      <h2>5 · Events</h2>
+      <div id="events"></div>
+    </div>
+
+    <div class="panel">
+      <h2>6 · Review queue &amp; rejections</h2>
+      <div id="review"></div>
+      <div id="rejections"></div>
+      <div id="warnings"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+
+function el(tag, text, className) {
+  const node = document.createElement(tag);
+  if (text !== undefined && text !== null) node.textContent = String(text);
+  if (className) node.className = className;
+  return node;
+}
+
+function show(id, on) { $(id).classList.toggle("hidden", !on); }
+
+function setError(message) {
+  const banner = $("error-banner");
+  banner.textContent = message || "";
+  show("error-banner", Boolean(message));
+}
+
+function setStateBanner(kind, text) {
+  const banner = $("state-banner");
+  banner.className = "banner" + (kind ? " " + kind : " hidden");
+  banner.textContent = text || "";
+}
+
+async function loadConfig() {
+  try {
+    const cfg = await (await fetch("/ui/config")).json();
+    uiConfig = cfg;
+    const select = $("provider");
+    select.replaceChildren();
+    for (const p of cfg.providers) {
+      const option = el("option", p);
+      option.value = p;
+      if (p === cfg.active_provider) option.selected = true;
+      select.appendChild(option);
+    }
+    // With a single enabled provider the choice is noise: show it as a static badge.
+    const single = cfg.providers.length === 1;
+    show("provider-label", !single);
+    show("provider-static", single);
+    if (single) $("provider-static").textContent = "provider: " + cfg.providers[0];
+    show("register-label", Boolean(cfg.synthetic_only));
+    $("provider-badge").textContent = "provider: " + cfg.active_provider;
+    $("hint").textContent =
+      `Max file size: ${cfg.max_file_mb} MB. Synthetic-only guard: ${cfg.synthetic_only ? "ON" : "OFF"}. ` +
+      `Entity types: ${cfg.entity_types.join(", ")}.`;
+  } catch (err) {
+    setError("Could not load /ui/config: " + err.message);
+  }
+}
+
+let controller = null;
+let ticker = null;
+let uiConfig = null;
+let lastRun = null;
+
+function stopTicker() {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+}
+
+$("cancel-btn").addEventListener("click", () => { if (controller) controller.abort(); });
+
+// Download exactly what the page displays, without a second model call.
+function downloadPayload() {
+  if (!lastRun) return;
+  const text = JSON.stringify(lastRun, null, 2);
+  const blob = new Blob([text], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = el("a");
+  link.href = url;
+  link.download = `atlas_${lastRun.case_id}_${lastRun.run_id}.json`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+  $("download-status").textContent = `Saved ${link.download} (${text.length} bytes).`;
+}
+
+$("download-json").addEventListener("click", downloadPayload);
+
+// The pipeline also writes its own artifacts; link them for download by name.
+function renderArtifactLinks(data) {
+  const host = $("artifact-links");
+  host.replaceChildren();
+  const names = (uiConfig && uiConfig.artifacts) || [];
+  if (!names.length) return;
+  host.appendChild(el("span", "Canonical run artifacts: "));
+  names.forEach((name, index) => {
+    if (index) host.appendChild(el("span", " · "));
+    const link = el("a", name);
+    link.href = "/ui/runs/" + encodeURIComponent(data.case_id) + "/" +
+                encodeURIComponent(data.run_id) + "/" + encodeURIComponent(name);
+    link.setAttribute("download", "");
+    host.appendChild(link);
+  });
+}
+
+$("run-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  setError("");
+  setStateBanner(null);
+  const button = $("run-btn");
+  const caseId = $("case-id").value.trim();
+  const provider = $("provider").value;
+  const files = $("files").files;
+  if (!caseId || !files.length) { setError("Enter a case ID and choose at least one file."); return; }
+
+  const body = new FormData();
+  body.append("case_id", caseId);
+  body.append("provider", provider);
+  body.append("register_synthetic", $("register-synthetic").checked ? "true" : "false");
+  for (const f of files) body.append("files", f, f.name);
+
+  const startedAt = Date.now();
+  controller = new AbortController();
+  button.disabled = true;
+  button.innerHTML = '<span class="spinner"></span>Extracting…';
+  show("cancel-btn", true);
+  const tick = () => { $("status").textContent = `Working… ${Math.round((Date.now() - startedAt) / 1000)}s`; };
+  tick();
+  ticker = setInterval(tick, 1000);
+
+  try {
+    const response = await fetch("/ui/run", { method: "POST", body, signal: controller.signal });
+    const data = await response.json();
+    if (!response.ok) {
+      setError(data.detail ? String(data.detail) : `Request failed (${response.status})`);
+      return;
+    }
+    render(data, Math.round((Date.now() - startedAt) / 1000));
+  } catch (err) {
+    if (err.name === "AbortError") setError("Extraction cancelled; no results were kept.");
+    else setError("Request failed: " + err.message);
+  } finally {
+    stopTicker();
+    controller = null;
+    show("cancel-btn", false);
+    button.disabled = false;
+    button.textContent = "Extract";
+    $("status").textContent = "";
+  }
+});
+
+function render(data, seconds) {
+  show("results", true);
+  lastRun = data;
+  $("download-status").textContent = "";
+  renderArtifactLinks(data);
+  const banner = $("mock-banner");
+  if (data.is_mock && data.mock_banner) {
+    banner.textContent = data.mock_banner;
+    show("mock-banner", true);
+    show("mock-badge", true);
+  } else {
+    show("mock-banner", false);
+    show("mock-badge", false);
+  }
+  $("provider-badge").textContent = `provider: ${data.provider} (${data.model})`;
+
+  // The run state is the first thing the reader needs: "no entities" is usually a state issue.
+  let kind = "warn";
+  if (data.state === "completed") kind = "ok";
+  else if (data.state === "rejected_input" || data.state === "failed") kind = "bad";
+  setStateBanner(kind, `state: ${data.state}${data.state_note ? " — " + data.state_note : ""}`);
+
+  renderCounts(data, seconds);
+  renderEntities(data.mentions);
+  renderConnections(data.mentions, data.relationships);
+  renderGraph(data.graph);
+  renderEvents(data.events);
+  renderReview(data.review_items, data.rejections, data.warnings);
+}
+
+function renderCounts(data, seconds) {
+  const wrap = $("counts");
+  wrap.replaceChildren();
+  const counts = [
+    ["Documents", data.documents.length], ["Entities", data.mentions.length],
+    ["Connections", data.relationships.length], ["Events", data.events.length],
+    ["Review", data.review_items.length], ["Rejected", data.rejections.length],
+  ];
+  for (const [label, value] of counts) {
+    const box = el("div", null, "count");
+    box.appendChild(el("b", value));
+    box.appendChild(el("span", label));
+    wrap.appendChild(box);
+  }
+  const took = Number.isFinite(seconds) ? ` · ${seconds}s` : "";
+  $("run-meta").textContent =
+    `Case ${data.case_id} · run ${data.run_id} · state ${data.state}${took}`;
+}
+
+function renderEntities(mentions) {
+  const host = $("entities");
+  host.replaceChildren();
+  if (!mentions.length) { host.appendChild(el("p", "No entities extracted.", "muted")); return; }
+
+  const groups = new Map();
+  for (const m of mentions) {
+    if (!groups.has(m.type)) groups.set(m.type, []);
+    groups.get(m.type).push(m);
+  }
+  for (const type of [...groups.keys()].sort()) {
+    host.appendChild(el("h3", `${type} (${groups.get(type).length})`, "type-" + type));
+    const table = el("table");
+    const head = el("tr");
+    for (const h of ["Surface", "Normalized", "Role", "Trust", "Attributes", "Quote", "Source"]) {
+      head.appendChild(el("th", h));
+    }
+    table.appendChild(head);
+
+    for (const m of groups.get(type)) {
+      const row = el("tr");
+      row.appendChild(el("td", m.surface_text));
+      row.appendChild(el("td", m.normalized_value ?? "—"));
+      row.appendChild(el("td", m.stated_role ?? "—"));
+      row.appendChild(el("td", m.identifier_trust ?? "—"));
+      const attrs = (m.attributes || []).map(a => `${a.name}: ${a.value_text}`).join("; ");
+      row.appendChild(el("td", attrs || "—"));
+      row.appendChild(el("td", m.source && m.source.quote ? m.source.quote : "—", "quote"));
+      row.appendChild(el("td", m.source ? `${m.source.unit_id}${m.source.page ? " p" + m.source.page : ""}` : "—", "muted"));
+      table.appendChild(row);
+    }
+    host.appendChild(table);
+  }
+}
+
+function mentionLabel(mentionsById, id) {
+  const m = mentionsById.get(id);
+  return m ? `${m.surface_text} (${m.type})` : id;
+}
+
+function renderConnections(mentions, relationships) {
+  const host = $("connections");
+  host.replaceChildren();
+  if (!relationships.length) { host.appendChild(el("p", "No connections identified.", "muted")); return; }
+  const byId = new Map(mentions.map(m => [m.mention_id, m]));
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["Subject", "Relationship", "Object", "Assertion", "Evidence"]) head.appendChild(el("th", h));
+  table.appendChild(head);
+  for (const r of relationships) {
+    const row = el("tr");
+    row.appendChild(el("td", mentionLabel(byId, r.subject_mention_id)));
+    row.appendChild(el("td", r.type, "ok"));
+    row.appendChild(el("td", mentionLabel(byId, r.object_mention_id)));
+    row.appendChild(el("td", r.assertion));
+    row.appendChild(el("td", r.source && r.source.quote ? r.source.quote : "—", "quote"));
+    table.appendChild(row);
+  }
+  host.appendChild(table);
+}
+
+const LABEL_COLORS = {
+  Person: "#f472b6", Phone: "#38bdf8", Imei: "#38bdf8", Vehicle: "#38bdf8",
+  Account: "#38bdf8", Organization: "#a78bfa", Location: "#34d399",
+  Event: "#fbbf24", Case: "#94a3b8", Unknown: "#64748b",
+};
+
+function renderGraph(graph) {
+  const host = $("graph");
+  host.replaceChildren();
+  const nodes = (graph && graph.nodes) || [];
+  const edges = (graph && graph.edges) || [];
+  if (!nodes.length) { host.appendChild(el("p", "No graph nodes (no trusted identifiers or persons).", "muted")); return; }
+
+  const width = Math.max(760, nodes.length * 110);
+  const height = 480;
+  const cx = width / 2, cy = height / 2, radius = Math.min(width, height) / 2 - 70;
+  const positions = new Map();
+  nodes.forEach((n, i) => {
+    const angle = (2 * Math.PI * i) / nodes.length - Math.PI / 2;
+    positions.set(n.node_id, { x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) });
+  });
+
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("width", width); svg.setAttribute("height", height);
+
+  for (const edge of edges) {
+    const a = positions.get(edge.src), b = positions.get(edge.dst);
+    if (!a || !b) continue;
+    const line = document.createElementNS(svg.namespaceURI, "line");
+    line.setAttribute("x1", a.x); line.setAttribute("y1", a.y);
+    line.setAttribute("x2", b.x); line.setAttribute("y2", b.y);
+    line.setAttribute("stroke", edge.canonical ? "#475569" : "#b45309");
+    line.setAttribute("stroke-dasharray", edge.canonical ? "" : "5 4");
+    svg.appendChild(line);
+    const midX = (a.x + b.x) / 2, midY = (a.y + b.y) / 2;
+    const label = document.createElementNS(svg.namespaceURI, "text");
+    label.setAttribute("x", midX); label.setAttribute("y", midY);
+    label.setAttribute("text-anchor", "middle");
+    label.setAttribute("class", "edge-label");
+    label.textContent = edge.type;
+    svg.appendChild(label);
+  }
+
+  for (const node of nodes) {
+    const pos = positions.get(node.node_id);
+    const circle = document.createElementNS(svg.namespaceURI, "circle");
+    circle.setAttribute("cx", pos.x); circle.setAttribute("cy", pos.y); circle.setAttribute("r", 16);
+    circle.setAttribute("fill", LABEL_COLORS[node.label] || LABEL_COLORS.Unknown);
+    circle.setAttribute("stroke", node.canonical ? "#0f172a" : "#b45309");
+    circle.setAttribute("stroke-width", node.canonical ? 2 : 3);
+    circle.appendChild(document.createElementNS(svg.namespaceURI, "title")).textContent =
+      `${node.label}: ${node.props.name || node.props.value || node.node_id}`;
+    svg.appendChild(circle);
+
+    const text = document.createElementNS(svg.namespaceURI, "text");
+    text.setAttribute("x", pos.x); text.setAttribute("y", pos.y + 30);
+    text.setAttribute("text-anchor", "middle");
+    text.setAttribute("class", "node-label");
+    const shown = node.props.name || node.props.value || node.node_id;
+    text.textContent = shown.length > 20 ? shown.slice(0, 19) + "…" : shown;
+    svg.appendChild(text);
+  }
+  host.appendChild(svg);
+}
+
+function renderEvents(events) {
+  const host = $("events");
+  host.replaceChildren();
+  if (!events.length) { host.appendChild(el("p", "No events recorded.", "muted")); return; }
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["Type", "Description", "Time", "Quote"]) head.appendChild(el("th", h));
+  table.appendChild(head);
+  for (const e of events) {
+    const row = el("tr");
+    row.appendChild(el("td", e.type));
+    row.appendChild(el("td", e.description));
+    row.appendChild(el("td", e.time && e.time.original_text ? e.time.original_text : "—"));
+    row.appendChild(el("td", e.source && e.source.quote ? e.source.quote : "—", "quote"));
+    table.appendChild(row);
+  }
+  host.appendChild(table);
+}
+
+function renderReview(items, rejections, warnings) {
+  const reviewHost = $("review");
+  reviewHost.replaceChildren();
+  if (!items.length) { reviewHost.appendChild(el("p", "No items flagged for review.", "muted")); }
+  for (const item of items) {
+    reviewHost.appendChild(el("div", `[${item.kind}] ${item.detail} — ${item.status}`, "warn"));
+  }
+
+  const rejHost = $("rejections");
+  rejHost.replaceChildren();
+  if (rejections.length) {
+    rejHost.appendChild(el("h3", `Rejected model output (${rejections.length})`));
+    for (const r of rejections) {
+      rejHost.appendChild(el("div", `[${r.kind}] ${r.reason}${r.model_item_excerpt ? " — " + r.model_item_excerpt : ""}`, "bad"));
+    }
+  }
+
+  const warnHost = $("warnings");
+  warnHost.replaceChildren();
+  if (warnings.length) {
+    warnHost.appendChild(el("h3", `Warnings (${warnings.length})`));
+    for (const w of warnings) warnHost.appendChild(el("div", w, "muted"));
+  }
+}
+
+loadConfig();
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+from __future__ import annotations
+
+PIPELINE_VERSION = "0.1.0"
+SCHEMA_VERSION = "1.0.0"
+PROMPT_VERSION = "extract-v1"
+NORMALIZATION_VERSION = "1"
+RESOLVER_VERSION = "1"
+
+__all__ = [
+    "NORMALIZATION_VERSION",
+    "PIPELINE_VERSION",
+    "PROMPT_VERSION",
+    "RESOLVER_VERSION",
+    "SCHEMA_VERSION",
+]

@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas"
+version = "0.1.0"
+description = "ATLAS Dev 3 — Document-to-JSON evidence pipeline"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "pypdfium2>=4.0",
+    "pillow>=10.0",
+    "opencv-python-headless>=4.8",
+    "pytesseract>=0.3",
+    "openpyxl>=3.1",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "phonenumbers>=8.13",
+    "rapidfuzz>=3.0",
+    "python-dateutil>=2.8",
+    "tenacity>=8.2",
+    "httpx>=0.25",
+    "fastapi>=0.104",
+    "uvicorn>=0.24",
+    "python-multipart>=0.0.6",
+    "jinja2>=3.1",
+    "pyyaml>=6.0",
+    "openai>=1.0",
+    "google-genai>=1.0",
+    "reportlab>=4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0",
+    "pytest-cov>=4.0",
+    "hypothesis>=6.0",
+    "respx>=0.21",
+    "ruff>=0.4",
+    "mypy>=1.8",
+]
+paddle = [
+    "paddleocr>=2.7",
+    "paddlepaddle>=2.5",
+]
+anthropic = [
+    "anthropic>=0.25",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+markers = [
+    "gate0: Gate 0 contract/config tests",
+    "gate1: Gate 1 ingest/OCR/tabular/synth/normalize tests",
+    "gate2: Gate 2 LLM/provenance tests",
+    "gate3: Gate 3 pipeline/resolver integration tests",
+    "gate4: Gate 4 API/adapter/graph/report/e2e tests",
+    "gate5: Gate 5 adversarial/QA tests",
+    "optional: Tests that may not run on all machines (PaddleOCR, Indic fonts)",
+    "needs_tesseract: Tests requiring Tesseract binary",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["atlas"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+check_untyped_defs = true
+disallow_untyped_defs = false
+
+[tool.coverage.run]
+source = ["src/atlas"]
+omit = ["src/atlas/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0

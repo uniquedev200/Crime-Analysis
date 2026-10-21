@@ -1,0 +1,164 @@
+{
+  "case_id": "CASE-B-002",
+  "doc_type": "FIR",
+  "events": [
+    {
+      "description": "Vandalism and threats at hardware store",
+      "page": 1,
+      "quote": "Occurrence of Offence: Date: 13/03/2026, Time: 20:15 IST",
+      "time_text": "13/03/2026, Time: 20:15 IST",
+      "type": "INCIDENT"
+    }
+  ],
+  "expected_resolver_outcomes": [
+    {
+      "expected_status": "needs_review",
+      "other_case_id": "CASE-A-001",
+      "reason": "Exact identifier with variant name Vicky vs Vikram Singh.",
+      "target_mention": "Vicky"
+    },
+    {
+      "expected_status": "no_match",
+      "other_case_id": "CASE-A-001",
+      "reason": "Hard negative: different father, age, and phone number.",
+      "target_mention": "Vikram Singh"
+    },
+    {
+      "expected_status": "needs_review",
+      "other_case_id": null,
+      "reason": "Family-shared phone with Sunita Sharma.",
+      "target_mention": "Pooja Sharma"
+    }
+  ],
+  "file_name": "FIR_B.pdf",
+  "mentions": [
+    {
+      "attributes": [],
+      "normalized_value": "Vicky",
+      "page": 1,
+      "quote": "suspect operating locally under the name Vicky was traced using mobile phone +919876543210.",
+      "stated_role": "suspect",
+      "surface_text": "Vicky",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "+919876543210",
+      "page": 1,
+      "quote": "mobile phone +919876543210.",
+      "stated_role": null,
+      "surface_text": "+919876543210",
+      "type": "PHONE"
+    },
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "Father's Name: Mohan Singh",
+          "value_text": "Mohan Singh"
+        },
+        {
+          "name": "age",
+          "quote": "Age: 48 yrs",
+          "value_text": "48"
+        }
+      ],
+      "normalized_value": "Vikram Singh",
+      "page": 1,
+      "quote": "Name: Vikram Singh",
+      "stated_role": "complainant",
+      "surface_text": "Vikram Singh",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "+919833344455",
+      "page": 1,
+      "quote": "Contact Phone: +919833344455",
+      "stated_role": null,
+      "surface_text": "+919833344455",
+      "type": "PHONE"
+    },
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "D/o Dinesh Sharma",
+          "value_text": "Dinesh Sharma"
+        },
+        {
+          "name": "age",
+          "quote": "age 26",
+          "value_text": "26"
+        }
+      ],
+      "normalized_value": "Pooja Sharma",
+      "page": 1,
+      "quote": "Witness Pooja Sharma, age 26, D/o Dinesh Sharma,",
+      "stated_role": "witness",
+      "surface_text": "Pooja Sharma",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [
+        {
+          "name": "father_name",
+          "quote": "W/o Dinesh Sharma",
+          "value_text": "Dinesh Sharma"
+        },
+        {
+          "name": "age",
+          "quote": "age 50",
+          "value_text": "50"
+        }
+      ],
+      "normalized_value": "Sunita Sharma",
+      "page": 1,
+      "quote": "Sunita Sharma, age 50, W/o Dinesh Sharma,",
+      "stated_role": "witness",
+      "surface_text": "Sunita Sharma",
+      "type": "PERSON"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "+919844455566",
+      "page": 1,
+      "quote": "share family contact phone +919844455566.",
+      "stated_role": null,
+      "surface_text": "+919844455566",
+      "type": "PHONE"
+    }
+  ],
+  "pages": {
+    "1": "DELHI POLICE\nFIRST INFORMATION REPORT\n(Under Section 154 Cr.P.C.)\n\n1. District: North Delhi, Police Station: Model Town, Year: 2026, FIR No: 0289/2026, Date: 14/03/2026\n2. Acts & Sections: Section 427, 506 IPC\n3. Occurrence of Offence: Date: 13/03/2026, Time: 20:15 IST\n4. Complainant:\n   Name: Vikram Singh\n   Father's Name: Mohan Singh\n   Age: 48 yrs\n   Address: Village Badarpur, Mehrauli Road, New Delhi 110044\n   Contact Phone: +919833344455\n5. Suspects Traced:\n   A suspect operating locally under the name Vicky was traced using mobile phone +919876543210.\n6. Witnesses Examined:\n   Witness Pooja Sharma, age 26, D/o Dinesh Sharma, and\n   Sunita Sharma, age 50, W/o Dinesh Sharma,\n   both residing at Quarter 5B, Police Colony, Model Town, Delhi 110009,\n   share family contact phone +919844455566.\n7. Brief Facts:\n   Complainant Vikram Singh stated that his hardware store was vandalized.\n   Suspect Vicky communicating via +919876543210 issued threats.\n   Witnesses Pooja Sharma and Sunita Sharma observed suspicious persons near the shop.\n\n[SYNTHETIC TEST DATA - FOR DEMO ONLY - CASE-B-002]"
+  },
+  "relationships": [
+    {
+      "object": "+919876543210",
+      "page": 1,
+      "quote": "Suspect Vicky communicating via +919876543210 issued threats.",
+      "subject": "Vicky",
+      "type": "USES_PHONE"
+    },
+    {
+      "object": "+919844455566",
+      "page": 1,
+      "quote": "share family contact phone +919844455566.",
+      "subject": "Pooja Sharma",
+      "type": "USES_PHONE"
+    },
+    {
+      "object": "+919844455566",
+      "page": 1,
+      "quote": "share family contact phone +919844455566.",
+      "subject": "Sunita Sharma",
+      "type": "USES_PHONE"
+    }
+  ],
+  "review_items": [
+    {
+      "detail": "OCR-derived phone numbers require reviewer verification.",
+      "kind": "low_trust_identifier"
+    }
+  ]
+}

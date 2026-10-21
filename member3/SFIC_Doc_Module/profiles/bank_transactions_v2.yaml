@@ -1,0 +1,27 @@
+name: bank_transactions_v2
+version: "2.0"
+required_headers:
+  - txn_id
+  - txn_date
+  - from_account
+  - debit
+  - credit
+  - balance
+header_aliases:
+  transaction_id: txn_id
+  booking_time_ist: txn_date
+  account_number: from_account
+  counterparty_account: to_account
+  debit_inr: debit
+  credit_inr: credit
+  balance_inr: balance
+  reference_number: reference_number
+  related_reference: related_reference
+  counterparty_name_recorded: counterparty_name
+  channel: channel
+  status: status
+  value_date: value_date
+date_format: "%Y-%m-%d %H:%M:%S"
+timezone: "Asia/Kolkata"
+amount_format: "indian"
+id_columns: [from_account, to_account]

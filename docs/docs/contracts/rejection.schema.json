@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "RejectionKind": {
+      "description": "Reason category for rejecting an LLM extraction item.",
+      "enum": [
+        "quote_not_found",
+        "unit_not_in_chunk",
+        "value_not_in_quote",
+        "schema_violation",
+        "unknown_local_id",
+        "role_unsupported"
+      ],
+      "title": "RejectionKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record of an LLM output item that failed quote verification or schema validation.",
+  "properties": {
+    "rejection_id": {
+      "title": "Rejection Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "kind": {
+      "$ref": "#/$defs/RejectionKind"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "model_item_excerpt": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model Item Excerpt"
+    }
+  },
+  "required": [
+    "rejection_id",
+    "case_id",
+    "doc_id",
+    "kind",
+    "reason"
+  ],
+  "title": "Rejection",
+  "type": "object"
+}

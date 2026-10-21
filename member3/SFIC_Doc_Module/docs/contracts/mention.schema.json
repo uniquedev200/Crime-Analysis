@@ -1,0 +1,490 @@
+{
+  "$defs": {
+    "AttrName": {
+      "description": "Standardized demographic and personal attribute names.",
+      "enum": [
+        "father_name",
+        "age",
+        "dob",
+        "gender",
+        "address",
+        "occupation"
+      ],
+      "title": "AttrName",
+      "type": "string"
+    },
+    "EntityType": {
+      "description": "Supported entity categories extracted from evidence documents.",
+      "enum": [
+        "PERSON",
+        "PHONE",
+        "IMEI",
+        "VEHICLE",
+        "ACCOUNT",
+        "ORGANIZATION",
+        "LOCATION"
+      ],
+      "title": "EntityType",
+      "type": "string"
+    },
+    "IdentifierTrust": {
+      "description": "Trust classification for identifiers governing graph node creation.",
+      "enum": [
+        "strong",
+        "review_required",
+        "blocked",
+        "not_applicable"
+      ],
+      "title": "IdentifierTrust",
+      "type": "string"
+    },
+    "MentionAttribute": {
+      "additionalProperties": false,
+      "description": "Demographic or personal attribute attached to a mention.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/AttrName"
+        },
+        "value_text": {
+          "title": "Value Text",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "name",
+        "value_text"
+      ],
+      "title": "MentionAttribute",
+      "type": "object"
+    },
+    "NormalizationStatus": {
+      "description": "Status of deterministic identifier/attribute normalization.",
+      "enum": [
+        "ok",
+        "ambiguous",
+        "invalid",
+        "masked",
+        "not_applicable"
+      ],
+      "title": "NormalizationStatus",
+      "type": "string"
+    },
+    "OcrInfo": {
+      "additionalProperties": false,
+      "description": "OCR confidence scoring and engine metadata.",
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/OcrLevel"
+        },
+        "min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min"
+        },
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean"
+        },
+        "score_kind": {
+          "default": "engine_score_not_probability",
+          "title": "Score Kind",
+          "type": "string"
+        },
+        "engine": {
+          "title": "Engine",
+          "type": "string"
+        },
+        "langs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Langs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "level",
+        "engine"
+      ],
+      "title": "OcrInfo",
+      "type": "object"
+    },
+    "OcrLevel": {
+      "description": "Granularity level of OCR confidence scoring.",
+      "enum": [
+        "word",
+        "line",
+        "none"
+      ],
+      "title": "OcrLevel",
+      "type": "string"
+    },
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "ReviewKind": {
+      "description": "Categorized review triggers requiring human reviewer inspection.",
+      "enum": [
+        "low_trust_identifier",
+        "invalid_identifier",
+        "identifier_not_found_by_parser",
+        "role_inferred",
+        "ambiguous_date",
+        "contradiction",
+        "ambiguous_location",
+        "mapping_unconfirmed",
+        "tabular_pdf_detected",
+        "match_candidate",
+        "chunk_failed"
+      ],
+      "title": "ReviewKind",
+      "type": "string"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Exact source location reference in an ingested document.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "unit_kind": {
+          "$ref": "#/$defs/UnitKind"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "row": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "text_origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_status": {
+          "$ref": "#/$defs/QuoteStatus"
+        },
+        "occurrence_count": {
+          "default": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "unit_id",
+        "unit_kind",
+        "text_origin",
+        "quote",
+        "quote_status"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "StatedRole": {
+      "description": "Stated role for PERSON entities in narrative police documents.",
+      "enum": [
+        "complainant",
+        "accused",
+        "suspect",
+        "witness",
+        "victim",
+        "officer",
+        "other",
+        "unknown"
+      ],
+      "title": "StatedRole",
+      "type": "string"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    },
+    "ValidationCheck": {
+      "additionalProperties": false,
+      "description": "Result of an individual deterministic validator check.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        }
+      },
+      "required": [
+        "name",
+        "passed"
+      ],
+      "title": "ValidationCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Extracted entity mention with provenance and normalization state.",
+  "properties": {
+    "mention_id": {
+      "title": "Mention Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "doc_id": {
+      "title": "Doc Id",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/EntityType"
+    },
+    "surface_text": {
+      "title": "Surface Text",
+      "type": "string"
+    },
+    "normalized_value": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Normalized Value"
+    },
+    "normalization_status": {
+      "$ref": "#/$defs/NormalizationStatus",
+      "default": "not_applicable"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ValidationCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "stated_role": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StatedRole"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "attributes": {
+      "items": {
+        "$ref": "#/$defs/MentionAttribute"
+      },
+      "title": "Attributes",
+      "type": "array"
+    },
+    "origin": {
+      "$ref": "#/$defs/Origin"
+    },
+    "ocr": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/OcrInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "identifier_trust": {
+      "$ref": "#/$defs/IdentifierTrust",
+      "default": "not_applicable"
+    },
+    "confirmed_by": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Confirmed By"
+    },
+    "review_flags": {
+      "items": {
+        "$ref": "#/$defs/ReviewKind"
+      },
+      "title": "Review Flags",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceRef"
+    }
+  },
+  "required": [
+    "mention_id",
+    "case_id",
+    "doc_id",
+    "type",
+    "surface_text",
+    "origin",
+    "source"
+  ],
+  "title": "Mention",
+  "type": "object"
+}

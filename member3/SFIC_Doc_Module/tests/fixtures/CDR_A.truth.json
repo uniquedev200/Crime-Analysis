@@ -1,0 +1,109 @@
+{
+  "case_id": "CASE-A-001",
+  "doc_type": "CDR",
+  "events": [],
+  "expected_resolver_outcomes": [],
+  "file_name": "CDR_A.xlsx",
+  "mentions": [
+    {
+      "attributes": [],
+      "normalized_value": "+919876543210",
+      "page": null,
+      "quote": "+919876543210",
+      "surface_text": "+919876543210",
+      "type": "PHONE"
+    },
+    {
+      "attributes": [],
+      "normalized_value": "860123045678900",
+      "page": null,
+      "quote": "860123045678900",
+      "surface_text": "860123045678900",
+      "type": "IMEI"
+    }
+  ],
+  "profile": "cdr_v1",
+  "relationships": [
+    {
+      "object": "+919811122233",
+      "page": null,
+      "quote": "+919876543210 called +919811122233",
+      "subject": "+919876543210",
+      "type": "CALLED"
+    }
+  ],
+  "review_items": [],
+  "row_count": 2000,
+  "sample_rows": [
+    {
+      "a_party": "+919876543210",
+      "b_party": "+919822233344",
+      "duration_s": 67,
+      "row": 3,
+      "start_time": "2026-03-08 14:36:00"
+    },
+    {
+      "a_party": "+919811122233",
+      "b_party": "+919876543210",
+      "duration_s": 81,
+      "row": 4,
+      "start_time": "2026-03-03 20:57:00"
+    },
+    {
+      "a_party": "+919876543210",
+      "b_party": "+919811122233",
+      "duration_s": 226,
+      "row": 5,
+      "start_time": "2026-03-08 01:14:00"
+    },
+    {
+      "a_party": "+919822233344",
+      "b_party": "+919876543210",
+      "duration_s": 129,
+      "row": 6,
+      "start_time": "2026-03-03 19:42:00"
+    },
+    {
+      "a_party": "+919876543210",
+      "b_party": "+919822233344",
+      "duration_s": 342,
+      "row": 7,
+      "start_time": "2026-03-09 11:31:00"
+    },
+    {
+      "a_party": "+919822233344",
+      "b_party": "+919876543210",
+      "duration_s": 311,
+      "row": 8,
+      "start_time": "2026-03-06 10:39:00"
+    },
+    {
+      "a_party": "+919876543210",
+      "b_party": "+919822233344",
+      "duration_s": 226,
+      "row": 9,
+      "start_time": "2026-03-09 06:38:00"
+    },
+    {
+      "a_party": "+919811122233",
+      "b_party": "+919876543210",
+      "duration_s": 400,
+      "row": 10,
+      "start_time": "2026-03-03 18:47:00"
+    },
+    {
+      "a_party": "+919876543210",
+      "b_party": "+919855566677",
+      "duration_s": 59,
+      "row": 11,
+      "start_time": "2026-03-05 15:44:00"
+    },
+    {
+      "a_party": "+919811122233",
+      "b_party": "+919876543210",
+      "duration_s": 32,
+      "row": 12,
+      "start_time": "2026-03-10 12:23:00"
+    }
+  ]
+}

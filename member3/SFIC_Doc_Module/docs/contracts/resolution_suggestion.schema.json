@@ -1,0 +1,295 @@
+{
+  "$defs": {
+    "Origin": {
+      "description": "Origin mechanism indicating how text or fact was derived.",
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "table_parser",
+        "text_file",
+        "json_file",
+        "model_inferred"
+      ],
+      "title": "Origin",
+      "type": "string"
+    },
+    "QuoteStatus": {
+      "description": "Verification outcome of quoted source text against document units.",
+      "enum": [
+        "verified",
+        "verified_ambiguous_location",
+        "unverified"
+      ],
+      "title": "QuoteStatus",
+      "type": "string"
+    },
+    "Signal": {
+      "additionalProperties": false,
+      "description": "Evidence signal supporting or contradicting an entity resolution suggestion.",
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "polarity": {
+          "$ref": "#/$defs/SignalPolarity"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/SourceRef"
+          },
+          "title": "Sources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "polarity",
+        "detail"
+      ],
+      "title": "Signal",
+      "type": "object"
+    },
+    "SignalPolarity": {
+      "description": "Polarity of evidence signal in entity resolution.",
+      "enum": [
+        "supports",
+        "contradicts",
+        "neutral"
+      ],
+      "title": "SignalPolarity",
+      "type": "string"
+    },
+    "SourceRef": {
+      "additionalProperties": false,
+      "description": "Exact source location reference in an ingested document.",
+      "properties": {
+        "doc_id": {
+          "title": "Doc Id",
+          "type": "string"
+        },
+        "file_name": {
+          "title": "File Name",
+          "type": "string"
+        },
+        "file_sha256": {
+          "title": "File Sha256",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "unit_kind": {
+          "$ref": "#/$defs/UnitKind"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "row": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row"
+        },
+        "line_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Start"
+        },
+        "line_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line End"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "text_origin": {
+          "$ref": "#/$defs/Origin"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "quote_status": {
+          "$ref": "#/$defs/QuoteStatus"
+        },
+        "occurrence_count": {
+          "default": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "doc_id",
+        "file_name",
+        "file_sha256",
+        "unit_id",
+        "unit_kind",
+        "text_origin",
+        "quote",
+        "quote_status"
+      ],
+      "title": "SourceRef",
+      "type": "object"
+    },
+    "SuggestionStatus": {
+      "description": "Categorization status for entity resolution suggestions.",
+      "enum": [
+        "candidate",
+        "needs_review",
+        "ambiguous",
+        "no_match"
+      ],
+      "title": "SuggestionStatus",
+      "type": "string"
+    },
+    "UnitKind": {
+      "description": "Type of reference unit in evidence documents.",
+      "enum": [
+        "page",
+        "line",
+        "row",
+        "field"
+      ],
+      "title": "UnitKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Suggestion-only match candidate between mention and entity candidate.",
+  "properties": {
+    "suggestion_id": {
+      "title": "Suggestion Id",
+      "type": "string"
+    },
+    "case_id": {
+      "title": "Case Id",
+      "type": "string"
+    },
+    "mention_id": {
+      "title": "Mention Id",
+      "type": "string"
+    },
+    "candidate_entity_id": {
+      "title": "Candidate Entity Id",
+      "type": "string"
+    },
+    "candidate_case_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Candidate Case Id"
+    },
+    "status": {
+      "$ref": "#/$defs/SuggestionStatus"
+    },
+    "heuristic_rank": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Heuristic Rank"
+    },
+    "rank_note": {
+      "default": "heuristic ordering, not a probability",
+      "title": "Rank Note",
+      "type": "string"
+    },
+    "signals": {
+      "items": {
+        "$ref": "#/$defs/Signal"
+      },
+      "title": "Signals",
+      "type": "array"
+    },
+    "explanation": {
+      "title": "Explanation",
+      "type": "string"
+    },
+    "requires_human_decision": {
+      "default": true,
+      "title": "Requires Human Decision",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "suggestion_id",
+    "case_id",
+    "mention_id",
+    "candidate_entity_id",
+    "status",
+    "explanation"
+  ],
+  "title": "ResolutionSuggestion",
+  "type": "object"
+}

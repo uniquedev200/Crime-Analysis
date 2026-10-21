@@ -1,0 +1,698 @@
+/* Shared palette for every ATLAS page.
+   Midnight:   #101C2B
+   Slate Navy: #243B53
+   Ice:        #F1F5F8
+   Mist:       #D8E3EA
+*/
+:root, [data-theme="light"] {
+  --palette-background: #F1F5F8;
+  --palette-card: #FFFFFF;
+  --palette-text: #101C2B;
+  --palette-accent: #243B53;
+  --palette-accent-hover: #101C2B;
+  --palette-selected: #D8E3EA;
+  --palette-decorative: #243B53;
+  --palette-secondary: #243B53;
+  --palette-border: #D8E3EA;
+  --palette-navigation: #101C2B;
+  --palette-muted: #486581;
+  --palette-divider: #D8E3EA;
+  --bg0: var(--palette-background);
+  --bg1: var(--palette-selected);
+  --bg2: var(--palette-border);
+  --surface: var(--palette-card);
+  --surface-hover: #E4ECF2;
+  --surface-active: var(--palette-selected);
+  --glass: rgba(255,255,255,.96);
+  --glass-strong: var(--palette-card);
+  --glass-card: var(--palette-card);
+  --border: var(--palette-border);
+  --glass-border: var(--palette-border);
+  --border-strong: var(--palette-secondary);
+  --border-focus: var(--palette-accent);
+  --text: var(--palette-text);
+  --text-dim: var(--palette-secondary);
+  --text-faint: var(--palette-muted);
+  --accent: var(--palette-accent);
+  --accent-secondary: var(--palette-accent-hover);
+  --accent-glow: rgba(36, 59, 83, 0.16);
+  --accent-gradient: linear-gradient(135deg, #243B53, #101C2B);
+  --dark-btn: var(--palette-accent);
+  --dark-btn-hover: var(--palette-accent-hover);
+  --graph-bg: var(--palette-card);
+  --cyan: var(--palette-accent);
+  --green: #107C41;
+  --amber: #B45309;
+  --red: #C53030;
+  --danger: #C53030;
+  --danger-gradient: linear-gradient(135deg, #101C2B, #243B53);
+  --tag-crit-bg: rgba(36, 59, 83, 0.12);
+  --tag-crit-color: #101C2B;
+  --tag-crit-border: #D8E3EA;
+  --tag-high-bg: var(--palette-selected);
+  --tag-high-color: var(--palette-text);
+  --tag-high-border: var(--palette-border);
+  --tag-med-bg: var(--palette-card);
+  --tag-med-color: var(--palette-text);
+  --tag-med-border: var(--palette-border);
+  --tag-low-bg: var(--palette-selected);
+  --tag-low-color: var(--palette-secondary);
+  --tag-low-border: var(--palette-border);
+  --tag-open-bg: var(--palette-selected);
+  --tag-open-color: var(--palette-text);
+  --tag-open-border: var(--palette-border);
+  --tag-closed-bg: var(--palette-card);
+  --tag-closed-color: var(--palette-muted);
+  --tag-closed-border: var(--palette-border);
+}
+body { background: var(--palette-background); color: var(--palette-text); }
+.atlas-landing { --ivory: var(--palette-background); --charcoal: var(--palette-text); --muted: var(--palette-secondary); --olive: var(--palette-accent); --sage: var(--palette-selected); --line: var(--palette-border); --copper: var(--palette-accent-hover); }
+.atlas-auth { --auth-ivory: var(--palette-background); --auth-charcoal: var(--palette-text); --auth-muted: var(--palette-secondary); --auth-olive: var(--palette-accent); --auth-sage: var(--palette-selected); --auth-line: var(--palette-border); --auth-copper: var(--palette-accent-hover); }
+.card, .stat-card, .modal, .modal-content, .profile-menu,
+.app-shell .card, .app-shell .stat-card,
+.atlas-auth .atlas-auth-card, .atlas-auth .atlas-auth-modal,
+.atlas-landing .record-front, .atlas-landing .record-middle,
+.atlas-landing .source-document, .atlas-landing .atlas-timeline-number,
+.app-shell .network-information-card, .app-shell .network-stat-card, .app-shell .graph-ai-box, .app-shell .graph-canvas-actions .neu-btn,
+.app-shell .case-list-panel, .app-shell .case-summary-panel,
+.app-shell .workspace-details, .app-shell .workspace-drawer, .app-shell .investigation-metrics,
+.app-shell .graph-stage, .app-shell .graph-first-workspace #graph, .app-shell .investigation-map-layout #graph { background: var(--palette-card); }
+.atlas-auth .atlas-auth-card { border-color: var(--palette-border); }
+.atlas-auth .atlas-auth-card input, .atlas-auth .atlas-auth-card select,
+.atlas-auth .atlas-auth-card textarea { background: var(--palette-card); }
+.neu-btn.primary, .app-shell .neu-btn.primary,
+.atlas-landing .atlas-home-button, .atlas-auth .atlas-auth-submit {
+  background: var(--palette-accent); border-color: var(--palette-accent); color: #F1F5F8;
+}
+.neu-btn.primary:hover:not(:disabled), .app-shell .neu-btn.primary:hover:not(:disabled),
+.atlas-landing .atlas-home-button:hover, .atlas-auth .atlas-auth-submit:hover:not(:disabled) {
+  background: var(--palette-accent-hover); border-color: var(--palette-accent-hover); color: #FFFFFF;
+}
+.app-shell .workspace-tab.active { color: var(--palette-accent); border-color: var(--palette-accent); }
+.app-shell .workspace-tabs button.active,
+.atlas-auth .atlas-auth-switch button.active { background: var(--palette-selected); color: var(--palette-text); border-bottom-color: var(--palette-accent); }
+.app-shell .workspace-rail-item.active .workspace-rail-icon { background: var(--palette-selected); color: var(--palette-accent); }
+.app-shell .nav-item.active { color: var(--palette-card); }
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible { outline-color: var(--palette-accent); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--palette-accent); }
+::selection { background: var(--palette-selected); color: var(--palette-text); }
+.atlas-landing .record-dot,
+.atlas-landing .art-caption>span,
+.atlas-case-hint-dot { background: var(--palette-decorative); }
+
+/* Separate the page, card, and navigation surfaces throughout the workspace. */
+.app-shell, .app-shell .app-top-header, .app-shell .app-sidebar { background: var(--palette-navigation); }
+.app-shell .app-content, .app-shell.investigate-shell .main { background: var(--palette-background); }
+.overview-v2 .ov-panel, .overview-v2 .ov-registry-actions input { background: var(--palette-card); }
+.app-shell .header-search { border-color: var(--palette-divider); }
+.app-shell .workspace-rail-item:hover .workspace-rail-icon { background: rgba(255, 255, 255, 0.08); }
+
+/* Midnight & Slate Navy Dark Theme */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --palette-background: #101C2B;
+  --palette-card: #162638;
+  --palette-text: #F1F5F8;
+  --palette-secondary: #D8E3EA;
+  --palette-muted: #829AB1;
+  --palette-accent: #F1F5F8;
+  --palette-accent-hover: #D8E3EA;
+  --palette-decorative: #F1F5F8;
+  --palette-selected: #243B53;
+  --palette-border: #243B53;
+  --palette-navigation: #0B131D;
+  --palette-divider: #243B53;
+  --bg0: var(--palette-background);
+  --bg1: var(--palette-selected);
+  --bg2: var(--palette-border);
+  --surface: var(--palette-card);
+  --surface-hover: #1E3248;
+  --surface-active: #243B53;
+  --glass: #162638;
+  --glass-strong: #162638;
+  --glass-card: #162638;
+  --border: var(--palette-border);
+  --glass-border: var(--palette-border);
+  --border-strong: #334E68;
+  --border-focus: #F1F5F8;
+  --text: var(--palette-text);
+  --text-dim: var(--palette-secondary);
+  --text-faint: var(--palette-muted);
+  --accent: var(--palette-accent);
+  --accent-secondary: var(--palette-accent-hover);
+  --accent-glow: rgba(241, 245, 248, 0.22);
+  --accent-gradient: linear-gradient(135deg, #F1F5F8, #D8E3EA);
+  --dark-btn: #F1F5F8;
+  --dark-btn-hover: #D8E3EA;
+  --graph-bg: #101C2B;
+
+  --tag-crit-bg: rgba(216, 227, 234, 0.16);
+  --tag-crit-color: #F1F5F8;
+  --tag-crit-border: #243B53;
+  --tag-high-bg: rgba(216, 227, 234, 0.16);
+  --tag-high-color: #F1F5F8;
+  --tag-high-border: #243B53;
+  --tag-med-bg: #162638;
+  --tag-med-color: #F1F5F8;
+  --tag-med-border: #243B53;
+  --tag-low-bg: rgba(36, 59, 83, 0.45);
+  --tag-low-color: #D8E3EA;
+  --tag-low-border: #243B53;
+  --tag-open-bg: rgba(216, 227, 234, 0.16);
+  --tag-open-color: #F1F5F8;
+  --tag-open-border: #243B53;
+  --tag-closed-bg: #162638;
+  --tag-closed-color: #D8E3EA;
+  --tag-closed-border: #243B53;
+}
+[data-theme="light"] { color-scheme: light; }
+[data-theme="dark"] .atlas-landing .atlas-home-button { color: #101C2B; background: var(--palette-accent); border-color: var(--palette-accent); font-weight: 600; }
+[data-theme="dark"] .atlas-landing .atlas-home-button:hover { color: #101C2B; background: var(--palette-accent-hover); border-color: var(--palette-accent-hover); }
+
+[data-theme="dark"] .neu-btn.primary,
+[data-theme="dark"] .app-shell .neu-btn.primary,
+[data-theme="dark"] .atlas-auth .atlas-auth-submit,
+[data-theme="dark"] .atlas-case-inspector-bottom button {
+  background: var(--palette-accent);
+  border-color: var(--palette-accent);
+  color: #101C2B;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .neu-btn.primary:hover:not(:disabled),
+[data-theme="dark"] .app-shell .neu-btn.primary:hover:not(:disabled),
+[data-theme="dark"] .atlas-auth .atlas-auth-submit:hover:not(:disabled),
+[data-theme="dark"] .atlas-case-inspector-bottom button:hover {
+  background: var(--palette-accent-hover);
+  border-color: var(--palette-accent-hover);
+  color: #101C2B;
+}
+
+[data-theme="dark"] .app-shell .workspace-tabs button.active {
+  color: var(--palette-text);
+  border-bottom-color: var(--palette-accent);
+}
+
+[data-theme="dark"] .app-shell .workspace-rail-item.active .workspace-rail-icon {
+  background: var(--palette-accent);
+  color: #101C2B;
+}
+
+[data-theme="dark"] .app-shell .profile-avatar {
+  background: var(--palette-selected);
+  color: var(--palette-text);
+}
+
+/* ==========================================================================
+   Smooth Theme Shift Switch Styles (Workspace, Auth, Profile)
+   ========================================================================== */
+.workspace-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.workspace-theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.workspace-theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-toggle-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 52px;
+  height: 26px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  background: var(--palette-border, #D8E3EA);
+  border: 1px solid var(--palette-divider, rgba(36, 59, 83, 0.25));
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .theme-toggle-track {
+  background: #1B2B3E;
+  border-color: rgba(216, 227, 234, 0.25);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  z-index: 1;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-icon svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.sun-icon {
+  color: #D97706;
+}
+
+.moon-icon {
+  color: #94A3B8;
+}
+
+[data-theme="dark"] .sun-icon {
+  color: #64748B;
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .moon-icon {
+  color: #60A5FA;
+  opacity: 1;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+  z-index: 2;
+  color: #D97706;
+}
+
+.theme-toggle-thumb svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.workspace-theme-toggle.is-dark .theme-toggle-thumb {
+  transform: translateX(26px);
+  background: #243B53;
+  color: #F1F5F8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.workspace-theme-toggle.is-dark .theme-toggle-thumb svg {
+  transform: rotate(360deg);
+}
+
+.workspace-theme-toggle.is-light .theme-toggle-thumb svg {
+  transform: rotate(0deg);
+}
+
+.theme-toggle-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--palette-secondary);
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle-label {
+  color: var(--palette-accent);
+}
+
+/* Smooth global color & background transition */
+body, .app-shell, .app-top-header, .app-sidebar, .view-pane, .neu-card, .evidence-ingestion-workspace {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.profile-menu .profile-menu-theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border-top: 1px solid var(--palette-border);
+  border-bottom: 1px solid var(--palette-border);
+  margin: 4px 0;
+  font-size: 11px;
+  color: var(--palette-text);
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.profile-menu .profile-menu-theme-btn:hover {
+  background: var(--palette-selected);
+  color: var(--palette-accent);
+}
+.profile-menu .profile-menu-theme-btn svg {
+  width: 14px;
+  height: 14px;
+  color: var(--palette-accent);
+  flex-shrink: 0;
+}
+
+.atlas-auth-navbar .atlas-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid var(--palette-border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--palette-text);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.atlas-auth-navbar .atlas-theme-toggle:hover {
+  background: var(--palette-selected);
+  border-color: var(--palette-accent);
+}
+.atlas-auth-navbar .atlas-theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 680px) {
+  .workspace-theme-toggle .theme-toggle-label { display: none; }
+  .workspace-theme-toggle { padding: 0 4px; }
+  .atlas-auth-navbar .atlas-theme-toggle span { display: none; }
+}
+
+
+/* ==========================================================================
+   Dark Theme Workspace & Component Surface Overrides
+   ========================================================================== */
+[data-theme="dark"] .app-shell .card,
+[data-theme="dark"] .app-shell .stat-card,
+[data-theme="dark"] .app-shell .metric-card,
+[data-theme="dark"] .app-shell .network-information-card,
+[data-theme="dark"] .app-shell .network-stat-card,
+[data-theme="dark"] .app-shell .graph-ai-box,
+[data-theme="dark"] .app-shell .case-list-panel,
+[data-theme="dark"] .app-shell .case-summary-panel,
+[data-theme="dark"] .app-shell .workspace-details,
+[data-theme="dark"] .app-shell .workspace-drawer,
+[data-theme="dark"] .app-shell .investigation-metrics {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .control,
+[data-theme="dark"] .app-shell input,
+[data-theme="dark"] .app-shell select,
+[data-theme="dark"] .app-shell textarea {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .control:focus,
+[data-theme="dark"] .app-shell input:focus,
+[data-theme="dark"] .app-shell select:focus,
+[data-theme="dark"] .app-shell textarea:focus {
+  border-color: var(--palette-accent);
+}
+
+[data-theme="dark"] .app-shell thead th {
+  background: var(--palette-selected);
+  color: var(--palette-secondary);
+  border-color: var(--palette-border);
+}
+
+[data-theme="dark"] .app-shell tbody td {
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .tbl-wrap {
+  border-color: var(--palette-border);
+}
+
+[data-theme="dark"] .modal.entity-details-modal,
+[data-theme="dark"] .entity-details-close,
+[data-theme="dark"] .entity-details-modal .entity-props-table td,
+[data-theme="dark"] .entity-details-connection {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .entity-details-connection:hover:not(:disabled) {
+  background: var(--palette-selected);
+}
+
+[data-theme="dark"] .neu-btn:not(.primary),
+[data-theme="dark"] .app-shell .neu-btn:not(.primary) {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .neu-btn:not(.primary):hover,
+[data-theme="dark"] .app-shell .neu-btn:not(.primary):hover {
+  background: var(--palette-selected);
+  border-color: var(--palette-accent);
+}
+
+[data-theme="dark"] .app-shell .profile-menu {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .profile-menu button {
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .profile-menu button:hover {
+  background: var(--palette-selected);
+}
+
+[data-theme="dark"] .workspace-profile-details {
+  border-bottom-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .workspace-profile-details > strong {
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .workspace-profile-details > span {
+  color: var(--palette-secondary);
+}
+
+[data-theme="dark"] .app-shell .overview-summary {
+  border-color: var(--palette-border);
+  background: var(--palette-card);
+}
+
+[data-theme="dark"] .app-shell .overview-summary > div {
+  border-color: var(--palette-border);
+}
+
+[data-theme="dark"] .app-shell .overview-summary span {
+  color: var(--palette-secondary);
+}
+
+[data-theme="dark"] .app-shell .overview-summary strong {
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .app-shell .service-notice,
+[data-theme="dark"] .app-shell .review-callout {
+  background: var(--palette-selected);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .auth-flow-v2 .auth-email-summary,
+[data-theme="dark"] .auth-flow-v2 .auth-service-note,
+[data-theme="dark"] .auth-flow-v2 .auth-progress span {
+  background: var(--palette-card);
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+/* ==========================================================================
+   Comprehensive Dark Theme Text Visibility Rules across All Pages
+   ========================================================================== */
+[data-theme="dark"] .workspace-muted,
+[data-theme="dark"] .registry-reference,
+[data-theme="dark"] .case-reference,
+[data-theme="dark"] .workspace-scope-note,
+[data-theme="dark"] .workspace-quiet-state,
+[data-theme="dark"] .investigation-heading p,
+[data-theme="dark"] .case-workspace-header p,
+[data-theme="dark"] .card-desc,
+[data-theme="dark"] .table-foot,
+[data-theme="dark"] .overview-case-item small,
+[data-theme="dark"] .overview-activity small,
+[data-theme="dark"] .case-record-row small,
+[data-theme="dark"] .overview-finding > span:not(.tag),
+[data-theme="dark"] .investigation-empty p,
+[data-theme="dark"] .case-information-grid dt,
+[data-theme="dark"] .investigation-metrics span,
+[data-theme="dark"] .metric-card > span,
+[data-theme="dark"] .metric-card small,
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .stat-foot,
+[data-theme="dark"] .empty p,
+[data-theme="dark"] .field label,
+[data-theme="dark"] label,
+[data-theme="dark"] .view-banner p,
+[data-theme="dark"] .workspace-breadcrumb,
+[data-theme="dark"] .workspace-breadcrumb span,
+[data-theme="dark"] .quick-tool small,
+[data-theme="dark"] .insight-row p,
+[data-theme="dark"] .review-callout p,
+[data-theme="dark"] .service-notice p,
+[data-theme="dark"] .overview-filter-heading,
+[data-theme="dark"] .overview-filter-note,
+[data-theme="dark"] .overview-results-toolbar > div > span,
+[data-theme="dark"] .overview-summary span,
+[data-theme="dark"] .overview-panel-footer,
+[data-theme="dark"] .overview-insights-empty,
+[data-theme="dark"] .atlas-auth-description,
+[data-theme="dark"] .auth-field-hint,
+[data-theme="dark"] .auth-account-link,
+[data-theme="dark"] .atlas-auth-bottom,
+[data-theme="dark"] .atlas-case-intro p,
+[data-theme="dark"] .atlas-case-operation,
+[data-theme="dark"] .atlas-case-entity-foot,
+[data-theme="dark"] .atlas-case-map-hint,
+[data-theme="dark"] .atlas-case-detail p,
+[data-theme="dark"] .atlas-case-detail li,
+[data-theme="dark"] .atlas-case-note,
+[data-theme="dark"] .entity-details-id,
+[data-theme="dark"] .entity-details-modal .prop-key,
+[data-theme="dark"] .graph-node-preview-id,
+[data-theme="dark"] .graph-node-preview-row,
+[data-theme="dark"] .network-stat-card h2,
+[data-theme="dark"] .network-information-card h2,
+[data-theme="dark"] .network-scope-footer,
+[data-theme="dark"] .network-entity-row,
+[data-theme="dark"] .file-viewer-meta,
+[data-theme="dark"] .file-viewer-meta span,
+[data-theme="dark"] .sheet-note,
+[data-theme="dark"] .upload-drop p,
+[data-theme="dark"] .upload-drop small,
+[data-theme="dark"] .upload-steps,
+[data-theme="dark"] .upload-guidance {
+  color: var(--palette-secondary) !important;
+}
+
+/* Clear, visible input placeholders in Dark Mode */
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder,
+[data-theme="dark"] select::placeholder,
+[data-theme="dark"] .control::placeholder {
+  color: var(--palette-muted) !important;
+  opacity: 1;
+}
+
+/* Primary text & table cell content in Dark Mode */
+[data-theme="dark"] .card-title,
+[data-theme="dark"] .investigation-heading h2,
+[data-theme="dark"] .case-workspace-header h2,
+[data-theme="dark"] .view-banner h1,
+[data-theme="dark"] .case-information-grid dd,
+[data-theme="dark"] .app-shell tbody td,
+[data-theme="dark"] .app-shell tbody td strong,
+[data-theme="dark"] .registry-panel td,
+[data-theme="dark"] .registry-panel td strong,
+[data-theme="dark"] .overview-v2 td,
+[data-theme="dark"] .overview-v2 td strong {
+  color: var(--palette-text) !important;
+}
+
+/* Text buttons, links and active filters */
+[data-theme="dark"] .workspace-text-button,
+[data-theme="dark"] .overview-panel-footer button,
+[data-theme="dark"] .overview-clear-filters,
+[data-theme="dark"] .auth-text-link {
+  color: var(--palette-accent) !important;
+}
+[data-theme="dark"] .workspace-text-button:hover,
+[data-theme="dark"] .overview-panel-footer button:hover,
+[data-theme="dark"] .overview-clear-filters:hover,
+[data-theme="dark"] .auth-text-link:hover {
+  color: var(--palette-accent-hover) !important;
+}
+
+/* Excel Spreadsheet Viewer Dark Theme Harmony */
+[data-theme="dark"] .excel-corner-cell,
+[data-theme="dark"] .excel-header-letters th,
+[data-theme="dark"] .excel-header-names th,
+[data-theme="dark"] .excel-row-num,
+[data-theme="dark"] .excel-toolbar,
+[data-theme="dark"] .excel-pagination-bar {
+  background: var(--palette-card) !important;
+  border-color: var(--palette-border) !important;
+  color: var(--palette-text) !important;
+}
+
+[data-theme="dark"] .excel-cell {
+  border-color: var(--palette-border);
+  color: var(--palette-text);
+}
+
+[data-theme="dark"] .excel-data-row:hover,
+[data-theme="dark"] .excel-data-row:hover .excel-row-num {
+  background: var(--palette-selected) !important;
+}
+
+/* Status Badges Dark Theme Harmony */
+[data-theme="dark"] .status-badge.completed {
+  background: rgba(16, 124, 65, 0.22);
+  color: #34D399;
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+[data-theme="dark"] .status-badge.processing {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FBBF24;
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+[data-theme="dark"] .status-badge.queued {
+  background: var(--palette-selected);
+  color: var(--palette-secondary);
+  border-color: var(--palette-border);
+}
+
+[data-theme="dark"] .status-badge.review {
+  background: rgba(216, 227, 234, 0.16);
+  color: #D8E3EA;
+  border-color: rgba(216, 227, 234, 0.3);
+}
+
+[data-theme="dark"] .status-badge.failed {
+  background: rgba(239, 68, 68, 0.2);
+  color: #F87171;
+  border-color: rgba(248, 113, 113, 0.35);
+}
+

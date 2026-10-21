@@ -1,0 +1,160 @@
+.atlas-auth { --auth-ivory:#FFFFFF; --auth-charcoal:#171C1B; --auth-muted:#303A36; --auth-olive:#171C1B; --auth-sage:var(--palette-selected, #FFFFFF); --auth-line:#D7E2DB; --auth-copper:#303A36; display:block; min-height:100svh; background:var(--auth-ivory); color:var(--auth-charcoal); font-family:'Segoe UI',system-ui,sans-serif; }
+.atlas-auth * { box-sizing:border-box; }
+.atlas-auth button,.atlas-auth input,.atlas-auth textarea { font:inherit; }
+.atlas-auth button:focus-visible,.atlas-auth input:focus-visible,.atlas-auth textarea:focus-visible { outline:2px solid var(--auth-olive); outline-offset:3px; }
+.atlas-auth button:disabled { opacity:.6; cursor:wait; }
+.atlas-auth-story { position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; padding:44px clamp(30px,5vw,80px); background:var(--auth-sage); min-height:100svh; }
+.atlas-auth-brand { display:flex; align-items:center; gap:12px; border:0; padding:0; width:fit-content; background:transparent; color:var(--auth-charcoal); font-size:23px!important; font-weight:650!important; letter-spacing:4px; }
+.atlas-auth-brand svg { width:36px; height:36px; }
+.atlas-auth-eyebrow { display:block; font-size:9px; font-weight:600; letter-spacing:2px; color:var(--auth-muted); }
+.atlas-auth-story-copy { position:relative; z-index:1; padding:70px 0 110px; }
+.atlas-auth-story-copy h2 { font-size:clamp(38px,4.2vw,62px); line-height:1.12; font-weight:450; letter-spacing:-2.5px; margin:26px 0; }
+.atlas-auth-story-copy h2 em { font-family:Georgia,serif; font-weight:400; }
+.atlas-auth-story-copy p { color:var(--auth-muted); font-size:14px; }
+.atlas-auth-story-foot { font-size:8px; letter-spacing:1.8px; color:var(--auth-muted); }
+.atlas-auth-graph { position:absolute; inset:0; width:100%; height:100%; color:var(--auth-olive); opacity:.17; z-index:-1; pointer-events:none; }
+.atlas-auth-story::after { content:''; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse at 40% 45%,var(--auth-sage),transparent 80%); }
+.atlas-auth-main { padding:34px clamp(28px,5vw,80px) 24px; display:flex; flex-direction:column; justify-content:space-between; align-items:center; gap:40px; }
+.atlas-auth-back { align-self:flex-start; border:0; background:transparent; color:var(--auth-muted); font-size:12px!important; padding:8px 0; }
+.atlas-auth-back:hover { color:var(--auth-charcoal); }
+.atlas-auth-card { width:100%; max-width:460px; }
+.atlas-auth-card h1 { font-size:clamp(30px,3vw,42px); line-height:1.15; font-weight:450; letter-spacing:-1.4px; margin:16px 0 14px; }
+.atlas-auth-description { font-size:14px; color:var(--auth-muted); line-height:1.7; margin:0; }
+.atlas-auth-switch { display:flex; border-bottom:1px solid var(--auth-line); margin:28px 0; gap:28px; }
+.atlas-auth-switch button { background:transparent; border:0; border-bottom:2px solid transparent; color:var(--auth-muted); padding:0 0 12px; font-size:13px; }
+.atlas-auth-switch button.active { border-bottom-color:var(--auth-charcoal); color:var(--auth-charcoal); font-weight:600; }
+.atlas-auth-fields { border:0; padding:0; margin:0; min-width:0; }
+.atlas-auth-field { margin-bottom:21px; }
+.atlas-auth-field label { display:block; font-size:12px; font-weight:550; color:var(--auth-charcoal); margin-bottom:8px; }
+.atlas-auth-field input,.atlas-auth-field textarea { width:100%; border:1px solid #303A3666; border-radius:4px; background:var(--auth-ivory); color:var(--auth-charcoal); padding:12px 14px; min-height:46px; font-size:13px; transition:border-color .2s; }
+.atlas-auth-field textarea { resize:vertical; line-height:1.6; }
+.atlas-auth-field input::placeholder,.atlas-auth-field textarea::placeholder { color:var(--auth-muted); opacity:1; }
+.atlas-auth-field input:focus,.atlas-auth-field textarea:focus { border-color:var(--auth-olive); }
+.atlas-auth-password { position:relative; }
+.atlas-auth-password input { padding-right:50px; }
+.atlas-auth-password button { position:absolute; right:4px; top:3px; height:40px; width:42px; border:0; background:transparent; color:var(--auth-muted); display:grid; place-items:center; }
+.atlas-auth-password svg { width:20px; height:20px; }
+.atlas-auth-submit { width:100%; min-height:48px; display:flex; align-items:center; justify-content:space-between; gap:20px; padding:12px 18px; border:1px solid var(--auth-charcoal); border-radius:4px; background:var(--auth-charcoal); color:var(--auth-ivory); font-size:13px!important; margin-top:8px; }
+.atlas-auth-submit:hover:not(:disabled) { background:#303A36; }
+.atlas-auth-submit > span { font-size:20px; line-height:1; }
+.atlas-auth-bottom { color:var(--auth-muted); font-size:10px; }
+.atlas-auth-group-label { display:flex; align-items:center; gap:12px; font-size:11px; color:var(--auth-muted); margin:8px 0 18px; }
+.atlas-auth-group-label > span { font:10px ui-monospace,Consolas,monospace; color:var(--auth-muted); border-right:1px solid var(--auth-copper); padding-right:12px; }
+.atlas-auth-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:16px; }
+.atlas-auth-register .atlas-auth-main { gap:30px; }
+.atlas-auth-register .atlas-auth-card { max-width:510px; }
+.atlas-auth-register .atlas-auth-field { margin-bottom:16px; }
+.atlas-auth-register .atlas-auth-card h1 { font-size:36px; }
+.atlas-auth-register .atlas-auth-switch { margin:22px 0; }
+.atlas-auth-error { padding:12px 14px; margin:10px 0 18px; border-left:3px solid var(--auth-copper); background:var(--auth-sage); color:var(--auth-charcoal); font-size:12px; line-height:1.7; }
+.atlas-auth-success { padding:10px 0 30px; }
+.atlas-auth-success-mark { display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:var(--auth-sage); color:var(--auth-olive); }
+.atlas-auth-success h2 { font-size:25px; font-weight:500; margin:20px 0 12px; }
+.atlas-auth-success p { font-size:13px; line-height:1.8; color:var(--auth-muted); }
+.atlas-auth-reference { display:block; font:10px ui-monospace,Consolas,monospace; color:var(--auth-muted); margin:22px 0; overflow-wrap:anywhere; }
+.atlas-auth-modal { display:block; min-height:0; padding:28px; border-radius:8px; }
+.atlas-auth-modal .atlas-auth-card { margin:auto; }
+@media (max-width:900px) { .atlas-auth { grid-template-columns:.8fr 1.2fr; } .atlas-auth-story { padding:30px; } .atlas-auth-story-copy h2 { font-size:42px; } .atlas-auth-main { padding:26px 30px; } .atlas-auth-grid { grid-template-columns:1fr; gap:0; } }
+@media (max-width:680px) { .atlas-auth { display:block; } .atlas-auth-story { min-height:0; padding:24px; border-bottom:1px solid var(--auth-line); } .atlas-auth-brand { font-size:20px!important; } .atlas-auth-story-copy,.atlas-auth-story-foot,.atlas-auth-graph,.atlas-auth-story::after { display:none; } .atlas-auth-main { min-height:calc(100svh - 85px); padding:20px 24px; gap:32px; } .atlas-auth-card h1,.atlas-auth-register .atlas-auth-card h1 { font-size:34px; } .atlas-auth-modal { padding:24px; } }
+@media (prefers-reduced-motion:reduce) { .atlas-auth * { transition:none!important; } }
+
+/* A single centred form for both account access screens. */
+.atlas-auth-main { min-height:100svh; width:100%; }
+
+/* Bordered form cards with comfortable spacing on both access screens. */
+.atlas-auth-card {
+  max-width: 520px;
+  padding: 36px;
+  border: 1px solid #303A3659;
+  border-radius: 12px;
+  background: var(--auth-ivory);
+  box-shadow: 0 8px 28px #171C1B08;
+}
+.atlas-auth-register .atlas-auth-card { max-width: 590px; }
+.atlas-auth-modal .atlas-auth-card { box-shadow: none; }
+@media (max-width: 680px) {
+  .atlas-auth-card { padding: 26px 22px; border-radius: 10px; }
+  .atlas-auth-main { padding-left: 18px; padding-right: 18px; }
+}
+
+/* Compact login action and balanced two-column registration fields. */
+.atlas-auth-submit-compact {
+  width: fit-content;
+  min-width: 144px;
+  min-height: 44px;
+  justify-content: center;
+  gap: 18px;
+  margin: 14px auto 0;
+  padding: 10px 22px;
+}
+.atlas-auth-register .atlas-auth-card { max-width: 740px; }
+.atlas-auth-register .atlas-auth-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+.atlas-auth-register .atlas-auth-group-label { grid-column: 1 / -1; margin: 6px 0 0; }
+.atlas-auth-register .atlas-auth-field { min-width: 0; margin-bottom: 0; }
+.atlas-auth-register .atlas-auth-field label { line-height: 1.5; }
+.atlas-auth-register .atlas-auth-submit { margin-top: 24px; }
+@media (max-width: 680px) {
+  .atlas-auth-register .atlas-auth-fields { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* Shared landing-style navigation above the centred access forms. */
+.atlas-auth:not(.atlas-auth-modal) { padding-top: 64px; }
+.atlas-auth-navbar {
+  position: fixed; inset: 0 0 auto; z-index: 100;
+  height: 64px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 max(32px, calc((100% - 1312px) / 2));
+  background: var(--auth-ivory); border-bottom: 1px solid var(--auth-line);
+}
+.atlas-auth-nav-brand { display: flex; align-items: center; gap: 12px; border: 0; padding: 0; background: transparent; color: var(--auth-charcoal); font-size: 22px!important; font-weight: 650!important; letter-spacing: 4px; }
+.atlas-auth-nav-brand svg { width: 34px; height: 34px; }
+.atlas-auth-navbar nav { display: flex; align-items: center; gap: 34px; }
+.atlas-auth-navbar nav button { border: 0; padding: 10px 0; background: transparent; color: var(--auth-muted); font-size: 13px; }
+.atlas-auth-navbar nav button:hover { color: var(--auth-charcoal); text-decoration: underline; text-underline-offset: 5px; }
+.atlas-auth-navbar nav .atlas-auth-nav-signin { display: flex; align-items: center; gap: 13px; color: var(--auth-charcoal); border-left: 1px solid var(--auth-line); padding-left: 32px; }
+.atlas-auth-main { min-height: calc(100svh - 64px); justify-content: center; position: relative; padding-top: 40px; padding-bottom: 58px; }
+.atlas-auth-bottom { position: absolute; bottom: 22px; margin: 0; }
+.atlas-auth-register .atlas-auth-submit-compact { width: fit-content; margin: 24px auto 0; }
+@media (max-width: 680px) {
+  .atlas-auth:not(.atlas-auth-modal) { padding-top: 60px; }
+  .atlas-auth-navbar { height: 60px; padding: 0 20px; }
+  .atlas-auth-nav-brand { font-size: 17px!important; gap: 8px; letter-spacing: 2px; }
+  .atlas-auth-nav-brand svg { width: 28px; height: 28px; }
+  .atlas-auth-navbar nav { gap: 16px; }
+  .atlas-auth-navbar nav button { font-size: 11px; }
+  .atlas-auth-navbar nav .atlas-auth-nav-signin { border: 0; padding-left: 0; }
+  .atlas-auth-nav-signin > span { display: none; }
+  .atlas-auth-main { min-height: calc(100svh - 60px); padding-top: 28px; padding-bottom: 58px; }
+}
+
+/* Keep the forms compact while allowing natural scrolling on small screens. */
+.atlas-auth-main { padding-top: 18px; padding-bottom: 34px; gap: 0; }
+.atlas-auth-card { padding: 24px 28px; }
+.atlas-auth-card h1, .atlas-auth-register .atlas-auth-card h1 { font-size: 30px; margin: 0 0 10px; }
+.atlas-auth-switch, .atlas-auth-register .atlas-auth-switch { margin: 16px 0; }
+.atlas-auth-switch button { padding-bottom: 8px; }
+.atlas-auth-field { margin-bottom: 16px; }
+.atlas-auth-field label { margin-bottom: 6px; }
+.atlas-auth-field input, .atlas-auth-field textarea { min-height: 42px; padding: 10px 12px; }
+.atlas-auth-password button { height: 36px; }
+.atlas-auth-register .atlas-auth-fields { gap: 12px 22px; }
+.atlas-auth-register .atlas-auth-group-label { margin: 0; }
+.atlas-auth-register .atlas-auth-field textarea { height: 58px; }
+.atlas-auth-register .atlas-auth-submit-compact { margin-top: 16px; }
+.atlas-auth-bottom { bottom: 10px; }
+@media (max-height: 650px) and (min-width: 681px) {
+  .atlas-auth-main { padding-top: 12px; padding-bottom: 26px; }
+  .atlas-auth-card { padding: 18px 24px; }
+  .atlas-auth-card h1, .atlas-auth-register .atlas-auth-card h1 { font-size: 27px; margin-bottom: 8px; }
+  .atlas-auth-switch, .atlas-auth-register .atlas-auth-switch { margin: 12px 0; }
+  .atlas-auth-register .atlas-auth-fields { gap: 10px 20px; }
+  .atlas-auth-register .atlas-auth-group-label { font-size: 10px; }
+}
+@media (max-width: 680px) {
+  .atlas-auth-main { padding-top: 18px; padding-bottom: 34px; }
+  .atlas-auth-card { padding: 22px 20px; }
+  .atlas-auth-register .atlas-auth-fields { gap: 12px; }
+}

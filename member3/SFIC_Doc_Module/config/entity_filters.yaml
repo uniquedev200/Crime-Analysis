@@ -1,0 +1,185 @@
+# Entity filtering lexicons (data, not code).
+#
+# `atlas.normalize.names.is_valid_person_name` loads this file at runtime to reject
+# non-person strings such as generic noun phrases ("The Person"), unnamed roles
+# ("Complainant") and transaction narrations ("Service Reversal").
+#
+# Nothing here is baked into the Python source: edit or replace this file (or point
+# the ENTITY_FILTER_CONFIG environment variable at another file) and the filter
+# changes without any code modification. All matching is case-insensitive and
+# whitespace/punctuation-insensitive.
+version: "1.0.0"
+
+person:
+  # Minimum number of Unicode letters a candidate name must contain.
+  min_letters: 2
+  # Maximum number of whitespace-delimited tokens allowed (guards against whole sentences).
+  max_tokens: 8
+
+  # Grammar function words that never occur as a token inside a personal name.
+  # Any candidate containing one of these tokens is rejected.
+  function_words:
+    - the
+    - a
+    - an
+    - of
+    - in
+    - on
+    - at
+    - for
+    - to
+    - and
+    - or
+    - but
+    - with
+    - by
+    - from
+    - as
+    - is
+    - was
+    - are
+    - be
+    - been
+    - were
+    - this
+    - that
+    - these
+    - those
+    - any
+    - said
+    - such
+    - his
+    - their
+    - its
+    - my
+    - your
+    - our
+
+  # Generic nouns / placeholders. Matched both as a whole phrase and as a token.
+  generic_terms:
+    - person
+    - persons
+    - individual
+    - party
+    - male
+    - female
+    - boy
+    - girl
+    - body
+    - dead body
+    - deceased
+    - unidentified body
+    - unidentified dead body
+    - someone
+    - anyone
+    - anybody
+    - somebody
+    - nobody
+    - no one
+    - unknown
+    - unidentified
+    - unknown person
+    - unknown male
+    - unknown female
+    - unknown boy
+    - unknown girl
+    - unidentified person
+    - unidentified male
+    - unidentified female
+    - he
+    - she
+    - him
+    - they
+    - them
+    - who
+    - whom
+    - nil
+    - none
+    - "null"
+    - not available
+    - not applicable
+
+  # Unnamed legal / operational roles. Rejected as a whole phrase, or as a token
+  # when no genuine name token remains ("Investigating Officer" is rejected,
+  # "Sub-Inspector K. Rathore" is kept because it names a real person).
+  role_terms:
+    - accused
+    - suspect
+    - suspects
+    - victim
+    - victims
+    - complainant
+    - complainants
+    - witness
+    - witnesses
+    - informant
+    - informer
+    - officer
+    - investigating officer
+    - io
+    - sho
+    - police
+    - constable
+    - head constable
+    - sub inspector
+    - sub-inspector
+    - inspector
+    - driver
+    - passenger
+    - rider
+    - operator
+
+  # Transaction / banking narration words. Never a personal name.
+  narration_terms:
+    - reversal
+    - reversals
+    - charges
+    - deposit
+    - withdrawal
+    - clearing
+    - cheque
+    - neft
+    - rtgs
+    - imps
+    - transfer
+    - balance
+    - interest
+    - gst
+    - sms
+    - atm
+    - cash
+    - service
+    - ordinary
+    - course
+    - narration
+    - transaction
+
+  # Whole-phrase narrations (matched after normalization).
+  narration_phrases:
+    - service reversal
+    - ordinary course
+    - ordinary c
+    - ordinary course of business
+    - bank charges
+    - cash deposit
+    - cash withdrawal
+    - neft reversal
+    - rtgs reversal
+    - imps reversal
+    - balance b/f
+    - balance c/f
+    - account maintenance
+    - sms charges
+    - gst on charges
+    - minimum balance charges
+    - clearing cheque
+    - cheque return
+
+  # Modifier prefixes that only introduce a generic phrase, not a proper name.
+  generic_prefixes:
+    - unknown
+    - unidentified
+    - said
+    - such
+    - the
+    - any

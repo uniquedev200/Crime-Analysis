@@ -1,0 +1,94 @@
+# ==============================================================================
+# Git Ignore Configuration for Crime-Analysis / ATLAS
+# ==============================================================================
+
+# 1. Environment and Secrets (CRITICAL)
+.env
+.env.*
+*.env
+*.env.*
+member3/SFIC_Doc_Module/.env
+!.env.example
+!*/.env.example
+
+# 2. Python Bytecode, Caches & Distribution
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+
+# 3. Virtual Environments
+.venv/
+*/.venv/
+*/*/.venv/
+venv/
+*/venv/
+env/
+*/env/
+ENV/
+*.venv
+
+# 4. Testing & Code Quality Caches
+.pytest_cache/
+*/.pytest_cache/
+.mypy_cache/
+*/.mypy_cache/
+.ruff_cache/
+*/.ruff_cache/
+.hypothesis/
+*/.hypothesis/
+.coverage
+*/.coverage
+htmlcov/
+*.cover
+
+# 5. Node.js & Frontend Artifacts
+node_modules/
+*/node_modules/
+*/*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+member1/dist/
+
+# 6. Runtime Evidence, Uploads & Output Data
+data/originals/*
+!data/originals/.gitkeep
+data/receipts/*
+!data/receipts/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
+outputs/
+*/outputs/
+data/cache/
+*.sqlite
+*.sqlite3
+*.db
+*.log
+
+# 7. Operating System & Editor Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+__MACOSX/
+*/__MACOSX/
